@@ -1,0 +1,23 @@
+<view class="page">
+  <view>
+    <view class="hospital-item">
+      <image class="cover" src="/res/images/home-hospital.png" />
+      <view class="info">
+        <view class="name">{{hospitalDetail.name}}</view>
+        <view class="desc">{{hospitalDetail.desc}}</view>
+        <view class="phone">
+          <van-icon name="phone-o" />
+          {{hospitalDetail.phone}}
+        </view>
+        <view class="location">
+          <van-icon name="location-o" />
+          {{hospitalDetail.location}}
+        </view>
+      </view>
+    </view>
+    <view class="department-content">
+      <view class="title">推荐科室</view>
+      <view class="content"></view>
+    </view>
+  </view>
+</view>

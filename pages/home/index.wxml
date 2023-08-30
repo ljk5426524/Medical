@@ -1,0 +1,63 @@
+<view class="page">
+		<view class="bg-top"></view>
+		<view class="search-input">
+				<van-icon name="search" size="18px" />
+				专家姓名、疾病、症状查找
+		</view>
+		<view class="menu-items">
+				<view class="menu-item">
+						<image class="img-left" src="/res/images/home-menu-person.png" />
+						<view class="text">快速复诊</view>
+						<view class="sub-text">
+								扫码，添加
+								<text class="text-import">问诊专家</text>
+						</view>
+				</view>
+				<view class="menu-item">
+						<image class="img-right" src="/res/images/home-menu-plus.png" />
+						<view class="text">老年健康</view>
+						<view class="sub-text">
+								义诊体检，
+								<text class="text-import">预约取号</text>
+						</view>
+				</view>
+		</view>
+		<view class="find-items">
+				<view class="find-item" bindtap="toFind" data-type="{{1}}">
+						<view class="text">找医院</view>
+						<view class="sub-text">
+								来自南京的
+								<text class="text-import">三甲医院</text>
+						</view>
+						<image class="img" src="/res/images/home-hospital.png" />
+				</view>
+				<view class="find-item" bindtap="toFind" data-type="{{2}}">
+						<view class="text">找科室</view>
+						<view class="sub-text">专病专科 快速查找</view>
+						<image class="img" src="/res/images/home-medicine.png" />
+				</view>
+				<view class="find-item" bindtap="toFind" data-type="{{3}}">
+						<view class="text">找医生</view>
+						<view class="sub-text">搜索名医 在线咨询</view>
+						<image class="img" src="/res/images/home-doctor.png" />
+				</view>
+				<view class="find-item" bindtap="toFind" data-type="{{4}}">
+						<view class="text">找护士</view>
+						<view class="sub-text">专业护士 在线预约</view>
+						<image class="img" src="/res/images/home-nurse.png" />
+				</view>
+		</view>
+		<view class="specialist">
+				<view class="title">我的专家</view>
+				<view wx:for="{{specialist}}" wx:key="id" class="doctor-item">
+						<view class="doctor-info">
+								<view>
+										<text class="name">{{item.name}}</text>
+										<text class="job">{{item.job}}</text>
+										<text class="subject">{{item.subject}}</text>
+								</view>
+								<view>{{item.hospital}}</view>
+						</view>
+				</view>
+		</view>
+</view>

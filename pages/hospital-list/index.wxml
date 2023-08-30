@@ -1,0 +1,20 @@
+<view class="page">
+    <van-search value="{{ keyword }}" background="#f5f5f5" placeholder="专家姓名、疾病、症状查找" shape="round" bind:search="onSearch" />
+    <scroll-view class="hospital-items" scroll-y="{{true}}">
+        <view class="hospital-item" wx:for="{{hospitalList}}" wx:key="id" bindtap="toFind" data-id="{{item.id}}">
+            <image class="cover" src="/res/images/home-hospital.png" />
+            <view class="info">
+                <view class="name">{{item.name}}</view>
+                <view class="desc">{{item.desc}}</view>
+                <view class="phone">
+                    <van-icon name="phone-o" />
+                    {{item.phone}}
+                </view>
+                <view class="location">
+                    <van-icon name="location-o" />
+                    {{item.location}}
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+</view>

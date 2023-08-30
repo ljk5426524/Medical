@@ -1,0 +1,68 @@
+{
+  "_from": "@tencentcloud/chat-uikit-wechat",
+  "_id": "@tencentcloud/chat-uikit-wechat@1.1.3",
+  "_inBundle": false,
+  "_integrity": "sha512-LZ/aiARqJF7u5SIrEFPSG3TA6XXxEUJPhsnR1OYUJqnT+z1Ot+wVHD3NaIpQW/8WR0IBVHMZJRRWVyGBEzcN5w==",
+  "_location": "/@tencentcloud/chat-uikit-wechat",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "@tencentcloud/chat-uikit-wechat",
+    "name": "@tencentcloud/chat-uikit-wechat",
+    "escapedName": "@tencentcloud%2fchat-uikit-wechat",
+    "scope": "@tencentcloud",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@tencentcloud/chat-uikit-wechat/-/chat-uikit-wechat-1.1.3.tgz",
+  "_shasum": "ef1ee4df03f794140d9d4b7f75814c18be9117d3",
+  "_spec": "@tencentcloud/chat-uikit-wechat",
+  "_where": "/Users/lijiankai/Documents/medical",
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/TencentCloud/chat-uikit-wechat/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "aegis-mp-sdk": "1.36.7",
+    "tim-profanity-filter-plugin": "^0.9.0",
+    "tim-upload-plugin": "^1.1.0",
+    "tim-wx-sdk": "^2.26.2"
+  },
+  "deprecated": false,
+  "description": "TUIKit 是基于 IM SDK 实现的一套 UI 组件，其包含会话、聊天、群组、个人资料等功能，基于 TUIKit 组件您可以像搭积木一样快速搭建起自己的业务逻辑。",
+  "directories": {
+    "lib": "lib"
+  },
+  "homepage": "https://github.com/TencentCloud/chat-uikit-wechat#readme",
+  "keywords": [
+    "uikit",
+    "chat",
+    "小程序",
+    "IM",
+    "tencent",
+    "tencentcloud",
+    "messaging",
+    "即时通信",
+    "通信",
+    "WebSocket",
+    "wechat"
+  ],
+  "license": "ISC",
+  "main": "index.js",
+  "name": "@tencentcloud/chat-uikit-wechat",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TencentCloud/chat-uikit-wechat.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.1.3"
+}

@@ -1,0 +1,12 @@
+<view class="page">
+    <view class="title">
+        选择科室
+        <text class="sub-title">（在线咨询专科医生）</text>
+    </view>
+    <view class="depart-content">
+        <view wx:for="{{departmentList}}" wx:key="id" class="depart-item" bindtap="toFind" data-id="{{item.id}}">
+            <view class="depart-icon"></view>
+            <view class="depart-name">名称{{item.name}}</view>
+        </view>
+    </view>
+</view>
