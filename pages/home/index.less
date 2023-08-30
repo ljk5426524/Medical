@@ -1,0 +1,150 @@
+.page {
+  height: 100vh;
+  background-color: #f9fafc;
+
+  .bg-top {
+    height: 230rpx;
+    background-color: #5677f6;
+  }
+
+  .search-input {
+    width: 600rpx;
+    background-color: #fff;
+    color: #bcbcbc;
+    border: 2rpx solid #fff;
+    padding: 20rpx 40rpx;
+    margin: -40rpx auto 0;
+    border-radius: 40rpx;
+  }
+
+  .menu-items {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 60rpx 0 40rpx;
+
+    .menu-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 250rpx;
+      background-color: #fff;
+      padding: 40rpx 40rpx;
+
+      .img-left {
+        width: 67rpx;
+        height: 80rpx;
+      }
+
+      .img-right {
+        width: 80rpx;
+        height: 76rpx;
+
+      }
+
+      .text {
+        font-size: 32rpx;
+        font-weight: bold;
+        margin: 12rpx 0;
+      }
+
+      .sub-text {
+        font-size: 24rpx;
+        color: #999;
+
+        .text-import {
+          color: red;
+        }
+      }
+    }
+  }
+
+  .find-items {
+    padding: 40rpx 40rpx;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20rpx;
+
+    .find-item {
+      position: relative;
+      width: 260rpx;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      padding: 30rpx;
+      margin-bottom: 20rpx;
+
+      &:first-child {
+        background-color: #eff5fb;
+      }
+
+      &:nth-child(2) {
+        background-color: #ecf3ea;
+      }
+
+      &:nth-child(3) {
+        background-color: #eeedfa;
+      }
+
+      &:nth-child(4) {
+        background-color: #f8e8ed;
+      }
+
+      .text {
+        color: #2a2a2a;
+        font-size: 32rpx;
+        font-weight: bold;
+        margin: 0 0 20rpx 0;
+      }
+
+      .sub-text {
+        color: #999;
+        font-size: 24rpx;
+
+        .text-import {
+          color: #5677f6;
+        }
+      }
+
+      .img {
+        position: absolute;
+        right: 26rpx;
+        top: 26rpx;
+        width: 52rpx;
+        height: 55rpx;
+      }
+    }
+  }
+
+  .specialist {
+    padding: 50rpx;
+
+    .title {
+      font-size: 34rpx;
+      color: #2a2a2a;
+      font-weight: bold;
+    }
+
+    .doctor-item {
+      display: flex;
+      align-items: center;
+
+      .doctor-info {
+        font-size: 30rpx;
+        color: #999;
+
+        .name {
+          font-size: 30rpx;
+          font-weight: bold;
+        }
+
+        .job {
+          margin: 0 18rpx;
+        }
+      }
+    }
+  }
+}

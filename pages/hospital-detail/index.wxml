@@ -1,0 +1,33 @@
+<view class="page">
+  <view>
+    <view class="hospital-item">
+      <image class="cover" src="/res/images/home-hospital.png" />
+      <view class="info">
+        <view class="name">{{hospitalDetail.name}}</view>
+        <view class="desc">{{hospitalDetail.desc}}</view>
+        <view class="phone">
+          <van-icon name="phone-o" />
+          {{hospitalDetail.phone}}
+        </view>
+        <view class="location">
+          <van-icon name="location-o" />
+          {{hospitalDetail.location}}
+        </view>
+      </view>
+    </view>
+    <view class="dept-content">
+      <view class="title">推荐科室</view>
+      <view class="content">
+        <view wx:for="{{hospitalDetail.departmentList}}" wx:key="id" class="dept-item" bindtap="toFind" data-id="{{item.id}}">
+          {{item.name}}
+        </view>
+      </view>
+    </view>
+    <view class="intro-content">
+      <view class="title">机构简介</view>
+      <view class="intro">
+        南京鼓楼医院，又名南京大学医学院附属鼓楼医院，创建于1892年，已经具有127年历史，前身是由美国基督会资助的加拿大籍传教士威廉•爱德华•麦克林医学博士创建的一所“基督医院”，目前为集医教研为一体的大型综合性三级甲等医院，也是全国较早的西医院。
+      </view>
+    </view>
+  </view>
+</view>

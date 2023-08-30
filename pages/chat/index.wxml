@@ -1,0 +1,23 @@
+<view class="page">
+    <view class="tabs">
+        <view class="{{tabActive === 1 ?'tab-item active':'tab-item'}}" bindtap="tabChange" data-tab="{{1}}">
+            问诊消息
+        </view>
+        <view class="{{tabActive === 2 ?'tab-item active':'tab-item'}}" bindtap="tabChange" data-tab="{{2}}">
+            服务消息
+        </view>
+    </view>
+    <TUIKit config="{{config}}" id="TUIKit"></TUIKit>
+    <!-- <view wx:for="{{conversationList}}" wx:key="id" class="dialog-item" bindtap="toChat" data-id="{{item.id}}">
+        <image class="avator" src="../../res/images/home-doctor.png" />
+        <view class="content">
+            <view class="info">
+                {{item.name}}
+                <view class="sub-text">外科</view>
+                <view class="time">{{item.time}}</view>
+            </view>
+            <view class="msg">{{item.msg}}</view>
+        </view>
+        <view></view>
+    </view> -->
+</view>
