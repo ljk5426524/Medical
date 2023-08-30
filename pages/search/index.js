@@ -5,6 +5,38 @@ Page({
      * 页面的初始数据
      */
     data: {
+        keyword: '',
+        deptOptions: [{
+            value: '',
+            text: '全部科室'
+        }, {
+            value: 1,
+            text: '神经内科'
+        }, {
+            value: 2,
+            text: '神经外科'
+        }, {
+            value: 3,
+            text: '胸外科'
+        }, {
+            value: 4,
+            text: '心血管内科'
+        }, {
+            value: 5,
+            text: '泌尿外科'
+        }],
+        orderOptions: [{
+            value: '',
+            text: '综合排序'
+        }, {
+            value: 1,
+            text: '正序'
+        }, {
+            value: 2,
+            text: '倒序'
+        }],
+        deptId: '',
+        orderType: '',
 
     },
 

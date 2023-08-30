@@ -1,2 +1,8 @@
-<!--pages/search/index.wxml-->
-<text>pages/search/index.wxml</text>
+<view class="page">
+    <van-search value="{{ keyword }}" background="#f5f5f5" placeholder="专家姓名、疾病、症状查找" shape="round" bind:search="onSearch" />
+    <van-dropdown-menu active-color="#4C78FF">
+        <van-dropdown-item value="{{ deptId }}" options="{{ deptOptions }}" />
+        <van-dropdown-item value="{{ orderType }}" options="{{ orderOptions }}" />
+    </van-dropdown-menu>
+    <view></view>
+</view>
