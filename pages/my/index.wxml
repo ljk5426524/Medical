@@ -17,6 +17,6 @@
         <van-cell title="快速问诊历史" is-link icon="notes-o" />
         <van-cell title="我的服务" is-link icon="gem-o" />
         <van-cell title="我的扫码记录" is-link icon="qr" />
-        <van-cell title="设置" is-link icon="setting-o" />
+        <van-cell title="设置" is-link icon="setting-o" url="/pages/setting/index" />
     </van-cell-group>
 </view>
