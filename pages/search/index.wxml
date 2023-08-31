@@ -4,5 +4,32 @@
         <van-dropdown-item value="{{ deptId }}" options="{{ deptOptions }}" />
         <van-dropdown-item value="{{ orderType }}" options="{{ orderOptions }}" />
     </van-dropdown-menu>
-    <view></view>
+    <view class="user-list">
+        <view class="user-item" wx:for="{{userList}}" wx:key="id">
+            <image class="avator" src="/res/images/home-doctor.png" />
+            <view class="info">
+                <view class="name">
+                    {{item.name}}
+                    <text class="major">{{item.major}}</text>
+                </view>
+                <view class="hospital">
+                    {{item.hospital}}
+                    <text class="major">{{item.subject}}</text>
+                </view>
+                <view class="desc">{{item.desc}}</view>
+                <view class="service">
+                    <view>
+                        已服务
+                        <text class="impo">{{item.serviceCount}}</text>
+                        次
+                    </view>
+                    <view>
+                        好评
+                        <text class="impo">{{item.good}}%</text>
+                    </view>
+                    <view>在线</view>
+                </view>
+            </view>
+        </view>
+    </view>
 </view>

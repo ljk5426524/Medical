@@ -37,6 +37,25 @@ Page({
         }],
         deptId: '',
         orderType: '',
+        userList: [{
+            id: 1,
+            name: '王小明',
+            major: '主任医师',
+            hospital: '南京市鼓楼医院',
+            subject: '外科',
+            desc: '擅长：中医药诊治儿童神经精神系统疾病（多发性抽动症）、脾胃系疾病（厌食症、慢性腹泻）',
+            serviceCount: 2131,
+            good: 98,
+        }, {
+            id: 2,
+            name: '王大明',
+            major: '主任医师',
+            hospital: '南京市鼓楼医院',
+            subject: '外科',
+            desc: '擅长：中医药诊治儿童神经精神系统疾病（多发性抽动症）、脾胃系疾病（厌食症、慢性腹泻）',
+            serviceCount: 2131,
+            good: 98,
+        }]
 
     },
 
