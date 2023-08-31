@@ -1,12 +1,13 @@
 {
     "pages": [
+        "pages/my/index",
         "pages/home/index",
+        "pages/home-search/index",
         "pages/doctor-detail/index",
         "pages/hospital-list/index",
         "pages/department/index",
         "pages/chat/index",
         "pages/index/index",
-        "pages/my/index",
         "pages/chat/chat",
         "pages/hospital-detail/index",
         "pages/search/index"
@@ -41,7 +42,9 @@
         "van-search": "@vant/weapp/search/index",
         "van-icon": "@vant/weapp/icon/index",
         "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
-        "van-dropdown-item": "@vant/weapp/dropdown-item/index"
+        "van-dropdown-item": "@vant/weapp/dropdown-item/index",
+        "van-cell": "@vant/weapp/cell/index",
+        "van-cell-group": "@vant/weapp/cell-group/index"
     },
     "sitemapLocation": "sitemap.json"
 }
