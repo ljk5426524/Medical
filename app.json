@@ -1,8 +1,9 @@
 {
     "pages": [
+        "pages/home/index",
+        "pages/doctor-detail/index",
         "pages/hospital-list/index",
         "pages/department/index",
-        "pages/home/index",
         "pages/chat/index",
         "pages/index/index",
         "pages/my/index",

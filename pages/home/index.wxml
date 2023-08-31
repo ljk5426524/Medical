@@ -5,7 +5,7 @@
 				专家姓名、疾病、症状查找
 		</view>
 		<view class="menu-items">
-				<view class="menu-item">
+				<view class="menu-item" bindtap="toAsk">
 						<image class="img-left" src="/res/images/home-menu-person.png" />
 						<view class="text">快速复诊</view>
 						<view class="sub-text">

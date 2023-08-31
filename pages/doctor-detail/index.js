@@ -1,16 +1,11 @@
-// pages/home/index.js
+// pages/doctor-detail/index.js
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-        specialist: [{
-            name: '刘高级',
-            job: '主任',
-            subject: '外科',
-            hospital: '南京市儿童医院'
-        }]
+
     },
 
     /**
@@ -67,23 +62,5 @@ Page({
      */
     onShareAppMessage: function () {
 
-    },
-
-    toFind(e) {
-        const { type } = e.currentTarget.dataset
-        const map = {
-            1: '/pages/hospital-list/index',
-            2: '/pages/department/index',
-            3: '/pages/search/index',
-            4: '/pages/search/index'
-        }
-        wx.navigateTo({
-            url: map[type]
-        })
-    },
-    toAsk() {
-        wx.navigateTo({
-            url: '/pages/doctor-detail/index'
-        })
     }
 })

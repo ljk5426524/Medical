@@ -1,0 +1,48 @@
+<view class="page">
+    <view class="header">
+        <view></view>
+        <view class="name">王小明</view>
+        <view class="desc">
+            <view class="desc-item">主任医师</view>
+            <view class="desc-item">外科</view>
+            <view class="desc-item">南京市鼓楼医院</view>
+        </view>
+    </view>
+    <view class="avator">
+        <image class="cover" src="/res/images/home-doctor.png" />
+    </view>
+    <view class="evaluate">
+        <view>
+            <view class="value">231</view>
+            <view class="label">服务次数</view>
+        </view>
+        <view>
+            <view class="value">97%</view>
+            <view class="label">推荐指数</view>
+        </view>
+        <view>
+            <view class="value">32</view>
+            <view class="label">好评指数</view>
+        </view>
+    </view>
+    <view class="info">
+        <view class="title">擅长</view>
+        <view class="content">
+            对妇科内分泌性疾病和疑难杂症的中医及中西医结合诊治。妇科各种疾病：月经不调，女性更年期综合症，不孕不育，盆腔炎，附件炎，乳腺增生等等。
+        </view>
+    </view>
+    <view class="service">
+        <view class="title">医生服务</view>
+        <view class="btn-content">
+            <image class="icon" src="/res/images/home-hospital.png" />
+            <view class="btn-text">
+                <view class="text-title">图文问诊</view>
+                <view class="text-sub">通过文字、图片与医生沟通，时长为20分钟</view>
+            </view>
+        </view>
+    </view>
+    <view class="add-content">
+        <view wx:if="{{true}}" class="btn-add">申请加入专家联系名单</view>
+        <view wx:else class="btn-add-del">从专家联系名单中解除</view>
+    </view>
+</view>
