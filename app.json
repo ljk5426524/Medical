@@ -1,6 +1,8 @@
 {
     "pages": [
         "pages/my/index",
+        "pages/my-doctors/index",
+        "pages/my-info/index",
         "pages/setting/index",
         "pages/home/index",
         "pages/home-search/index",
@@ -12,7 +14,8 @@
         "pages/chat/chat",
         "pages/hospital-detail/index",
         "pages/search/index",
-        "pages/my-info/index"
+        "pages/my-scan-record/index",
+        "pages/my-service/index"
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -46,7 +49,11 @@
         "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
         "van-dropdown-item": "@vant/weapp/dropdown-item/index",
         "van-cell": "@vant/weapp/cell/index",
-        "van-cell-group": "@vant/weapp/cell-group/index"
+        "van-cell-group": "@vant/weapp/cell-group/index",
+        "van-field": "@vant/weapp/field/index",
+        "van-popup": "@vant/weapp/popup/index",
+        "van-picker": "@vant/weapp/picker/index",
+        "van-button": "@vant/weapp/button/index"
     },
     "sitemapLocation": "sitemap.json"
 }

@@ -1,0 +1,62 @@
+.page {
+  height: 100vh;
+  padding: 40rpx;
+
+  .user-item {
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 30rpx;
+    padding: 20rpx 0;
+    border-bottom: 2rpx solid #E8E9EC;
+
+    .avator {
+      width: 86rpx;
+      height: 86rpx;
+      flex-shrink: 0;
+    }
+
+    .info {
+      color: #2E3C67;
+
+      .name {
+        font-size: 28rpx;
+        font-weight: bold;
+
+        .position {
+          font-size: 26rpx;
+          font-weight: normal;
+          margin: 0 20rpx;
+        }
+      }
+
+      .hospital {
+        font-size: 26rpx;
+
+        .department {
+          margin: 0 20rpx;
+        }
+      }
+    }
+
+    .btn-chat {
+      position: absolute;
+      right: 20rpx;
+      top: 20rpx;
+      font-size: 26rpx;
+      color: #4B79FF;
+      background-color: #EBEFFF;
+      padding: 8rpx 16rpx;
+      border-radius: 22rpx;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &.saved {
+        background-color: #fff;
+        color: #929397;
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+<view class="page">
+  <view class="tabs">
+    <view class="{{tabActive === 1 ?'tab-item active':'tab-item'}}" bindtap="tabChange" data-tab="{{1}}">
+      义诊服务
+    </view>
+    <view class="{{tabActive === 2 ?'tab-item active':'tab-item'}}" bindtap="tabChange" data-tab="{{2}}">
+      体检服务
+    </view>
+  </view>
+  <scroll-view class="list-items" scroll-y="{{true}}" show-scrollbar="{{false}}" enhanced="{{true}}">
+    <view class="list-item" wx:for="{{serviceList}}" wx:key="id">
+      <view class="item-time">
+        <van-icon name="clock-o" />
+        {{item.time}}
+      </view>
+      <view class="item-board">
+        <view class="item-info">服务名称：{{item.name}}</view>
+        <view class="item-info">服务时间：{{item.time}}</view>
+        <view class="item-info">预约方：{{item.hospital}}</view>
+        <view class="item-info">预约人：{{item.from}}</view>
+        <van-button wx:if="{{item.state === 1}}" size="small" type="default" custom-class="btn">
+          自约
+        </van-button>
+        <van-button wx:elif="{{item.state === 2}}" size="small" type="default" custom-class="btn-transfer">
+          受让
+        </van-button>
+        <van-button wx:else size="small" type="default" custom-class="btn-transfered">
+          已转让
+        </van-button>
+        <view wx:if="{{item.status === 1}}" class="state">待服务</view>
+        <view wx:else class="state over">已过期</view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

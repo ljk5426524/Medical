@@ -7,16 +7,18 @@
                 <view class="phone">186****8271</view>
                 <view class="account">账号：14278</view>
             </view>
-            <view class="btn-self">个人资料</view>
+            <view class="btn-self">
+                <navigator url="/pages/my-info/index">个人资料</navigator>
+            </view>
         </view>
     </view>
     <van-cell-group>
         <van-cell title="家庭成员" is-link icon="wap-home-o" />
-        <van-cell title="我的专家" is-link icon="friends-o" />
+        <van-cell title="我的专家" is-link icon="friends-o" url="/pages/my-doctors/index" />
         <van-cell title="在线问诊历史" is-link icon="comment-o" />
         <van-cell title="快速问诊历史" is-link icon="notes-o" />
-        <van-cell title="我的服务" is-link icon="gem-o" />
-        <van-cell title="我的扫码记录" is-link icon="qr" />
+        <van-cell title="我的服务" is-link icon="gem-o" url="/pages/my-service/index" />
+        <van-cell title="我的扫码记录" is-link icon="qr" url="/pages/my-scan-record/index" />
         <van-cell title="设置" is-link icon="setting-o" url="/pages/setting/index" />
     </van-cell-group>
 </view>

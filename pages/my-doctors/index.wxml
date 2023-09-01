@@ -1,0 +1,18 @@
+<view class="page">
+  <view class="user-item" wx:for="{{doctorList}}" wx:key="id" bindtap="toDoctorDetail" data-id="{{item.id}}">
+    <image class="avator" src="/res/images/home-doctor.png" />
+    <view class="info">
+      <view class="name">
+        {{item.name}}
+        <text class="position">{{item.position}}</text>
+      </view>
+      <view class="hospital">
+        {{item.hospital}}
+        <text class="department">{{item.department}}</text>
+      </view>
+      <view class="desc">{{item.desc}}</view>
+      <view class="btn-chat" bindtap="toChat">咨询</view>
+    </view>
+  </view>
+  <view wx:if="{{!doctorList.length}}">暂未添加专家</view>
+</view>
