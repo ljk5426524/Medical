@@ -1,5 +1,6 @@
 // pages/my-info/index.js
 import api from "../../api/index";
+import { wxToast } from "../../utils/wx-api";
 Page({
 
 	/**
@@ -7,35 +8,26 @@ Page({
 	 */
 	data: {
 		userInfo: {
-			userName: '',
-			sex: 1,
-			cardNum: '',
-			phone: '',
-			age: '',
-			marriage: 0
+			id: "99",
+			mobile: "18556201182",
+			name: "185****1182",
+			nickname: "185****1182",
+			headImage: "http://app.kbing123.com/mdedia/20230904/XxGPWjWxRiS82ff4aea3844c983f36d5ca1ef27e71e7.png",
+			sex: "1",
+			age: '0',
+			marry: '0',
+			idcard: "3212831999999555",
 		},
 		popType: 1, // 1:性别 2:婚育
-		sexColumns: [{
-			text: '男',
-			value: 1,
-		}, {
-			text: '女',
-			value: 0,
-		}],
-		marryColumns: [{
-			text: '未婚',
-			value: 0,
-		}, {
-			text: '已婚',
-			value: 1,
-		}]
+		sexColumns: ['男', '女'],
+		ageColumns: new Array(121).fill(0).map((v, i) => i),
+		marryColumns: ['未婚未育', '未婚已育', '已婚未育', '已婚已育', '离婚未育', '离婚已育'],
 	},
 
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
-
 	},
 
 	/**
@@ -87,7 +79,6 @@ Page({
 
 	},
 
-
 	// 更换头像
 	changeAvator() {
 		wx.chooseImage({
@@ -113,6 +104,7 @@ Page({
 					src: tempFilePaths[0],
 					quality,
 					success: res => {
+						console.log('?????', res.tempFilePath)
 						this.uploadFile(res.tempFilePath);
 					},
 					fail: res => {
@@ -130,13 +122,13 @@ Page({
 		api
 			.uploadFile({
 				filePath,
-				name: "file"
+				name: "media"
 			})
 			.then(res => {
 				this.setData({
 					userInfo: {
 						...this.data.userInfo,
-						picture: res.data.url
+						headImage: res.data.media_url
 					}
 				});
 			});
@@ -153,13 +145,19 @@ Page({
 			popShow: true
 		})
 	},
+	ageSel() {
+		this.setData({
+			popType: 0,
+			popShow: true
+		})
+	},
 	onClose() {
 		this.setData({
 			popShow: false
 		})
 	},
 	onSexChange(e) {
-		const { value: { value } } = e.detail
+		const { value } = e.detail
 		this.setData({
 			userInfo: {
 				...this.data.userInfo,
@@ -168,11 +166,20 @@ Page({
 		})
 	},
 	onMarryChange(e) {
-		const { value: { value } } = e.detail
+		const { value } = e.detail
 		this.setData({
 			userInfo: {
 				...this.data.userInfo,
-				marriage: value
+				marry: value
+			}
+		})
+	},
+	onAgeChange(e) {
+		const { value } = e.detail
+		this.setData({
+			userInfo: {
+				...this.data.userInfo,
+				age: value
 			}
 		})
 	},
@@ -184,8 +191,6 @@ Page({
 				dataset: { type }
 			}
 		} = event;
-
-		console.log(detail, type);
 
 		this.setData({
 			userInfo: {
@@ -202,5 +207,17 @@ Page({
 			cardNum,
 			age)
 	},
-	submit() { }
+	submit() {
+		const { userInfo: { mobile, age, name, headImage, sex, marry, idcard } } = this.data
+		api.editUserInfo({
+			mobile, age, name, headImage, sex, marry, idcard, id: 99
+		}).then(res => {
+			wxToast.show({
+				title: '更新成功',
+				done: () => {
+					wx.navigateBack()
+				}
+			})
+		})
+	}
 })

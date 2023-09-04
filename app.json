@@ -1,12 +1,16 @@
 {
     "pages": [
         "pages/home/index",
+        "pages/order-diagnosis/index",
+        "pages/order-diagnosis-detail/index",
+        "pages/my-service/index",
+        "pages/my-info/index",
+        "pages/old-health-menu/index",
         "pages/my-family-add/index",
         "pages/my-family/index",
         "pages/doctor-detail/index",
         "pages/my/index",
         "pages/my-doctors/index",
-        "pages/my-info/index",
         "pages/setting/index",
         "pages/home-search/index",
         "pages/hospital-list/index",
@@ -17,7 +21,7 @@
         "pages/hospital-detail/index",
         "pages/search/index",
         "pages/my-scan-record/index",
-        "pages/my-service/index"
+        "pages/old-health-tab/index"
     ],
     "window": {
         "backgroundTextStyle": "light",

@@ -22,14 +22,14 @@ const toUrlEncoded = obj => Object.keys(obj).map(k => encodeURIComponent(k) + '=
 
 // => "hello=world&message=JavaScript%20is%20cool"
 export function request({ url, data = {}, type, loadingText = '', isLoading = true, ...rest }) {
-  const { token = "3692c3ad47154f06b0f53f097ffb9117" } = rest
+  const { token = "21186191f8ef442893fa64a69988aa6c", contentType = "application/x-www-form-urlencoded;charset=utf-8" } = rest
   const header = {}
   let requestName = type || 'request'
 
   if (wx.getStorageSync('token')) {
     header.Authorization = wx.getStorageSync('token')
   }
-  header['content-type'] = 'application/x-www-form-urlencoded;charset=utf-8'
+  header['content-type'] = contentType
   // header['content-type'] = 'multipart/form-data; boundary=XXX'
   token && (header.Authorization = token)
 
@@ -44,7 +44,7 @@ export function request({ url, data = {}, type, loadingText = '', isLoading = tr
     wx[requestName]({
       url,
       data:
-        toUrlEncoded(data),
+        type || contentType === 'application/json' ? data : toUrlEncoded(data),
       header,
       ...rest,
       success: res => {

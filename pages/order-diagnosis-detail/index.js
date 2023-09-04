@@ -1,20 +1,18 @@
-// pages/my-service/index.js
-import api from '../../api/index'
+// pages/order-diagnosis-detail/index.js
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-        tabActive: 0,
-        serviceList: []
+        buttonClientRect: wx.getMenuButtonBoundingClientRect(),
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        this.getServiceList()
+
     },
 
     /**
@@ -65,24 +63,8 @@ Page({
     onShareAppMessage: function () {
 
     },
-    tabChange(e) {
-        const { tab } = e.currentTarget.dataset
-        this.setData({
-            tabActive: tab
-        }, () => {
-            this.getServiceList()
-        })
-    },
 
-    getServiceList() {
-        const { tabActive } = this.data
-        api.getServiceList({
-            memberId: 99,
-            type: tabActive,// 0：义诊，1：体检
-        }).then(res => {
-            this.setData({
-                serviceList: res.data.records
-            })
-        })
-    },
+    goBack() {
+        wx.navigateBack()
+    }
 })

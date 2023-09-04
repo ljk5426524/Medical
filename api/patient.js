@@ -49,5 +49,31 @@ export default {
       data,
       method: 'post',
     })
+  },
+  // 义诊体检列表
+  getServiceList(data) {
+    return request({
+      url: `${baseUrl}api/v1/serviceRecord/listPage`,
+      data,
+      method: "post",
+      contentType: 'application/json'
+    })
+  },
+  // 在线问诊记录
+  getOnlineRecord(data) {
+    return request({
+      url: `${baseUrl}api/v1/order/selectOnlineOrderByUserId`,
+      data,
+      method: "post",
+    })
+  },
+  // 快速问诊订单
+  getFasteRecord(data) {
+    return request({
+      url: `${baseUrl}api/v1/order/selectDispatchOrderByUserId`,
+      data,
+      method: "post",
+      contentType: 'application/json'
+    })
   }
 }

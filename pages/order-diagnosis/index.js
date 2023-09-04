@@ -1,4 +1,4 @@
-// pages/home/index.js
+// pages/order-diagnosis/index.js
 import api from '../../api/index'
 Page({
 
@@ -6,11 +6,10 @@ Page({
      * 页面的初始数据
      */
     data: {
-        specialist: [{
-            name: '刘高级',
-            titleName: '主任',
-            departmentName: '外科',
-            merchantName: '南京市儿童医院'
+        recordList: [{
+            id: 1
+        }, {
+            id: 2
         }]
     },
 
@@ -18,7 +17,18 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        this.getMyDoctors()
+        const { type } = options
+        if (+type === 1) {
+            this.getOnlineRecord()
+            wx.setNavigationBarTitle({
+                title: '在线问诊历史'
+            })
+        } else {
+            this.getFasteRecord()
+            wx.setNavigationBarTitle({
+                title: '快速问诊历史'
+            })
+        }
     },
 
     /**
@@ -69,42 +79,33 @@ Page({
     onShareAppMessage: function () {
 
     },
+    getOnlineRecord() {
+        api.getOnlineRecord({
 
-    toFind(e) {
-        const { type } = e.currentTarget.dataset
-        const map = {
-            1: '/pages/hospital-list/index',
-            2: '/pages/department/index',
-            3: '/pages/search/index?role=0',
-            4: '/pages/search/index?role=1'
-        }
-        wx.navigateTo({
-            url: map[type]
-        })
-    },
-    toAsk() {
-        wx.navigateTo({
-            url: '/pages/doctor-detail/index'
-        })
-    },
-    toOldHealth() {
-        wx.navigateTo({
-            url: '/pages/old-health-menu/index'
-        })
-    },
-    getMyDoctors() {
-        api.getMyDoctors({
-            userId: 99
+            current: 1,
+            size: 10,
+            memberId: 47
         }).then(res => {
             this.setData({
-                specialist: res.data.records
+                recordList: res.data.records
             })
         })
     },
-    toDoctorDetail(e) {
+    getFasteRecord() {
+        api.getFasteRecord({
+            current: 1,
+            size: 10,
+            memberId: 47
+        }).then(res => {
+            this.setData({
+                recordList: res.data.records
+            })
+        })
+    },
+    toDetail(e) {
         const { id } = e.currentTarget.dataset
         wx.navigateTo({
-            url: `/pages/doctor-detail/index?id=${id}`,
+            url: `/pages/order-diagnosis-detail/index?id=${id}`
         })
     }
 })

@@ -1,20 +1,20 @@
 <view class="page">
 		<van-cell title="头像" bind:click="changeAvator">
-				<image slot="right-icon" class="avator" src="/res/images/home-doctor.png" />
+				<image slot="right-icon" class="avator" src="{{userInfo.headImage}}" />
 		</van-cell>
 		<view class="placeholder"></view>
 		<van-cell-group>
-				<van-field value="{{ userInfo.userName }}" clearable placeholder="请输入姓名" maxlength="{{10}}" type="text" data-type="userName" bind:change="changeField" input-align="right">
+				<van-field value="{{ userInfo.name }}" clearable placeholder="请输入姓名" maxlength="{{10}}" type="text" data-type="name" bind:change="changeField" input-align="right">
 						<view class="form-item-label isRequire" slot="label">姓名</view>
 				</van-field>
 				<van-cell bind:click="sexSel" is-link>
 						<view class="form-item-title" slot="title">
 								<view class="form-item-label isRequire">性别</view>
-								<view class="form-item-value">{{userInfo.sex?'男':'女'}}</view>
+								<view class="form-item-value">{{userInfo.sex === '1'?'男':'女'}}</view>
 						</view>
 						<van-icon slot="right-icon" name="arrow" size="16px" />
 				</van-cell>
-				<van-field value="{{ userInfo.cardNum }}" clearable placeholder="请输入身份证号" maxlength="{{18}}" type="text" data-type="cardNum" bind:change="changeField" input-align="right">
+				<van-field value="{{ userInfo.idcard }}" clearable placeholder="请输入身份证号" maxlength="{{18}}" type="text" data-type="idcard" bind:change="changeField" input-align="right">
 						<view class="form-item-label isRequire" slot="label">身份证号</view>
 				</van-field>
 				<!-- <van-cell bind:click="changePhone">
@@ -24,16 +24,20 @@
 						</view>
 						<van-icon slot="right-icon" name="arrow" size="16px" />
 				</van-cell> -->
-				<van-field value="{{ userInfo.phone }}" clearable placeholder="请输入手机号" maxlength="{{11}}" type="number" data-type="phone" bind:change="changeField" input-align="right">
+				<van-field value="{{ userInfo.mobile }}" clearable placeholder="请输入手机号" maxlength="{{11}}" type="number" data-type="mobile" bind:change="changeField" input-align="right">
 						<view class="form-item-label isRequire" slot="label">手机号</view>
 				</van-field>
-				<van-field value="{{ userInfo.age }}" clearable placeholder="请输入年龄" maxlength="{{3}}" type="number" data-type="age" bind:change="changeField" input-align="right">
-						<view class="form-item-label isRequire" slot="label">年龄</view>
-				</van-field>
+				<van-cell bind:click="ageSel" is-link>
+						<view class="form-item-title" slot="title">
+								<view class="form-item-label isRequire">年龄</view>
+								<view class="form-item-value">{{userInfo.age}}</view>
+						</view>
+						<van-icon slot="right-icon" name="arrow" size="16px" />
+				</van-cell>
 				<van-cell bind:click="marrySel" is-link>
 						<view class="form-item-title" slot="title">
 								<view class="form-item-label isRequire">婚育情况</view>
-								<view class="form-item-value">{{userInfo.marriage?'已婚':'未婚'}}</view>
+								<view class="form-item-value">{{userInfo.marry}}</view>
 						</view>
 						<van-icon slot="right-icon" name="arrow" size="16px" />
 				</van-cell>
@@ -44,6 +48,7 @@
 		<van-button round type="primary" block custom-class="btn" bind:click="submit">提交</van-button>
 		<van-popup show="{{ popShow }}" position="bottom" bind:close="onClose">
 				<van-picker wx:if="{{popType === 1}}" columns="{{ sexColumns }}" bind:change="onSexChange" />
-				<van-picker wx:else columns="{{ marryColumns }}" bind:change="onMarryChange" />
+				<van-picker wx:elif="{{popType === 2}}" columns="{{ marryColumns }}" bind:change="onMarryChange" />
+				<van-picker wx:else columns="{{ ageColumns }}" default-index="{{50}}" bind:change="onAgeChange" />
 		</van-popup>
 </view>

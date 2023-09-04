@@ -13,7 +13,7 @@
 								<text class="text-import">问诊专家</text>
 						</view>
 				</view>
-				<view class="menu-item">
+				<view class="menu-item" bindtap="toOldHealth">
 						<image class="img-right" src="/res/images/home-menu-plus.png" />
 						<view class="text">老年健康</view>
 						<view class="sub-text">

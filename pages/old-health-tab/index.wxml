@@ -1,0 +1,21 @@
+<view class="page">
+  <view class="tabs">
+    <view class="{{tabActive === 1 ?'tab-item active':'tab-item'}}" bindtap="tabChange" data-tab="{{1}}">
+      体检服务
+    </view>
+    <view class="{{tabActive === 0 ?'tab-item active':'tab-item'}}" bindtap="tabChange" data-tab="{{0}}">
+      义诊服务
+    </view>
+  </view>
+  <view class="list-content">
+    <view v-for="{{serviceList}}" wx:key="id" class="list-item">
+      <image class="cover" src="" />
+      <view class="info">
+        <view class="name"></view>
+        <view class="content"></view>
+        <view class="time"></view>
+        <view class="address"></view>
+      </view>
+    </view>
+  </view>
+</view>

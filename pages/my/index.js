@@ -6,7 +6,17 @@ Page({
      * 页面的初始数据
      */
     data: {
-
+        userInfo: {
+            id: "99",
+            mobile: "18556201182",
+            name: "185****1182",
+            nickname: "185****1182",
+            headImage: "http://app.kbing123.com/mdedia/20230904/XxGPWjWxRiS82ff4aea3844c983f36d5ca1ef27e71e7.png",
+            sex: "1",
+            age: '0',
+            marry: '0',
+            idcard: "3212831999999555",
+        },
     },
 
     /**

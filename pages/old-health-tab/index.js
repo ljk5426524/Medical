@@ -1,12 +1,11 @@
-// pages/my-service/index.js
-import api from '../../api/index'
+// pages/old-health-tab/index.js
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-        tabActive: 0,
+        tabActive: 1,
         serviceList: []
     },
 
@@ -14,7 +13,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        this.getServiceList()
+
     },
 
     /**
@@ -69,20 +68,6 @@ Page({
         const { tab } = e.currentTarget.dataset
         this.setData({
             tabActive: tab
-        }, () => {
-            this.getServiceList()
-        })
-    },
-
-    getServiceList() {
-        const { tabActive } = this.data
-        api.getServiceList({
-            memberId: 99,
-            type: tabActive,// 0：义诊，1：体检
-        }).then(res => {
-            this.setData({
-                serviceList: res.data.records
-            })
         })
     },
 })

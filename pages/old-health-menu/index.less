@@ -1,0 +1,56 @@
+.page {
+  padding-top: 80rpx;
+  height: 100vh;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  gap: 40rpx;
+
+
+  .menu-item {
+    position: relative;
+    box-sizing: border-box;
+    width: 690rpx;
+    height: 230rpx;
+    background: linear-gradient(-90deg, #4184FF 0%, #8DB3FF 100%);
+    box-shadow: 3rpx 4rpx 25rpx 0rpx rgba(148, 201, 200, 0.5);
+    border-radius: 8rpx;
+    color: #fff;
+    padding: 74rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 14rpx;
+
+    &.second {
+      background: linear-gradient(-90deg, #988ADE 0%, #8D7CFF 100%);
+    }
+
+    .menu-item-title {
+      font-size: 36rpx;
+    }
+
+    .menu-item-sub-title {
+      font-size: 28rpx;
+    }
+
+    .icon {
+      position: absolute;
+      right: 40rpx;
+      top: 70rpx;
+      width: 120rpx;
+      height: 120rpx;
+    }
+
+    .icon2 {
+      position: absolute;
+      right: 60rpx;
+      top: 76rpx;
+      width: 80rpx;
+      height: 80rpx;
+    }
+  }
+}

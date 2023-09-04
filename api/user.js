@@ -5,7 +5,7 @@ export default {
 	// 头像、文件上传
 	uploadFile(data) {
 		return request({
-			url: `${baseUrl}ftpFile/upload`,
+			url: `${baseUrl}v1/api/file/upload`,
 			data,
 			method: "post",
 			type: "uploadFile",
@@ -26,6 +26,14 @@ export default {
 	checkUserInfo(data) {
 		return request({
 			url: `${baseUrl}api/v1/member/checkUserInfo`,
+			data,
+			method: "post"
+		});
+	},
+	// 编辑用户信息
+	editUserInfo(data) {
+		return request({
+			url: `${baseUrl}api/v1/member/editUserInfo`,
 			data,
 			method: "post"
 		});

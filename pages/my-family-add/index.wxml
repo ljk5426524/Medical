@@ -21,19 +21,9 @@
     <van-field value="{{ userInfo.cardNum }}" clearable placeholder="请输入身份证号" maxlength="{{18}}" type="text" data-type="cardNum" bind:change="changeField" input-align="right">
       <view class="form-item-label isRequire" slot="label">身份证号</view>
     </van-field>
-    <!-- <van-cell bind:click="changePhone">
-						<view class="form-item-title" slot="title">
-								<view class="form-item-label isRequire">手机号</view>
-								<view class="form-item-value">{{userInfo.phone}}</view>
-						</view>
-						<van-icon slot="right-icon" name="arrow" size="16px" />
-				</van-cell> -->
     <van-field value="{{ userInfo.phone }}" clearable placeholder="请输入手机号" maxlength="{{11}}" type="number" data-type="phone" bind:change="changeField" input-align="right">
       <view class="form-item-label isRequire" slot="label">手机号</view>
     </van-field>
-    <!-- <van-field value="{{ userInfo.age }}" clearable placeholder="请输入年龄" maxlength="{{3}}" type="number" data-type="age" bind:change="changeField" input-align="right">
-      <view class="form-item-label isRequire" slot="label">年龄</view>
-    </van-field> -->
     <van-cell bind:click="ageSel" is-link>
       <view class="form-item-title" slot="title">
         <view class="form-item-label isRequire">年龄</view>

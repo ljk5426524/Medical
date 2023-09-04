@@ -1,0 +1,25 @@
+<view class="page">
+  <view class="list-content">
+    <view class="list-item" wx:for="{{recordList}}" wx:key="id" bindtap="toDetail" data-id="{{item.id}}">
+      <view class="list-item-top">
+        <image class="avator" src="/res/images/home-doctor.png" />
+        <view class="info">
+          <view class="name">
+            {{item.doctorRelVo.doctorName}}
+            <text class="major">{{item.doctorRelVo.titleName}}</text>
+          </view>
+          <view class="address">
+            {{item.doctorRelVo.merchantName}}
+            <text class="dept">{{item.doctorRelVo.departmentName}}</text>
+          </view>
+        </view>
+        <!-- <view class="state">5</view> -->
+        <view class="state active">5</view>
+      </view>
+      <view class="list-item-bottom">
+        <view class="time">问诊时间：{{item.createTime}}</view>
+        <view class="time">{{item.productName}}</view>
+      </view>
+    </view>
+  </view>
+</view>
