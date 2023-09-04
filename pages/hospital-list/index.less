@@ -6,6 +6,8 @@
     padding: 0 20rpx 50rpx;
     height: calc(100vh - 120rpx);
 
+    box-sizing: border-box;
+
     .hospital-item {
       padding: 34rpx 14rpx;
       display: flex;
@@ -22,6 +24,8 @@
         width: 174rpx;
         height: 130rpx;
         margin-right: 20px;
+        flex-shrink: 0;
+
       }
 
       .info {
@@ -38,6 +42,11 @@
         .desc {
           font-size: 24rpx;
           color: #9FA8B9;
+          word-break: break-all;
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
         }
 
         .phone {

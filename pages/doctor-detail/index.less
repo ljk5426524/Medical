@@ -1,8 +1,8 @@
 .page {
     box-sizing: border-box;
     background-color: #fff;
-    height: 100vh;
-    padding-bottom: 80rpx;
+    min-height: 100vh;
+    padding-bottom: 160rpx;
 
     .header {
         width: 750rpx;
@@ -92,6 +92,7 @@
             font-size: 26rpx;
             color: #606973;
             line-height: 1.5;
+            height: calc(100vh - 1250rpx);
         }
     }
 
@@ -143,7 +144,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 60rpx 0;
+        padding: 20rpx 0 60rpx 0;
+        background-color: #fff;
 
         .btn-add {
             display: flex;

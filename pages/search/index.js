@@ -1,4 +1,5 @@
 // pages/search/index.js
+import api from '../../api/index'
 Page({
 
     /**
@@ -6,56 +7,11 @@ Page({
      */
     data: {
         keyword: '',
-        deptOptions: [{
-            value: '',
-            text: '全部科室'
-        }, {
-            value: 1,
-            text: '神经内科'
-        }, {
-            value: 2,
-            text: '神经外科'
-        }, {
-            value: 3,
-            text: '胸外科'
-        }, {
-            value: 4,
-            text: '心血管内科'
-        }, {
-            value: 5,
-            text: '泌尿外科'
-        }],
-        orderOptions: [{
-            value: '',
-            text: '综合排序'
-        }, {
-            value: 1,
-            text: '正序'
-        }, {
-            value: 2,
-            text: '倒序'
-        }],
+        deptOptions: [],
         deptId: '',
-        orderType: '',
-        userList: [{
-            id: 1,
-            name: '王小明',
-            major: '主任医师',
-            hospital: '南京市鼓楼医院',
-            subject: '外科',
-            desc: '擅长：中医药诊治儿童神经精神系统疾病（多发性抽动症）、脾胃系疾病（厌食症、慢性腹泻）',
-            serviceCount: 2131,
-            good: 98,
-        }, {
-            id: 2,
-            name: '王大明',
-            major: '主任医师',
-            hospital: '南京市鼓楼医院',
-            subject: '外科',
-            desc: '擅长：中医药诊治儿童神经精神系统疾病（多发性抽动症）、脾胃系疾病（厌食症、慢性腹泻）',
-            serviceCount: 2131,
-            good: 98,
-        }]
+        hospitalId: '',
+        hospitalOptions: [],
+        userList: []
 
     },
 
@@ -63,7 +19,15 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        const { dId, hId, role } = options
+        this.setData({
+            role: role,
+            hospitalId: hId ? +hId : '',
+            deptId: dId || ''
+        })
+        Promise.all([this.getDepartmentPage(), this.getMerchantByPage()]).then(res => {
+            this.selectDoctorByPage()
+        })
     },
 
     /**
@@ -113,5 +77,71 @@ Page({
      */
     onShareAppMessage: function () {
 
+    },
+    getDepartmentPage() {
+        api.getDepartmentPage({}).then(res => {
+            this.setData({
+                deptOptions: [{
+                    value: '',
+                    text: '全部科室'
+                }, ...res.data.map(i => {
+                    return {
+                        value: i.id,
+                        text: i.name
+                    }
+                })]
+            })
+        })
+    },
+    getMerchantByPage() {
+        api.getMerchantByPage({
+        }).then(res => {
+
+            this.setData({
+                hospitalOptions: [{
+                    value: '',
+                    text: '全部医院'
+                }, ...res.data.records.map(i => {
+                    return {
+                        value: i.id,
+                        text: i.name
+                    }
+                })]
+            })
+        })
+    },
+    selectDoctorByPage() {
+        const { hospitalId, deptId, keyword, role } = this.data
+        const params = {}
+        if (hospitalId) {
+            params.merchantId = hospitalId
+        }
+        if (deptId) {
+            params.departmentId = deptId
+        }
+        if (keyword) {
+            params.name = keyword
+        }
+        if (role) {
+            params.role = role
+        }
+        api.selectDoctorByPage(params).then(res => {
+            this.setData({
+                userList: res.data.records
+            })
+        })
+    },
+    onSearch(e) {
+        this.setData({
+            keyword: e.detail,
+        }, () => {
+            this.selectDoctorByPage()
+        });
+    },
+    toDetail(e) {
+        const { id } = e.currentTarget.dataset
+        wx.navigateTo({
+            url: `/pages/doctor-detail/index?id=${id}`,
+        })
     }
 })

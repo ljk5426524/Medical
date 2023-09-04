@@ -1,18 +1,21 @@
 // pages/doctor-detail/index.js
+import api from '../../api/index'
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-
+        doctorDetail: {}
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        const { id } = options
+        this.getDoctorDetail(id)
+        this.findDoctorProduct(id)
     },
 
     /**
@@ -62,5 +65,24 @@ Page({
      */
     onShareAppMessage: function () {
 
+    },
+
+    getDoctorDetail(id) {
+        api.getDoctorDetail({
+            doctorId: id || 4
+        }).then(res => {
+            this.setData({
+                doctorDetail: res.data
+            })
+        })
+    },
+    findDoctorProduct(id) {
+        api.findDoctorProduct({
+            doctorId: id || 4
+        }).then(res => {
+            // this.setData({
+            //     doctorDetail: res.data
+            // })
+        })
     }
 })

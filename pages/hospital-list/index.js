@@ -1,4 +1,5 @@
 // pages/hospital-list/index.js
+import api from '../../api/index'
 Page({
 
     /**
@@ -6,32 +7,14 @@ Page({
      */
     data: {
         keyword: '', // 关键词查询
-        hospitalList: [{
-            id: 1,
-            name: '北京协和医院',
-            desc: '共有323名专家可提供服务',
-            phone: '010-69155566',
-            location: '北京市通州区xxxx街道鱼市街10-2031号',
-        }, {
-            id: 2,
-            name: '南京市鼓楼医院',
-            desc: '共有1234名专家可提供服务',
-            phone: '025-892839040',
-            location: '南京市鼓楼区xxx街道1号',
-        }, {
-            id: 3,
-            name: '江苏省人民医院',
-            desc: '共有3232名专家可提供服务',
-            phone: '025-69155566',
-            location: '南京市鼓楼区上海路31号',
-        }]
+        hospitalList: []
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        this.getMerchantByPage()
     },
 
     /**
@@ -91,13 +74,23 @@ Page({
         this.setData({
             keyword: e.detail,
         }, () => {
-            this.getHospitalList()
+            this.getMerchantByPage()
         });
     },
     toFind(e) {
         const { id } = e.currentTarget.dataset
         wx.navigateTo({
             url: `/pages/hospital-detail/index?id=${id}`
+        })
+    },
+    getMerchantByPage() {
+        const { keyword } = this.data
+        api.getMerchantByPage({
+            name: keyword
+        }).then(res => {
+            this.setData({
+                hospitalList: res.data.records
+            })
         })
     }
 })

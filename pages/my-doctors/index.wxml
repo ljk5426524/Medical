@@ -1,16 +1,16 @@
 <view class="page">
   <view class="user-item" wx:for="{{doctorList}}" wx:key="id" bindtap="toDoctorDetail" data-id="{{item.id}}">
-    <image class="avator" src="/res/images/home-doctor.png" />
+    <image class="avator" src="{{item.headImage}}" />
     <view class="info">
       <view class="name">
         {{item.name}}
-        <text class="position">{{item.position}}</text>
+        <text class="position">{{item.titleName}}</text>
       </view>
       <view class="hospital">
-        {{item.hospital}}
-        <text class="department">{{item.department}}</text>
+        {{item.merchantName}}
+        <text class="department">{{item.departmentName}}</text>
       </view>
-      <view class="desc">{{item.desc}}</view>
+      <view class="desc">{{item.description}}</view>
       <view class="btn-chat" bindtap="toChat">咨询</view>
     </view>
   </view>

@@ -1,12 +1,14 @@
 {
     "pages": [
+        "pages/home/index",
+        "pages/my-family-add/index",
+        "pages/my-family/index",
+        "pages/doctor-detail/index",
         "pages/my/index",
         "pages/my-doctors/index",
         "pages/my-info/index",
         "pages/setting/index",
-        "pages/home/index",
         "pages/home-search/index",
-        "pages/doctor-detail/index",
         "pages/hospital-list/index",
         "pages/department/index",
         "pages/chat/index",

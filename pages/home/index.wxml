@@ -49,15 +49,17 @@
 		</view>
 		<view class="specialist">
 				<view class="title">我的专家</view>
-				<view wx:for="{{specialist}}" wx:key="id" class="doctor-item">
+				<view wx:for="{{specialist}}" wx:key="id" class="doctor-item" data-id="{{item.id}}" bindtap="toDoctorDetail">
+						<image class="avator" src="{{item.headImage}}" />
 						<view class="doctor-info">
 								<view>
 										<text class="name">{{item.name}}</text>
-										<text class="job">{{item.job}}</text>
-										<text class="subject">{{item.subject}}</text>
+										<text class="job">{{item.titleName}}</text>
+										<text class="subject">{{item.departmentName}}</text>
 								</view>
-								<view>{{item.hospital}}</view>
+								<view class="hospital">{{item.merchantName}}</view>
 						</view>
+						<view class="btn">咨询</view>
 				</view>
 		</view>
 </view>

@@ -1,4 +1,5 @@
 // pages/my-doctors/index.js
+import api from '../../api/index'
 Page({
 
     /**
@@ -9,14 +10,14 @@ Page({
             id: 1,
             name: '王小明',
             hospital: '北京协和医院',
-            department: '神经内科',
+            departmentName: '神经内科',
             position: '主治医师',
             desc: '擅长：神经科、神经内科擅长：神经科、神经内科擅长：神经科、神经内科擅长：神经科、神经内科擅长：神经科、神经内科擅长：神经科、神经内科'
         }, {
             id: 2,
             name: '李晓红',
             hospital: '北京协和医院',
-            department: '神经内科',
+            departmentName: '神经内科',
             position: '副主任医师',
             desc: '擅长：神经科、神经内科'
         }],
@@ -26,7 +27,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        this.getMyDoctors()
     },
 
     /**
@@ -81,13 +82,22 @@ Page({
     toDoctorDetail(e) {
         const { id } = e.currentTarget.dataset
         wx.navigateTo({
-            url: `../doctor-detail/index?id=${id}`
+            url: `/pages/doctor-detail/index?id=${id}`
         })
     },
     toChat(e) {
         const { id } = e.currentTarget.dataset
         wx.switchTab({
             url: `../chat/index`
+        })
+    },
+    getMyDoctors() {
+        api.getMyDoctors({
+            userId: 99
+        }).then(res => {
+            this.setData({
+                doctorList: res.data.records
+            })
         })
     }
 })

@@ -120,30 +120,65 @@
   }
 
   .specialist {
-    padding: 50rpx;
+    padding: 40rpx;
 
     .title {
       font-size: 34rpx;
       color: #2a2a2a;
       font-weight: bold;
+      ;
     }
 
     .doctor-item {
       display: flex;
       align-items: center;
+      justify-content: space-between;
+      background-color: #fff;
+      padding: 34rpx 24rpx;
+      box-shadow: 0rpx 0rpx 20rpx 0rpx #ECEFF4;
+      border-radius: 16rpx;
+      margin-top: 35rpx;
+
+      .avator {
+        width: 110rpx;
+        height: 110rpx;
+        flex-shrink: 0;
+        border-radius: 50%;
+      }
 
       .doctor-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        height: 110rpx;
         font-size: 30rpx;
         color: #999;
+        margin: 0 auto 0 26rpx;
+        color: #2E3C67;
 
         .name {
-          font-size: 30rpx;
+          font-size: 32rpx;
           font-weight: bold;
         }
 
         .job {
           margin: 0 18rpx;
+          font-size: 26rpx;
         }
+
+        .subject,
+        .hospital {
+          font-size: 26rpx;
+        }
+
+      }
+
+      .btn {
+        font-size: 28rpx;
+        background-color: #EAEFFF;
+        color: #4C78FF;
+        padding: 12rpx 20rpx;
+        border-radius: 26rpx;
       }
     }
   }

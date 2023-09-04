@@ -1,4 +1,5 @@
 // pages/hospital-detail/index.js
+import api from '../../api/index'
 Page({
 
     /**
@@ -6,27 +7,7 @@ Page({
      */
     data: {
         hospitalDetail: {
-            id: 1,
-            name: '北京协和医院',
-            desc: '共有323名专家可提供服务',
-            phone: '010-69155566',
-            location: '北京市通州区xxxx街道鱼市街10-2031号',
-            departmentList: [{
-                id: 1,
-                name: '神经内科'
-            }, {
-                id: 2,
-                name: '神经外科'
-            }, {
-                id: 3,
-                name: '胸外科'
-            }, {
-                id: 4,
-                name: '心血管内科'
-            }, {
-                id: 5,
-                name: '泌尿外科'
-            }]
+            departmentList: []
         }
     },
 
@@ -34,7 +15,8 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        const { id } = options
+        this.getMerchantByDetail(id)
     },
 
     /**
@@ -90,7 +72,28 @@ Page({
         const { id: dId } = e.currentTarget.dataset
         const { id: hId } = this.data.hospitalDetail
         wx.navigateTo({
-            url: `/pages/search/index?dId=${dId}&hId=${dId}`
+            url: `/pages/search/index?dId=${dId}&hId=${hId}`
+        })
+    },
+    getMerchantByDetail(id) {
+        api.getMerchantByDetail({ merchantId: id }).then(res => {
+            this.setData({
+                hospitalDetail: res.data
+            }, () => {
+                this.getDepartmentByMerchant(id)
+            })
+        })
+    },
+    getDepartmentByMerchant(id) {
+        api.getDepartmentByMerchant({
+            id
+        }).then(res => {
+            this.setData({
+                hospitalDetail: {
+                    ...this.data.hospitalDetail,
+                    departmentList: res.data
+                }
+            })
         })
     }
 })

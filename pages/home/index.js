@@ -1,4 +1,5 @@
 // pages/home/index.js
+import api from '../../api/index'
 Page({
 
     /**
@@ -7,9 +8,9 @@ Page({
     data: {
         specialist: [{
             name: '刘高级',
-            job: '主任',
-            subject: '外科',
-            hospital: '南京市儿童医院'
+            titleName: '主任',
+            departmentName: '外科',
+            merchantName: '南京市儿童医院'
         }]
     },
 
@@ -17,7 +18,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        this.getMyDoctors()
     },
 
     /**
@@ -74,8 +75,8 @@ Page({
         const map = {
             1: '/pages/hospital-list/index',
             2: '/pages/department/index',
-            3: '/pages/search/index',
-            4: '/pages/search/index'
+            3: '/pages/search/index?role=0',
+            4: '/pages/search/index?role=1'
         }
         wx.navigateTo({
             url: map[type]
@@ -84,6 +85,21 @@ Page({
     toAsk() {
         wx.navigateTo({
             url: '/pages/doctor-detail/index'
+        })
+    },
+    getMyDoctors() {
+        api.getMyDoctors({
+            userId: 99
+        }).then(res => {
+            this.setData({
+                specialist: res.data.records
+            })
+        })
+    },
+    toDoctorDetail(e) {
+        const { id } = e.currentTarget.dataset
+        wx.navigateTo({
+            url: `/pages/doctor-detail/index?id=${id}`,
         })
     }
 })

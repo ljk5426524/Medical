@@ -5,8 +5,10 @@
     </view>
     <view class="depart-content">
         <view wx:for="{{departmentList}}" wx:key="id" class="depart-item" bindtap="toFind" data-id="{{item.id}}">
-            <view class="depart-icon"></view>
-            <view class="depart-name">名称{{item.name}}</view>
+            <view class="depart-icon">
+                <image class="icon" src="{{item.icon}}" />
+            </view>
+            <view class="depart-name">{{item.name}}</view>
         </view>
     </view>
 </view>

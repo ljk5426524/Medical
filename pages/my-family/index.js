@@ -1,4 +1,4 @@
-// pages/my/index.js
+// pages/my-family/index.js
 import api from '../../api/index'
 Page({
 
@@ -6,14 +6,13 @@ Page({
      * 页面的初始数据
      */
     data: {
-
+        userList: []
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        // this.getUserInfo()
     },
 
     /**
@@ -28,6 +27,7 @@ Page({
      */
     onShow: function () {
 
+        this.getMyFamily()
     },
 
     /**
@@ -64,12 +64,18 @@ Page({
     onShareAppMessage: function () {
 
     },
-    getUserInfo() {
-        api.getTokenByPhone({
-            token: '62efc330f72b42f5810201d38acea937'
-        }).then(res => {
-            console.log(res)
+    toAdd() {
+        wx.navigateTo({
+            url: '/pages/my-family-add/index',
         })
-
+    },
+    getMyFamily() {
+        api.getMyFamily({
+            memberId: 99
+        }).then(res => {
+            this.setData({
+                userList: res.data
+            })
+        })
     }
 })

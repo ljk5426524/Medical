@@ -1,66 +1,19 @@
 // pages/department/index.js
+import api from '../../api/index'
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-        departmentList: [{
-            id: 1,
-            name: 'test1'
-        },
-        {
-            id: 2,
-            name: 'test2'
-        },
-        {
-            id: 3,
-            name: 'test3'
-        },
-        {
-            id: 4,
-            name: 'test4'
-        },
-        {
-            id: 5,
-            name: 'test5'
-        },
-        {
-            id: 6,
-            name: 'test6'
-        }, {
-            id: 4,
-            name: 'test4'
-        },
-        {
-            id: 5,
-            name: 'test5'
-        },
-        {
-            id: 6,
-            name: 'test6'
-        }, {
-            id: 4,
-            name: 'test4'
-        },
-        {
-            id: 5,
-            name: 'test5'
-        },
-        {
-            id: 6,
-            name: 'test6'
-        }, {
-            id: 4,
-            name: 'test4'
-        }]
+        departmentList: []
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        this.getDepartmentPage()
     },
 
     /**
@@ -115,7 +68,14 @@ Page({
     toFind(e) {
         const { id } = e.currentTarget.dataset
         wx.navigateTo({
-            url: `/pages/search/index?sId=${id}`
+            url: `/pages/search/index?dId=${id}`
+        })
+    },
+    getDepartmentPage() {
+        api.getDepartmentPage({}).then(res => {
+            this.setData({
+                departmentList: res.data
+            })
         })
     }
 })
