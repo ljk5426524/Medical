@@ -1,5 +1,6 @@
 {
     "pages": [
+        "pages/patient/index",
         "pages/home/index",
         "pages/old-health-tab/index",
         "pages/order-diagnosis/index",
@@ -23,7 +24,6 @@
         "pages/search/index",
         "pages/my-scan-record/index",
         "pages/home-doctor/index",
-        "pages/patient/index",
         "pages/old-health-detail/index",
         "pages/order-result/index"
     ],
@@ -64,7 +64,9 @@
         "van-popup": "@vant/weapp/popup/index",
         "van-picker": "@vant/weapp/picker/index",
         "van-button": "@vant/weapp/button/index",
-        "van-rate": "@vant/weapp/rate/index"
+        "van-rate": "@vant/weapp/rate/index",
+        "van-index-bar": "@vant/weapp/index-bar/index",
+        "van-index-anchor": "@vant/weapp/index-anchor/index"
     },
     "sitemapLocation": "sitemap.json"
 }

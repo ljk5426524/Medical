@@ -7,6 +7,7 @@
     "@tencentcloud/chat-uikit-wechat": "^1.1.3",
     "@vant/weapp": "^1.10.24",
     "cos-wx-sdk-v5": "^1.4.12",
+    "js-pinyin": "^0.2.5",
     "tim-upload-plugin": "^1.3.0",
     "tim-wx-sdk": "^2.27.5"
   },

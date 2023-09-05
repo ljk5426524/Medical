@@ -1,1 +1,19 @@
-<view class="page">patient</view>
+<view class="page">
+  <van-search value="{{ name }}" focus="{{true}}" placeholder="请输入患者姓名" shape="round" bind:search="onSearch" use-action-slot>
+    <view class="icon-content" slot="action" bind:tap="onClickFriend">
+      <van-icon name="friends-o" size="2em" class="icon" />
+    </view>
+  </van-search>
+  <van-index-bar index-list="{{ indexList }}">
+    <view wx:for="{{indexBarList}}" wx:key="*this" wx:for-index="key" wx:for-item="value">
+      <van-index-anchor index="{{key}}" />
+      <view wx:for="{{value}}" wx:key="id" class="user-item">
+        <image class="avator" src="{{item.headImage}}" />
+        <view class="name">{{item.nickname}}</view>
+        <view class="sex">{{item.sex === '1'?'男':'女'}}</view>
+        <view class="age">{{item.age}}岁</view>
+        <view class="scan">扫码添加</view>
+      </view>
+    </view>
+  </van-index-bar>
+</view>

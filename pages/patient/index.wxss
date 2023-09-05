@@ -1,1 +1,1 @@
-/* pages/patient/index.wxss */
+.page{height:100vh}.page .icon-content{width:120rpx;display:flex;align-items:center;justify-content:center}.page .user-item{display:flex;justify-content:flex-start;align-items:baseline;gap:20rpx;padding:20rpx}.page .user-item .avator{width:100rpx;height:100rpx;border-radius:50%}.page .user-item .name{color:#2E3C67;font-size:30rpx}.page .user-item .sex,.page .user-item .age{font-size:24rpx;color:#7B828B}.page .user-item .scan{font-size:24rpx;color:#7B828B;margin:0 20rpx 0 auto}
