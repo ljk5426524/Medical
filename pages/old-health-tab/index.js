@@ -1,4 +1,5 @@
 // pages/old-health-tab/index.js
+import api from '../../api/index'
 Page({
 
     /**
@@ -13,7 +14,12 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        const { tab } = options
+        this.setData({
+            tabActive: +tab
+        }, () => {
+            this.getServiceList()
+        })
     },
 
     /**
@@ -68,6 +74,27 @@ Page({
         const { tab } = e.currentTarget.dataset
         this.setData({
             tabActive: tab
+        }, () => {
+            this.getServiceList()
         })
     },
+    getServiceList() {
+        const { tabActive } = this.data
+        api.getServiceList({
+            current: 0,
+            size: 100,
+            type: tabActive
+        }).then(res => {
+            this.setData({
+                serviceList: res.data.records
+            })
+        })
+    },
+
+    toDetail(e) {
+        const { id } = e.currentTarget.dataset
+        wx.navigateTo({
+            url: `/pages/old-health-detail/index?id=${id}`
+        })
+    }
 })

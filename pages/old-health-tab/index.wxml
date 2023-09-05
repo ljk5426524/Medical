@@ -8,13 +8,19 @@
     </view>
   </view>
   <view class="list-content">
-    <view v-for="{{serviceList}}" wx:key="id" class="list-item">
-      <image class="cover" src="" />
+    <view wx:for="{{serviceList}}" wx:key="id" class="list-item" bindtap="toDetail" data-id="{{item.id}}">
+      <image class="cover" src="{{item.imgUrl}}" />
       <view class="info">
-        <view class="name"></view>
-        <view class="content"></view>
-        <view class="time"></view>
-        <view class="address"></view>
+        <view class="name">{{item.serviceName}}</view>
+        <view class="content">{{item.instruction}}</view>
+        <view class="time">
+          <van-icon name="calendar-o" />
+          {{item.startTime}} - {{item.endTime}}
+        </view>
+        <view class="address">
+          <van-icon name="location-o" />
+          {{item.provider}}
+        </view>
       </view>
     </view>
   </view>

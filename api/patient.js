@@ -75,5 +75,41 @@ export default {
       method: "post",
       contentType: 'application/json'
     })
-  }
+  },
+  // 记录订单详情
+  getOrderDetail(data) {
+    return request({
+      url: `${baseUrl}api/v1/order/getOrderDetailByOrderId`,
+      data,
+      method: "post"
+    })
+  },
+  // 老年健康 服务列表
+  getServiceList(data) {
+    return request({
+      url: `${baseUrl}api/v1/service/listPage`,
+      data,
+      method: "post",
+      contentType: 'application/json'
+    })
+  },
+  // 老年健康 服务详情
+  getServiceDetail(data) {
+    return request({
+      url: `${baseUrl}api/v1/service/detail`,
+      data,
+      method: "get",
+      contentType: 'application/json'
+    })
+  },
+  // 老年健康 服务预约
+  orderService(data) {
+    return request({
+      url: `${baseUrl}api/v1/service/order`,
+      data,
+      selfHandle: true,
+      method: "post",
+      contentType: 'application/json'
+    })
+  },
 }

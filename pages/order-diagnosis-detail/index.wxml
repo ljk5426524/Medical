@@ -1,26 +1,27 @@
 <view class="page">
   <view class="nav-bg">
     <van-icon class="back-icon" style="top:{{buttonClientRect.top}}px" name="arrow-left" color="#fff" bind:click="goBack" />
-    <view class="nav-title" style="top:{{buttonClientRect.top + 8}}px">凤凰图书试读</view>
+    <view class="nav-title" style="top:{{buttonClientRect.top + 8}}px">记录详情</view>
     <view class="detail-top" style="padding-top:{{buttonClientRect.top + 50}}px">
-      <view class="state">ing</view>
-      <view class="sub-state">ing</view>
+      <view class="state">{{recordDetail.stateStr}}</view>
+      <view wx:if="{{recordDetail.state === 2}}" class="sub-state">正在咨询医生，请及时关注医生回复</view>
+      <view wx:if="{{recordDetail.state === 3}}" class="sub-state">咨询已结束，点击“查看回话”可回看咨询详情</view>
     </view>
   </view>
   <view class="detail-content">
-    <view class="text">图文</view>
-    <view class="text">创建时间：</view>
-    <view class="text">测试</view>
+    <view class="text">{{recordDetail.productName}}</view>
+    <view class="text">创建时间：{{recordDetail.createTime}}</view>
+    <view class="text">咨询医生：</view>
     <view class="doctor-card">
-      <image class="avator" src="/res/images/home-doctor.png" />
+      <image class="avator" src="{{recordDetail.doctorRelVo.headImage }}" />
       <view class="doctor-info">
         <view class="name">
-          1
-          <text class="major">2</text>
+          {{recordDetail.doctorRelVo.doctorName}}
+          <text class="major">{{recordDetail.doctorRelVo.titleName}}</text>
         </view>
         <view class="address">
-          3
-          <text class="dept">4</text>
+          {{recordDetail.doctorRelVo.merchantName}}
+          <text class="dept">{{recordDetail.doctorRelVo.departmentName}}</text>
         </view>
       </view>
       <van-icon name="arrow" />
@@ -29,15 +30,20 @@
   <view class="detail-bottom">
     <view class="label">
       用户信息：
-      <text class="val">5</text>
+      <text class="val">{{recordDetail.patientName}}</text>
     </view>
     <view class="label">
       咨询内容：
-      <text class="val">6</text>
+      <text class="val">{{recordDetail.description}}</text>
     </view>
   </view>
-  <view class="btn-content">
-    <view class="btn">进入会话</view>
+  <view wx:if="{{recordDetail.state === 2 || recordDetail.state === 3}}" class="btn-content">
+    <view class="btn">{{recordDetail.state === 2?'进入':'查看'}}会话</view>
   </view>
-  <view class="order-code">订单编号：xxxx</view>
+  <view wx:if="{{recordDetail.commentTime}}" class="order-code">
+    服务评价：
+    <van-rate value="{{ recordDetail.commentCount }}" size="{{ 14 }}" color="#ffd21e" void-icon="star" void-color="#eee" bind:change="onChange" />
+    <view>{{recordDetail.commentContent}}</view>
+  </view>
+  <view class="order-code">订单编号：{{recordDetail.orderCode}}</view>
 </view>

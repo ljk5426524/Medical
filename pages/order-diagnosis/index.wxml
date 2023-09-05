@@ -2,7 +2,7 @@
   <view class="list-content">
     <view class="list-item" wx:for="{{recordList}}" wx:key="id" bindtap="toDetail" data-id="{{item.id}}">
       <view class="list-item-top">
-        <image class="avator" src="/res/images/home-doctor.png" />
+        <image class="avator" src="{{item.doctorRelVo.headImage}}" />
         <view class="info">
           <view class="name">
             {{item.doctorRelVo.doctorName}}
@@ -13,8 +13,10 @@
             <text class="dept">{{item.doctorRelVo.departmentName}}</text>
           </view>
         </view>
-        <!-- <view class="state">5</view> -->
-        <view class="state active">5</view>
+        <view wx:if="{{item.state === 1 || item.state === 2 || item.state === 9}}" class="state active">
+          {{item.stateStr}}
+        </view>
+        <view wx:else class="state">{{item.stateStr}}</view>
       </view>
       <view class="list-item-bottom">
         <view class="time">问诊时间：{{item.createTime}}</view>

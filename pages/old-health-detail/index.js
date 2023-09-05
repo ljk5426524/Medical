@@ -1,18 +1,21 @@
-// pages/old-health-menu/index.js
+// pages/old-health-detail/index.js
+import api from '../../api/index'
+import { wxToast } from '../../utils/wx-api'
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-
+        serviceDetail: {}
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        const { id } = options
+        this.getServiceDetail(id)
     },
 
     /**
@@ -64,10 +67,20 @@ Page({
 
     },
 
-    toTab(e) {
-        const { type } = e.currentTarget.dataset
+    getServiceDetail(id) {
+        api.getServiceDetail({
+            serviceId: id
+        }).then(res => {
+            this.setData({
+                serviceDetail: res.data
+            })
+        })
+    },
+    // 立即预约
+    order() {
+        const { serviceDetail: { id } } = this.data
         wx.navigateTo({
-            url: `/pages/old-health-tab/index?tab=${type}`,
+            url: `/pages/order-result/index?id=${id}`
         })
     }
 })

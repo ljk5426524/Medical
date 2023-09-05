@@ -1,4 +1,4 @@
-// pages/old-health-menu/index.js
+// pages/patient/index.js
 Page({
 
     /**
@@ -62,12 +62,5 @@ Page({
      */
     onShareAppMessage: function () {
 
-    },
-
-    toTab(e) {
-        const { type } = e.currentTarget.dataset
-        wx.navigateTo({
-            url: `/pages/old-health-tab/index?tab=${type}`,
-        })
     }
 })

@@ -1,13 +1,20 @@
-// pages/order-diagnosis-detail/index.js
+// pages/order-result/index.js
 import api from '../../api/index'
+import { wxToast } from '../../utils/wx-api'
 Page({
 
 	/**
 	 * 页面的初始数据
 	 */
 	data: {
-		buttonClientRect: wx.getMenuButtonBoundingClientRect(),
-		recordDetail: {}
+		serviceDetail: {},
+		orderSuccess: true,
+		reason: '',
+		orderNum: '',
+		userInfo: {
+			name: "185****1182",
+		},
+		pageIsReady: false
 	},
 
 	/**
@@ -15,7 +22,8 @@ Page({
 	 */
 	onLoad: function (options) {
 		const { id } = options
-		this.getOrderDetail(id)
+		this.getServiceDetail(id)
+		this.orderNow(id)
 	},
 
 	/**
@@ -67,30 +75,36 @@ Page({
 
 	},
 
-	goBack() {
-		wx.navigateBack()
-	},
-
-	getOrderDetail(id) {
-		api.getOrderDetail({
-			orderId: id
+	getServiceDetail(id) {
+		api.getServiceDetail({
+			serviceId: id
 		}).then(res => {
 			this.setData({
-				recordDetail: res.data.length ? { ...res.data[0], stateStr: this.stateFomart(res.data[0].state) } : {}
+				serviceDetail: res.data
 			})
 		})
 	},
-	stateFomart(val) {
-		const map = {
-			0: '待支付',
-			1: '待服务',
-			2: '问诊中',
-			3: '问诊结束',
-			4: '问诊已取消',
-			5: '无效订单',
-			6: '已关闭',
-			9: '待派单'
-		}
-		return map[+val]
-	},
+	orderNow(id) {
+		api.orderService({
+			memberId: 99,
+			memberName: "185****1182",
+			serviceId: id
+		}).then(res => {
+			const { code, msg, data } = res
+			if ([0, 1001, 1002, 1003].includes(+code)) {
+				this.setData({
+					orderSuccess: +code === 0,
+					reason: msg,
+					orderNum: data
+				})
+			} else {
+				wxToast.show({
+					title: msg
+				})
+			}
+			this.setData({
+				pageIsReady: true
+			})
+		})
+	}
 })

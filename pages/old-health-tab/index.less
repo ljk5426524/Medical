@@ -33,15 +33,46 @@
   }
 
   .list-content {
+    padding: 0 30rpx;
+
     .list-item {
       display: flex;
       justify-content: flex-start;
-      align-items: center;
+      align-items: flex-start;
+      margin-bottom: 30rpx;
 
       .cover {
         width: 174rpx;
         height: 130rpx;
         flex-shrink: 0;
+        margin-right: 20rpx;
+      }
+
+      .info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .name {
+          color: #2E3C67;
+          font-size: 32rpx;
+          font-weight: bold;
+        }
+
+        .content {
+          color: #9FA8B9;
+          font-size: 28rpx;
+        }
+
+        .time {
+          color: #9FA8B9;
+          font-size: 28rpx;
+        }
+
+        .address {
+          color: #9FA8B9;
+          font-size: 28rpx;
+        }
       }
     }
   }

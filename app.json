@@ -1,6 +1,7 @@
 {
     "pages": [
         "pages/home/index",
+        "pages/old-health-tab/index",
         "pages/order-diagnosis/index",
         "pages/order-diagnosis-detail/index",
         "pages/my-service/index",
@@ -21,7 +22,10 @@
         "pages/hospital-detail/index",
         "pages/search/index",
         "pages/my-scan-record/index",
-        "pages/old-health-tab/index"
+        "pages/home-doctor/index",
+        "pages/patient/index",
+        "pages/old-health-detail/index",
+        "pages/order-result/index"
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -59,7 +63,8 @@
         "van-field": "@vant/weapp/field/index",
         "van-popup": "@vant/weapp/popup/index",
         "van-picker": "@vant/weapp/picker/index",
-        "van-button": "@vant/weapp/button/index"
+        "van-button": "@vant/weapp/button/index",
+        "van-rate": "@vant/weapp/rate/index"
     },
     "sitemapLocation": "sitemap.json"
 }

@@ -6,11 +6,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        recordList: [{
-            id: 1
-        }, {
-            id: 2
-        }]
+        recordList: []
     },
 
     /**
@@ -18,7 +14,7 @@ Page({
      */
     onLoad: function (options) {
         const { type } = options
-        if (+type === 1) {
+        if (type && +type === 1) {
             this.getOnlineRecord()
             wx.setNavigationBarTitle({
                 title: '在线问诊历史'
@@ -81,13 +77,18 @@ Page({
     },
     getOnlineRecord() {
         api.getOnlineRecord({
-
             current: 1,
             size: 10,
             memberId: 47
         }).then(res => {
             this.setData({
-                recordList: res.data.records
+                recordList: res.data.records.map(i => {
+                    return {
+                        ...i,
+                        state: +i.state,
+                        stateStr: this.stateFomart(i.state)
+                    }
+                })
             })
         })
     },
@@ -98,9 +99,28 @@ Page({
             memberId: 47
         }).then(res => {
             this.setData({
-                recordList: res.data.records
+                recordList: res.data.records.map(i => {
+                    return {
+                        ...i,
+                        state: 2,
+                        stateStr: this.stateFomart(i.state)
+                    }
+                })
             })
         })
+    },
+    stateFomart(val) {
+        const map = {
+            0: '待支付',
+            1: '待服务',
+            2: '服务中',
+            3: '已服务',
+            4: '已取消',
+            5: '无效订单',
+            6: '已关闭',
+            9: '待派单'
+        }
+        return map[+val]
     },
     toDetail(e) {
         const { id } = e.currentTarget.dataset

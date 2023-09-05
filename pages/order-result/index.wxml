@@ -1,0 +1,45 @@
+<view class="page">
+  <view hidden="{{!pageIsReady}}" class="head-bg {{orderSuccess?'':'error'}}">
+    <view class="icon-state">
+      <view wx:if="{{orderSuccess}}">
+        <van-icon name="passed" />
+      </view>
+      <view wx:else>
+        <van-icon name="close" />
+      </view>
+      <view>{{orderSuccess ?'预约成功':'预约失败'}}</view>
+      <view wx:if="{{!orderSuccess}}" class="reason">{{reason}}</view>
+    </view>
+  </view>
+  <view wx:if="{{orderSuccess}}" class="card-white">凭 身 份 证 和 预 约 号 到 店 进 行 服 务</view>
+  <view wx:if="{{orderSuccess}}" class="info">
+    <view class="info-item">
+      <view class="item-label">预约服务</view>
+      <view class="item-val">{{serviceDetail.serviceName}}</view>
+    </view>
+    <view class="info-item">
+      <view class="item-label">服务方</view>
+      <view class="item-val">{{serviceDetail.provider}}</view>
+    </view>
+    <view class="info-item">
+      <view class="item-label">预约号</view>
+      <view class="item-val">{{orderNum}}</view>
+    </view>
+    <view class="info-item">
+      <view class="item-label">预约时间</view>
+      <view class="item-val impo">{{serviceDetail.startTime}}</view>
+    </view>
+    <view class="info-item">
+      <view class="item-label">预约人</view>
+      <view class="item-val impo">{{userInfo.name}}</view>
+    </view>
+    <view class="info-item">
+      <view class="item-label">联系电话</view>
+      <view class="item-val">{{serviceDetail.mobile}}</view>
+    </view>
+    <view class="info-item">
+      <view class="item-label">地址</view>
+      <view class="item-val">{{serviceDetail.address}}</view>
+    </view>
+  </view>
+</view>

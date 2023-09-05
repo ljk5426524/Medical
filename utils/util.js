@@ -22,7 +22,7 @@ const toUrlEncoded = obj => Object.keys(obj).map(k => encodeURIComponent(k) + '=
 
 // => "hello=world&message=JavaScript%20is%20cool"
 export function request({ url, data = {}, type, loadingText = '', isLoading = true, ...rest }) {
-  const { token = "21186191f8ef442893fa64a69988aa6c", contentType = "application/x-www-form-urlencoded;charset=utf-8" } = rest
+  const { token = "21186191f8ef442893fa64a69988aa6c", contentType = "application/x-www-form-urlencoded;charset=utf-8", selfHandle = false } = rest
   const header = {}
   let requestName = type || 'request'
 
@@ -61,7 +61,8 @@ export function request({ url, data = {}, type, loadingText = '', isLoading = tr
         }
         const { code } = resData
 
-        if (+code === 0) {
+        console.log(resData)
+        if (+code === 0 || selfHandle) {
           reslove(resData)
         } else {
           reject('非预期结果')
@@ -78,9 +79,8 @@ export function request({ url, data = {}, type, loadingText = '', isLoading = tr
               }
             })
           } else {
-
             wxToast.show({
-              title: res.data.errorMsg || '接口请求成功，但数据非预期，请稍后再试...',
+              title: res.data.msg || '接口请求成功，但数据非预期，请稍后再试...',
             })
 
           }
