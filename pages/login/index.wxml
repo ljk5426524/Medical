@@ -1,0 +1,7 @@
+<view class="page">
+  <view class="content" hidden="{{!pageShow}}">
+    <van-button open-type="getPhoneNumber" bind:getphonenumber="getUserPhone" type="primary" round color="#517CFF" block>
+      块级元素
+    </van-button>
+  </view>
+</view>

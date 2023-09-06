@@ -2,23 +2,26 @@
     <view class="header">
         <view class="page-title">我的</view>
         <view class="header-info">
-            <image class="avator" src="{{userInfo.headImage}}" />
-            <view>
-                <view class="phone">{{userInfo.name}}</view>
-                <view class="account">账号：{{userInfo.nickname}}</view>
+            <image class="avator" src="{{userInfo?userInfo.headImage:'/res/images/home-doctor.png'}}" />
+            <view class="info">
+                <view wx:if="{{userInfo}}" class="phone">{{userInfo.name}}</view>
+                <view wx:else class="phone">
+                    <navigator url="/pages/login/index">点击登录</navigator>
+                </view>
+                <view class="account">{{userInfo?'账号：'+userInfo.nickname:''}}</view>
             </view>
-            <view class="btn-self">
+            <view wx:if="{{userInfo}}" class="btn-self">
                 <navigator url="/pages/my-info/index">个人资料</navigator>
             </view>
         </view>
     </view>
     <van-cell-group>
-        <van-cell title="家庭成员" is-link icon="wap-home-o" url="/pages/my-family/index" />
-        <van-cell title="我的专家" is-link icon="friends-o" url="/pages/my-doctors/index" />
-        <van-cell title="在线问诊历史" is-link icon="comment-o" url="/pages/order-diagnosis/index?type=1" />
-        <van-cell title="快速问诊历史" is-link icon="notes-o" url="/pages/order-diagnosis/index?type=2" />
-        <van-cell title="我的服务" is-link icon="gem-o" url="/pages/my-service/index" />
-        <van-cell title="我的扫码记录" is-link icon="qr" url="/pages/my-scan-record/index" />
-        <van-cell title="设置" is-link icon="setting-o" url="/pages/setting/index" />
+        <van-cell title="家庭成员" is-link icon="wap-home-o" url="{{userInfo?'/pages/my-family/index':'/pages/login/index'}}" />
+        <van-cell title="我的专家" is-link icon="friends-o" url="{{userInfo?'/pages/my-doctors/index':'/pages/login/index'}}" />
+        <van-cell title="在线问诊历史" is-link icon="comment-o" url="{{userInfo?'/pages/order-diagnosis/index?type=1':'/pages/login/index'}}" />
+        <van-cell title="快速问诊历史" is-link icon="notes-o" url="{{userInfo?'/pages/order-diagnosis/index?type=2':'/pages/login/index'}}" />
+        <van-cell title="我的服务" is-link icon="gem-o" url="{{userInfo?'/pages/my-service/index':'/pages/login/index'}}" />
+        <van-cell title="我的扫码记录" is-link icon="qr" url="{{userInfo?'/pages/my-scan-record/index':'/pages/login/index'}}" />
+        <van-cell title="设置" is-link icon="setting-o" url="{{userInfo?'/pages/setting/index':'/pages/login/index'}}" />
     </van-cell-group>
 </view>

@@ -1,6 +1,7 @@
 // pages/my-info/index.js
 import api from "../../api/index";
 import { wxToast } from "../../utils/wx-api";
+import { getLocalUserInfo } from '../../utils/storage'
 Page({
 
 	/**
@@ -28,6 +29,9 @@ Page({
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
+		this.setData({
+			loginInfo: getLocalUserInfo()
+		})
 	},
 
 	/**
@@ -104,7 +108,6 @@ Page({
 					src: tempFilePaths[0],
 					quality,
 					success: res => {
-						console.log('?????', res.tempFilePath)
 						this.uploadFile(res.tempFilePath);
 					},
 					fail: res => {
@@ -208,9 +211,16 @@ Page({
 			age)
 	},
 	submit() {
-		const { userInfo: { mobile, age, name, headImage, sex, marry, idcard } } = this.data
+		const { userInfo: { mobile, age, name, headImage, sex, marry, idcard }, loginInfo: { id } } = this.data
 		api.editUserInfo({
-			mobile, age, name, headImage, sex, marry, idcard, id: 99
+			mobile,
+			age,
+			name,
+			headImage,
+			sex,
+			marry,
+			idcard,
+			id: id || 99
 		}).then(res => {
 			wxToast.show({
 				title: '更新成功',

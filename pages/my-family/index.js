@@ -1,5 +1,6 @@
 // pages/my-family/index.js
 import api from '../../api/index'
+import { getLocalUserInfo } from '../../utils/storage'
 Page({
 
     /**
@@ -13,6 +14,11 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        this.setData({
+            userInfo: getLocalUserInfo()
+        }, () => {
+            this.getMyFamily()
+        })
     },
 
     /**
@@ -27,7 +33,6 @@ Page({
      */
     onShow: function () {
 
-        this.getMyFamily()
     },
 
     /**
@@ -70,8 +75,9 @@ Page({
         })
     },
     getMyFamily() {
+        const { id } = this.data.userInfo
         api.getMyFamily({
-            memberId: 99
+            memberId: id || 99
         }).then(res => {
             this.setData({
                 userList: res.data

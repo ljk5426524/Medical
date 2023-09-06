@@ -1,11 +1,13 @@
 // pages/home/index.js
 import api from '../../api/index'
+import { getLocalUserInfo } from '../../utils/storage'
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
+        userInfo: null,
         specialist: [{
             name: '刘高级',
             titleName: '主任',
@@ -18,7 +20,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        this.getMyDoctors()
+
     },
 
     /**
@@ -32,7 +34,14 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+        const userInfo = getLocalUserInfo()
+        if (userInfo && userInfo.id) {
+            this.setData({
+                userInfo: getLocalUserInfo()
+            }, () => {
+                this.getMyDoctors()
+            })
+        }
     },
 
     /**
@@ -72,6 +81,7 @@ Page({
 
     toFind(e) {
         const { type } = e.currentTarget.dataset
+        const { userInfo } = this.data
         const map = {
             1: '/pages/hospital-list/index',
             2: '/pages/department/index',
@@ -79,17 +89,19 @@ Page({
             4: '/pages/search/index?role=1'
         }
         wx.navigateTo({
-            url: map[type]
+            url: userInfo ? map[type] : '/pages/login/index'
         })
     },
     toAsk() {
+        const { userInfo } = this.data
         wx.navigateTo({
-            url: '/pages/doctor-detail/index'
+            url: userInfo ? '/pages/doctor-detail/index' : '/pages/login/index'
         })
     },
     toOldHealth() {
+        const { userInfo } = this.data
         wx.navigateTo({
-            url: '/pages/old-health-menu/index'
+            url: userInfo ? '/pages/old-health-menu/index' : '/pages/login/index'
         })
     },
     getMyDoctors() {

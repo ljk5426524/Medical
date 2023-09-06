@@ -1,6 +1,7 @@
 // pages/order-result/index.js
 import api from '../../api/index'
 import { wxToast } from '../../utils/wx-api'
+import { getLocalUserInfo } from '../../utils/storage'
 Page({
 
 	/**
@@ -22,8 +23,13 @@ Page({
 	 */
 	onLoad: function (options) {
 		const { id } = options
-		this.getServiceDetail(id)
-		this.orderNow(id)
+		this.setData({
+			userInfo: getLocalUserInfo()
+		}, () => {
+			this.getServiceDetail(id)
+			this.orderNow(id)
+		})
+
 	},
 
 	/**
@@ -85,9 +91,10 @@ Page({
 		})
 	},
 	orderNow(id) {
+		const { userInfo: { id: userId, name } } = this.data
 		api.orderService({
-			memberId: 99,
-			memberName: "185****1182",
+			memberId: userId || 99,
+			memberName: name,
 			serviceId: id
 		}).then(res => {
 			const { code, msg, data } = res

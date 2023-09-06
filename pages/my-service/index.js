@@ -1,11 +1,13 @@
 // pages/my-service/index.js
 import api from '../../api/index'
+import { getLocalUserInfo } from '../../utils/storage'
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
+        userInfo: {},
         tabActive: 0,
         serviceList: []
     },
@@ -14,7 +16,11 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        this.getServiceList()
+        this.setData({
+            userInfo: getLocalUserInfo()
+        }, () => {
+            this.getServiceList()
+        })
     },
 
     /**
@@ -75,9 +81,9 @@ Page({
     },
 
     getServiceList() {
-        const { tabActive } = this.data
+        const { tabActive, userInfo: { id } } = this.data
         api.getServiceList({
-            memberId: 99,
+            memberId: id || 99,
             type: tabActive,// 0：义诊，1：体检
         }).then(res => {
             this.setData({

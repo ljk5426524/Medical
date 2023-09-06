@@ -19,7 +19,6 @@ export default {
 			url: `${baseUrl}user/pwd/token`,
 			data,
 			method: "post",
-			contentType: "application/x-www-form-urlencoded"
 		});
 	},
 	// 校验用户信息是否完善
@@ -37,5 +36,32 @@ export default {
 			data,
 			method: "post"
 		});
+	},
+	// code换openId
+	loginByWxCode(data) {
+		return request({
+			url: `${baseUrl}login/loginByCode`,
+			data,
+			method: "post",
+			contentType: 'application/json'
+		})
+	},
+	// 解密手机号
+	getUserPhone(data) {
+		return request({
+			url: `${baseUrl}wechat/getUserInfoByCode`,
+			data,
+			method: "post",
+			contentType: 'application/json'
+		})
+	},
+	// 注册登录 手机号绑定wxOpenId
+	registeByUserPhone(data) {
+		return request({
+			url: `${baseUrl}wx/bindPhone`,
+			data,
+			method: "post",
+			contentType: 'application/json'
+		})
 	}
 }

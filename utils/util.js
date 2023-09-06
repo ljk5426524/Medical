@@ -1,7 +1,6 @@
 
-import {
-  wxToast
-} from './wx-api'
+import { wxToast } from './wx-api'
+import { getToken } from './storage'
 
 export const formatTime = date => {
   const year = date.getFullYear()
@@ -12,6 +11,13 @@ export const formatTime = date => {
   const second = date.getSeconds()
 
   return `${[year, month, day].map(formatNumber).join('/')} ${[hour, minute, second].map(formatNumber).join(':')}`
+}
+export const formatDate = date => {
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+
+  return `${formatNumber(year)}年${formatNumber(month)}月${formatNumber(day)}日`
 }
 
 const formatNumber = n => {
@@ -26,11 +32,9 @@ export function request({ url, data = {}, type, loadingText = '', isLoading = tr
   const header = {}
   let requestName = type || 'request'
 
-  if (wx.getStorageSync('token')) {
-    header.Authorization = wx.getStorageSync('token')
-  }
   header['content-type'] = contentType
-  // header['content-type'] = 'multipart/form-data; boundary=XXX'
+
+  getToken() && (header.Authorization = getToken())
   token && (header.Authorization = token)
 
   return new Promise((reslove, reject) => {

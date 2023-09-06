@@ -1,0 +1,23 @@
+<view class="page">
+  <view class="user-list" wx:for="{{patientList}}" wx:key="key" wx:for-index="key" wx:for-item="value">
+    <view class="date">{{key}}</view>
+    <view class="user-item" wx:for="{{value}}" wx:key="id" bindtap="toDetail" data-id="{{item.id}}">
+      <image class="avator" src="{{item.headImage}}" />
+      <view class="name">
+        <text class="nickname">{{item.nickname}}</text>
+        <text class="sex">{{item.sex === '1'?'男':'女'}}</text>
+        <text class="age">{{item.age}}岁</text>
+      </view>
+      <view class="btn-group">
+        <view wx:if="{{item.applyStatue !== '2' && item.applyStatue!== '3'}}" class="btn" catchtap="handleFriend" data-id="{{item.id}}" data-type="{{3}}">
+          忽略
+        </view>
+        <view wx:if="{{item.applyStatue !== '2' && item.applyStatue!== '3'}}" class="btn accept" catchtap="handleFriend" data-id="{{item.id}}" data-type="{{2}}">
+          接受
+        </view>
+        <view wx:if="{{item.applyStatue === '2'}}" class="state">已添加</view>
+        <view wx:if="{{item.applyStatue === '3'}}" class="state">已忽略</view>
+      </view>
+    </view>
+  </view>
+</view>

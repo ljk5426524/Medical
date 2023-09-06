@@ -1,6 +1,7 @@
 // pages/patient/index.js
 import api from '../../api/index'
 import pinyin from 'js-pinyin'
+import { getLocalUserInfo } from '../../utils/storage'
 Page({
 
 	/**
@@ -47,14 +48,20 @@ Page({
 			'9',
 		],
 		indexBarList: {},
-		indexList: []
+		indexList: [],
+		actions: [{
+			name: '新的患者',
+		}, {
+			name: '扫一扫',
+		}],
+		newPatientList: []
 	},
 
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
-		this.getMyPatients()
+
 	},
 
 	/**
@@ -68,7 +75,11 @@ Page({
 	 * 生命周期函数--监听页面显示
 	 */
 	onShow: function () {
-
+		this.setData({
+			userInfo: getLocalUserInfo()
+		}, () => {
+			this.getMyPatients()
+		})
 	},
 
 	/**
@@ -108,10 +119,10 @@ Page({
 
 
 	getMyPatients() {
-		const { letters, name } = this.data
+		const { letters, name, userInfo: { id } } = this.data
 		api.getMyPatients({
 			name,
-			doctorId: 22
+			doctorId: id || 22
 		}).then(res => {
 			const list = res.data
 			let indexBar = {}
@@ -143,6 +154,7 @@ Page({
 			})
 		})
 	},
+
 	onSearch(e) {
 		this.setData({
 			name: e.detail,
@@ -151,5 +163,41 @@ Page({
 		});
 	},
 
-	onClickFriend() { }
+	toPatientDetail(e) {
+		const { id } = e.currentTarget.dataset
+		wx.navigateTo({
+			url: `/pages/patient-detail/index?id=${id}`
+		})
+	},
+	onClose() {
+		this.setData({
+			actionShow: false
+		})
+	},
+	onClickFriend() {
+		this.setData({
+			actionShow: true
+		})
+	},
+	onSelect(e) {
+		const { name } = e.detail
+		if (name === '新的患者') {
+			wx.navigateTo({
+				url: `/pages/patient-new/index`
+			})
+		} else {
+			wx.scanCode({
+				success(res) {
+					console.log(res)
+				}
+			})
+		}
+	},
+	scanCode() {
+		wx.scanCode({
+			success(res) {
+				console.log(res)
+			}
+		})
+	}
 })

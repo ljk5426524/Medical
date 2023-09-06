@@ -1,11 +1,13 @@
 // pages/order-diagnosis/index.js
 import api from '../../api/index'
+import { getLocalUserInfo } from '../../utils/storage'
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
+        userInfo: {},
         recordList: []
     },
 
@@ -14,17 +16,21 @@ Page({
      */
     onLoad: function (options) {
         const { type } = options
-        if (type && +type === 1) {
-            this.getOnlineRecord()
-            wx.setNavigationBarTitle({
-                title: '在线问诊历史'
-            })
-        } else {
-            this.getFasteRecord()
-            wx.setNavigationBarTitle({
-                title: '快速问诊历史'
-            })
-        }
+        this.setData({
+            userInfo: getLocalUserInfo()
+        }, () => {
+            if (type && +type === 1) {
+                this.getOnlineRecord()
+                wx.setNavigationBarTitle({
+                    title: '在线问诊历史'
+                })
+            } else {
+                this.getFasteRecord()
+                wx.setNavigationBarTitle({
+                    title: '快速问诊历史'
+                })
+            }
+        })
     },
 
     /**
@@ -76,10 +82,11 @@ Page({
 
     },
     getOnlineRecord() {
+        const { userInfo: { id } } = this.data
         api.getOnlineRecord({
             current: 1,
             size: 10,
-            memberId: 47
+            memberId: id || 47
         }).then(res => {
             this.setData({
                 recordList: res.data.records.map(i => {
@@ -93,10 +100,11 @@ Page({
         })
     },
     getFasteRecord() {
+        const { userInfo: { id } } = this.data
         api.getFasteRecord({
             current: 1,
             size: 10,
-            memberId: 47
+            memberId: id || 47
         }).then(res => {
             this.setData({
                 recordList: res.data.records.map(i => {

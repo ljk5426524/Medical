@@ -1,33 +1,24 @@
 // pages/my-doctors/index.js
 import api from '../../api/index'
+import { getLocalUserInfo } from '../../utils/storage'
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-        doctorList: [{
-            id: 1,
-            name: '王小明',
-            hospital: '北京协和医院',
-            departmentName: '神经内科',
-            position: '主治医师',
-            desc: '擅长：神经科、神经内科擅长：神经科、神经内科擅长：神经科、神经内科擅长：神经科、神经内科擅长：神经科、神经内科擅长：神经科、神经内科'
-        }, {
-            id: 2,
-            name: '李晓红',
-            hospital: '北京协和医院',
-            departmentName: '神经内科',
-            position: '副主任医师',
-            desc: '擅长：神经科、神经内科'
-        }],
+        doctorList: [],
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        this.getMyDoctors()
+        this.setData({
+            userInfo: getLocalUserInfo()
+        }, () => {
+            this.getMyDoctors()
+        })
     },
 
     /**
@@ -92,8 +83,11 @@ Page({
         })
     },
     getMyDoctors() {
+        const { userInfo: { id } } = this.data
         api.getMyDoctors({
-            userId: 99
+            current: 1,
+            size: 100,
+            userId: id
         }).then(res => {
             this.setData({
                 doctorList: res.data.records

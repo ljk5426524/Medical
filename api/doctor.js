@@ -28,4 +28,22 @@ export default {
       method: "post",
     });
   },
+
+  // 新增患者列表
+  getNewPatientList(data) {
+    return request({
+      url: `${baseUrl}api/v1/memberDoctorApply/applyDoctorList`,
+      data,
+      method: "post",
+    });
+  },
+
+  // 处理患者好友请求
+  handlePatientApply(data) {
+    return request({
+      url: `${baseUrl}api/v1/memberDoctorApply/doctorConfirm`,
+      data,
+      method: "post",
+    });
+  },
 }

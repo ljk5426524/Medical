@@ -5,15 +5,16 @@
     </view>
   </van-search>
   <van-index-bar index-list="{{ indexList }}">
-    <view wx:for="{{indexBarList}}" wx:key="*this" wx:for-index="key" wx:for-item="value">
+    <view wx:for="{{indexBarList}}" wx:key="key" wx:for-index="key" wx:for-item="value">
       <van-index-anchor index="{{key}}" />
-      <view wx:for="{{value}}" wx:key="id" class="user-item">
+      <view wx:for="{{value}}" wx:key="id" class="user-item" bindtap="toPatientDetail" data-id="{{item.id}}">
         <image class="avator" src="{{item.headImage}}" />
         <view class="name">{{item.nickname}}</view>
         <view class="sex">{{item.sex === '1'?'男':'女'}}</view>
         <view class="age">{{item.age}}岁</view>
-        <view class="scan">扫码添加</view>
+        <view class="scan" bindtap="scanCode">扫码添加</view>
       </view>
     </view>
   </van-index-bar>
+  <van-action-sheet show="{{ actionShow }}" actions="{{ actions }}" bind:close="onClose" bind:select="onSelect" />
 </view>

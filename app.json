@@ -1,8 +1,10 @@
 {
     "pages": [
-        "pages/patient-detail/index",
+        "pages/my/index",
         "pages/home/index",
         "pages/patient/index",
+        "pages/patient-new/index",
+        "pages/patient-detail/index",
         "pages/old-health-tab/index",
         "pages/order-diagnosis/index",
         "pages/order-diagnosis-detail/index",
@@ -12,7 +14,6 @@
         "pages/my-family-add/index",
         "pages/my-family/index",
         "pages/doctor-detail/index",
-        "pages/my/index",
         "pages/my-doctors/index",
         "pages/setting/index",
         "pages/home-search/index",
@@ -26,7 +27,8 @@
         "pages/my-scan-record/index",
         "pages/home-doctor/index",
         "pages/old-health-detail/index",
-        "pages/order-result/index"
+        "pages/order-result/index",
+        "pages/login/index"
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -68,7 +70,8 @@
         "van-rate": "@vant/weapp/rate/index",
         "van-index-bar": "@vant/weapp/index-bar/index",
         "van-index-anchor": "@vant/weapp/index-anchor/index",
-        "van-steps": "@vant/weapp/steps/index"
+        "van-steps": "@vant/weapp/steps/index",
+        "van-action-sheet": "@vant/weapp/action-sheet/index"
     },
     "sitemapLocation": "sitemap.json"
 }

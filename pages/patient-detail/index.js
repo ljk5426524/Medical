@@ -23,48 +23,48 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady() {},
+  onReady() { },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow() {},
+  onShow() { },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide() {},
+  onHide() { },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload() {},
+  onUnload() { },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh() {},
+  onPullDownRefresh() { },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom() {},
+  onReachBottom() { },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage() {},
+  onShareAppMessage() { },
 
-  getPatientDetail(id) {
-    api.getPatientDetail({ id: 63 }).then((res) => {
+  getPatientDetail(id = 63) {
+    api.getPatientDetail({ id }).then((res) => {
       this.setData({
         patientDetail: res.data,
       });
     });
   },
-  getPatientRecordList(id) {
+  getPatientRecordList(id = 63) {
     api
-      .getPatientRecordList({ current: 1, userId: 63, size: 500 })
+      .getPatientRecordList({ current: 1, userId: id, size: 500 })
       .then((res) => {
         const obj = {};
         const list = res.data.records;
@@ -91,7 +91,6 @@ Page({
             };
           });
         }
-        console.log(monthArr, obj);
         this.setData({
           recordList: obj,
           originRecordList: list,
@@ -130,5 +129,8 @@ Page({
         console.log(this.data.recordList);
       }
     );
+  },
+  goBack() {
+    wx.navigateBack()
   },
 });
