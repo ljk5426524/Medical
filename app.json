@@ -1,7 +1,8 @@
 {
     "pages": [
-        "pages/patient/index",
+        "pages/patient-detail/index",
         "pages/home/index",
+        "pages/patient/index",
         "pages/old-health-tab/index",
         "pages/order-diagnosis/index",
         "pages/order-diagnosis-detail/index",
@@ -66,7 +67,8 @@
         "van-button": "@vant/weapp/button/index",
         "van-rate": "@vant/weapp/rate/index",
         "van-index-bar": "@vant/weapp/index-bar/index",
-        "van-index-anchor": "@vant/weapp/index-anchor/index"
+        "van-index-anchor": "@vant/weapp/index-anchor/index",
+        "van-steps": "@vant/weapp/steps/index"
     },
     "sitemapLocation": "sitemap.json"
 }
