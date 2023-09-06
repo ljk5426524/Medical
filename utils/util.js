@@ -35,7 +35,7 @@ export function request({ url, data = {}, type, loadingText = '', isLoading = tr
   header['content-type'] = contentType
 
   getToken() && (header.Authorization = getToken())
-  token && (header.Authorization = token)
+  // token && (header.Authorization = token)
 
   return new Promise((reslove, reject) => {
     if (isLoading) {

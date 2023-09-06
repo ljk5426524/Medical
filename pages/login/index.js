@@ -121,17 +121,19 @@ Page({
 							} = this.data
 							api
 								.registeByUserPhone({
-									weixinOpenId,
-									phone: phoneNumber,
+									openId: weixinOpenId,
+									mobile: phoneNumber,
 								})
 								.then(async res2 => {
 									if (res2.code === '0') {
 										saveLocalUserInfo(res2.data.userInfo)
 										saveToken(res2.data.token)
 										wxToast.show({
-											title: "授权成功"
+											title: "授权成功",
+											done: () => {
+												wx.navigateBack()
+											}
 										})
-										wx.navigateBack()
 									}
 								})
 						})
