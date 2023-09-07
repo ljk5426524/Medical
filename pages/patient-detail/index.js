@@ -9,6 +9,7 @@ Page({
     patientDetail: {},
     recordList: [],
     originRecordList: [],
+    patientId: null
   },
 
   /**
@@ -18,6 +19,9 @@ Page({
     const { id } = options;
     this.getPatientDetail(id);
     this.getPatientRecordList(id);
+    this.setData({
+      patientId: id
+    })
   },
 
   /**
@@ -124,13 +128,16 @@ Page({
             }
           }),
         },
-      },
-      () => {
-        console.log(this.data.recordList);
       }
     );
   },
   goBack() {
     wx.navigateBack()
+  },
+  toUserInfo() {
+    const { patientId } = this.data
+    wx.navigateTo({
+      url: `/pages/patient-info/index?id=${patientId}`
+    })
   },
 });

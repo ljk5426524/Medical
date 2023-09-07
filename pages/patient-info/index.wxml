@@ -1,0 +1,12 @@
+<view class="page">
+  <van-cell-group>
+    <van-cell title="备注名" value="{{patientInfo.name}}" />
+    <van-cell title="昵称" value="{{patientInfo.nickname}}" />
+    <van-cell title="性别" value="{{patientInfo.sex === '1'?'男':'女'}}" />
+    <van-cell title="手机号" value="{{patientInfo.mobile}}" />
+    <van-cell title="年龄" value="{{patientInfo.age+'岁'}}" />
+    <van-cell title="地址" value="{{patientInfo.address}}" />
+    <view class="placeholder"></view>
+    <van-cell title="加入时间" value="{{patientInfo.createTime}}" />
+  </van-cell-group>
+</view>

@@ -1,8 +1,12 @@
 {
     "pages": [
-        "pages/my/index",
-        "pages/home/index",
+        "pages/my-info-doctor/index",
+        "pages/my-doctor/index",
+        "pages/home-doctor/index",
         "pages/patient/index",
+        "pages/home/index",
+        "pages/seek-detail/index",
+        "pages/my/index",
         "pages/patient-new/index",
         "pages/patient-detail/index",
         "pages/old-health-tab/index",
@@ -25,10 +29,10 @@
         "pages/hospital-detail/index",
         "pages/search/index",
         "pages/my-scan-record/index",
-        "pages/home-doctor/index",
         "pages/old-health-detail/index",
         "pages/order-result/index",
-        "pages/login/index"
+        "pages/login/index",
+        "pages/patient-info/index"
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -43,15 +47,15 @@
         "backgroundColor": "#ffffff",
         "list": [
             {
-                "pagePath": "pages/home/index",
+                "pagePath": "pages/home-doctor/index",
                 "text": "首页"
             },
             {
-                "pagePath": "pages/chat/index",
-                "text": "消息"
+                "pagePath": "pages/patient/index",
+                "text": "患者"
             },
             {
-                "pagePath": "pages/my/index",
+                "pagePath": "pages/my-doctor/index",
                 "text": "我的"
             }
         ]
@@ -70,8 +74,10 @@
         "van-rate": "@vant/weapp/rate/index",
         "van-index-bar": "@vant/weapp/index-bar/index",
         "van-index-anchor": "@vant/weapp/index-anchor/index",
-        "van-steps": "@vant/weapp/steps/index",
-        "van-action-sheet": "@vant/weapp/action-sheet/index"
+        "van-action-sheet": "@vant/weapp/action-sheet/index",
+        "van-switch": "@vant/weapp/switch/index",
+        "van-radio": "@vant/weapp/radio/index",
+        "van-radio-group": "@vant/weapp/radio-group/index"
     },
     "sitemapLocation": "sitemap.json"
 }

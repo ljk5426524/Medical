@@ -1,11 +1,16 @@
 // pages/home-doctor/index.js
+import api from '../../api/index'
+import { getLocalUserInfo } from '../../utils/storage'
+import { getTimeShow } from '../../utils/util'
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-
+        staticsInfo: {},
+        doctorState: 0,
+        msgList: []
     },
 
     /**
@@ -26,7 +31,16 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+        const userInfo = getLocalUserInfo()
+        const { state, flag } = userInfo
+        this.setData({
+            userInfo,
+            doctorState: +state, // 0,不接诊,1,开始接诊
+            isChecking: +flag === 5, // 用户状态，0.启用；1.已删除；2.禁用,3.未认证,4:认证未通过 5:认证中 6:已认证
+        }, () => {
+            this.getMsgList()
+            this.getHomeStatics()
+        })
     },
 
     /**
@@ -62,5 +76,42 @@ Page({
      */
     onShareAppMessage: function () {
 
+    },
+
+    onStateChange({ detail }) {
+        this.setData({ checked: detail });
+    },
+
+    getHomeStatics() {
+        const { userInfo: { id } } = this.data
+        api.getHomeStatics({
+            doctorId: id || 22
+        }).then(res => {
+            this.setData({
+                staticsInfo: res.data
+            })
+        })
+    },
+    getMsgList() {
+        api.getMsgList({
+            userId: 22,
+            appId: 2
+        }).then(res => {
+            this.setData({
+                msgList: res.data.records.map(i => {
+                    return {
+                        ...i,
+                        time: getTimeShow(i.updateTime)
+                    }
+                })
+            })
+        })
+    },
+    // 接诊详情
+    toSeekDetail(e) {
+        const { id } = e.currentTarget.dataset
+        wx.navigateTo({
+            url: `/pages/seek-detail/index?id=${id}`
+        })
     }
 })

@@ -1,0 +1,58 @@
+<view class="page">
+  <van-cell-group>
+    <van-field value="{{ userInfo.name }}" label="姓名" data-type="name" bind:change="changeField" input-align="right" placeholder="请输入姓名" bind:change="onChange" />
+    <van-cell bind:click="selShow" data-type="1" is-link>
+      <view class="form-item-title" slot="title">
+        <view class="form-item-label isRequire">性别</view>
+        <view class="form-item-value">{{userInfo.sex}}</view>
+      </view>
+      <van-icon slot="right-icon" name="arrow" size="16px" />
+    </van-cell>
+    <view class="placeholder"></view>
+    <van-cell bind:click="selShow" data-type="2" is-link>
+      <view class="form-item-title" slot="title">
+        <view class="form-item-label isRequire">在职状态</view>
+        <view class="form-item-value">{{userInfo.job}}</view>
+      </view>
+      <van-icon slot="right-icon" name="arrow" size="16px" />
+    </van-cell>
+    <van-field value="{{ value }}" label="医院" placeholder="请输入用户名" bind:change="onChange" />
+    <van-field value="{{ value }}" label="科室" placeholder="请输入用户名" bind:change="onChange" />
+    <van-cell bind:click="selShow" data-type="3" is-link>
+      <view class="form-item-title" slot="title">
+        <view class="form-item-label isRequire">职称</view>
+        <view class="form-item-value">{{userInfo.title}}</view>
+      </view>
+      <van-icon slot="right-icon" name="arrow" size="16px" />
+    </van-cell>
+    <van-field value="{{ userInfo.idcard }}" label="身份证号" data-type="idcard" bind:change="changeField" input-align="right" maxlength="{{18}}" placeholder="请输入身份证号" bind:change="onChange" />
+    <van-field value="{{ userInfo.goodat }}" label="擅长" data-type="goodat" bind:change="changeField" input-align="right" placeholder="请输入擅长" type="textarea" autosize="{{textAreaOption}}" bind:change="onChange" />
+    <van-field value="{{ userInfo.summary }}" label="简介" data-type="summary" bind:change="changeField" input-align="right" placeholder="请输入简介" type="textarea" autosize="{{textAreaOption}}" bind:change="onChange" />
+    <van-cell title="资格证编码" bind:click="uploadPic" data-type="doctorCertNo">
+      <image slot="right-icon" class="pic" src="{{userInfo.doctorCertNo}}" />
+    </van-cell>
+    <van-cell title="执业证编码" bind:click="uploadPic" data-type="engageCertPath">
+      <image slot="right-icon" class="pic" src="{{userInfo.engageCertPath}}" />
+    </van-cell>
+    <van-cell title="身份证正面" bind:click="uploadPic" data-type="idcardFrontImage">
+      <image slot="right-icon" class="pic" src="{{userInfo.idcardFrontImage}}" />
+    </van-cell>
+    <van-cell title="身份证反面" bind:click="uploadPic" data-type="idcardBlankImage">
+      <image slot="right-icon" class="pic" src="{{userInfo.idcardBlankImage}}" />
+    </van-cell>
+    <van-cell title="头像" bind:click="uploadPic" data-type="headImage">
+      <image slot="right-icon" class="pic" src="{{userInfo.headImage}}" />
+    </van-cell>
+  </van-cell-group>
+  <view class="btn-content">
+    <view class="btn" bindtap="confirm">提交</view>
+  </view>
+  <van-popup show="{{ popShow }}" position="bottom" bind:close="onClose">
+    <van-picker wx:if="{{popType === 1}}" columns="{{ sexColumns }}" bind:change="onPickerChange" data-type="sex" />
+    <van-picker wx:elif="{{popType === 2}}" columns="{{ jobColumns }}" bind:change="onPickerChange" data-type="job" />
+    <van-picker wx:elif="{{popType === 3}}" columns="{{ professionColumns }}" bind:change="onPickerChange" data-type="title" />
+  </van-popup>
+  <van-popup show="{{deptShow}}" position="bottom" bind:close="onClose">
+    <van-picker columns="{{ deptColumns }}" />
+  </van-popup>
+</view>

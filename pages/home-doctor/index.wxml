@@ -1,7 +1,54 @@
 <view class="page">
-  home
   <view class="page__hd">
-    <view class="page__title"></view>
+    <view class="page__title">宝葫芦 医生端</view>
+    <view class="header__info">
+      <view class="info">
+        <view class="info-item">
+          <view class="title">今日接诊（人）</view>
+          <view class="val">{{staticsInfo.curIncome}}</view>
+        </view>
+        <view class="info-item">
+          <view class="title">累计接诊（人）</view>
+          <view class="val">{{staticsInfo.totalIncome}}</view>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{isChecking}}" class="check-content">
+      <view class="text">认证审核中，请耐心等待...</view>
+      <view class="btn">审核中</view>
+    </view>
   </view>
-  <view class=""></view>
+  <view class="msg-content">
+    <view class="msg-hd">
+      <view class="title">消息</view>
+      <view class="btn-switch">
+        <view class="icon-text">停诊</view>
+        <van-switch checked="{{ doctorState === 0 }}" active-color="#4A78F5" bind:change="onStateChange" size="32px" />
+      </view>
+    </view>
+    <view class="msg-items">
+      <view wx:for="{{msgList}}" wx:key="id" class="msg-item">
+        <image class="avator" src="{{item.avatar}}" />
+        <view class="msg-info">
+          <view class="name">
+            {{item.patientName}}
+            <text class="info-text">{{item.patientSex === '1'?'男':'女'}}</text>
+            <text class="info-text">{{item.patientAge}}岁</text>
+          </view>
+          <view class="last-msg">{{item.content}}</view>
+        </view>
+        <view class="right-info">
+          <view class="time">{{item.time}}</view>
+          <!-- 1：待接诊，2接诊中，3已结束,4.已拒单,5已取消。 -->
+          <view wx:if="{{item.statue === '1' }}" class="btn" bindtap="toSeekDetail" data-id="{{item.id}}">
+            接诊
+          </view>
+          <view wx:if="{{item.statue === '2'}}" class="btn">接诊中</view>
+          <view wx:if="{{item.statue === '3'||item.statue === '4' || item.statue === '5'}}" class="btn disable">
+            {{item.statue === '3'?'已结束':item.statue === '4'?'已拒单':item.statue === '5'?'已取消':''}}
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
 </view>

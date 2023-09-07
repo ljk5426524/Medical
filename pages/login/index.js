@@ -1,5 +1,6 @@
 // pages/login/index.js
 import api from '../../api/index'
+import { ROLE_TYPE } from '../../utils/constant'
 import { saveLocalUserInfo, saveOpenId, saveToken } from '../../utils/storage'
 import { wxToast } from '../../utils/wx-api'
 Page({
@@ -73,7 +74,8 @@ Page({
 			success: response => {
 				const { code } = response
 				api.loginByWxCode({
-					code
+					code,
+					appId: ROLE_TYPE
 				}).then((res => {
 					if (typeof res.data === 'string') {
 						this.setData({
@@ -123,6 +125,7 @@ Page({
 								.registeByUserPhone({
 									openId: weixinOpenId,
 									mobile: phoneNumber,
+									appId: ROLE_TYPE
 								})
 								.then(async res2 => {
 									if (res2.code === '0') {
@@ -141,5 +144,4 @@ Page({
 			})
 		}
 	},
-	back() { wx.navigateBack() }
 })

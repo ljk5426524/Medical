@@ -6,6 +6,7 @@ Page({
      * 页面的初始数据
      */
     data: {
+        buttonClientRect: wx.getMenuButtonBoundingClientRect(),
         doctorDetail: {}
     },
 
@@ -67,6 +68,10 @@ Page({
 
     },
 
+
+    goBack() {
+        wx.navigateBack()
+    },
     getDoctorDetail(id) {
         api.getDoctorDetail({
             doctorId: id || 4

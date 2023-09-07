@@ -12,7 +12,7 @@
 								<text class="middle">{{patientDetail.age}}岁</text>
 								{{patientDetail.mobile}}
 						</view>
-						<view class="info">详细资料></view>
+						<view class="info" bindtap="toUserInfo">详细资料></view>
 						<view class="btn-group">
 								<view class="btn btn-left">会话记录</view>
 								<view class="btn btn-right">

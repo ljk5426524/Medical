@@ -1,6 +1,6 @@
 <view class="page">
     <view class="header">
-        <view></view>
+        <van-icon class="back-icon" style="top:{{buttonClientRect.top}}px" name="arrow-left" color="#fff" bind:click="goBack" />
         <view class="name">{{doctorDetail.name}}</view>
         <view class="desc">
             <view class="desc-item">{{doctorDetail.titleName}}</view>

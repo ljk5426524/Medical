@@ -217,7 +217,7 @@ Page({
 			age,
 			name,
 			headImage,
-			sex,
+			sex: sex === '男' ? '1' : '2',
 			marry,
 			idcard,
 			id: id || 99

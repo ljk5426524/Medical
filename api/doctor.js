@@ -46,4 +46,30 @@ export default {
       method: "post",
     });
   },
+  // 个人中心统计
+  getMyStatics(data) {
+    return request({
+      url: `${baseUrl}api/v1/doctor/getDoctorReceiptAndP`,
+      data,
+      method: "post",
+    });
+  },
+
+  // 首页统计
+  getHomeStatics(data) {
+    return request({
+      url: `${baseUrl}api/v1/doctor/getDoctorReceipt`,
+      data,
+      method: "post",
+    });
+  },
+
+  // 消息列表
+  getMsgList(data) {
+    return request({
+      url: `${baseUrl}v1/api/push/message/getList`,
+      data,
+      method: "post",
+    });
+  }
 }

@@ -19,6 +19,63 @@ export const formatDate = date => {
 
   return `${formatNumber(year)}年${formatNumber(month)}月${formatNumber(day)}日`
 }
+export const getTimeShow = (time_str) => {
+
+  var now = new Date();
+
+  var date = new Date(time_str);
+
+  //计算时间间隔，单位为分钟
+
+  var inter = parseInt((now.getTime() - date.getTime()) / 1000 / 60);
+
+  if (inter == 0) {
+
+    return "刚刚";
+
+  }
+
+  //多少分钟前
+
+  else if (inter < 60) {
+
+    return inter.toString() + "分钟前";
+
+  }
+
+  //多少小时前
+
+  else if (inter < 60 * 24) {
+
+    return parseInt(inter / 60).toString() + "小时前";
+
+  }
+
+  //本年度内，日期不同，取日期+时间  格式如  06-13 22:11
+
+  else if (now.getFullYear() == date.getFullYear()) {
+
+    return (date.getMonth() + 1).toString() + "-" +
+
+      date.getDate().toString() + " " +
+
+      formatNumber(date.getHours()) + ":" +
+
+      formatNumber(date.getMinutes());
+
+  }
+
+  else {
+
+    return date.getFullYear().toString() + "-" +
+
+      (date.getMonth() + 1).toString() + "-" +
+
+      date.getDate().toString()
+
+  }
+
+}
 
 const formatNumber = n => {
   n = n.toString()
