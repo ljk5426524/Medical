@@ -5,6 +5,7 @@
     padding-bottom: 160rpx;
 
     .header {
+        position: relative;
         width: 750rpx;
         height: 400rpx;
         background: linear-gradient(64deg, #4C78FF 0%, #7395FF 100%);
@@ -13,6 +14,13 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
+
+        .back-icon {
+            display: block;
+            position: absolute;
+            left: 20rpx;
+            font-size: 48rpx;
+        }
 
         .name {
             font-size: 38rpx;
@@ -40,6 +48,7 @@
     }
 
     .avator {
+        position: relative;
         width: 100%;
         display: flex;
         justify-content: center;

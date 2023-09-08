@@ -2,10 +2,10 @@
   <view hidden="{{!pageIsReady}}" class="head-bg {{orderSuccess?'':'error'}}">
     <view class="icon-state">
       <view wx:if="{{orderSuccess}}">
-        <van-icon name="passed" />
+        <image class="icon-success" src="/res/images/patient/icon-success.png" />
       </view>
       <view wx:else>
-        <van-icon name="close" />
+        <image class="icon" src="/res/images/patient/icon-close.png" />
       </view>
       <view>{{orderSuccess ?'预约成功':'预约失败'}}</view>
       <view wx:if="{{!orderSuccess}}" class="reason">{{reason}}</view>

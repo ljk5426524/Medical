@@ -5,11 +5,11 @@
       <view class="info">
         <view class="info-item">
           <view class="title">今日接诊（人）</view>
-          <view class="val">{{staticsInfo.curIncome}}</view>
+          <view class="val">{{userInfo?staticsInfo.curIncome:"**"}}</view>
         </view>
         <view class="info-item">
           <view class="title">累计接诊（人）</view>
-          <view class="val">{{staticsInfo.totalIncome}}</view>
+          <view class="val">{{userInfo?staticsInfo.totalIncome:"**"}}</view>
         </view>
       </view>
     </view>
@@ -21,7 +21,7 @@
   <view class="msg-content">
     <view class="msg-hd">
       <view class="title">消息</view>
-      <view class="btn-switch">
+      <view wx:if="{{userInfo}}" class="btn-switch">
         <view class="icon-text">停诊</view>
         <van-switch checked="{{ doctorState === 0 }}" active-color="#4A78F5" bind:change="onStateChange" size="32px" />
       </view>

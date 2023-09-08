@@ -39,7 +39,7 @@
     </view>
     <van-popup show="{{ allowErrorShow }}" bind:close="onClose">
         <view class="error-content">
-            <image class="icon" src="/res/images/home-hospital.png" />
+            <image class="icon" src="/res/images/doctor/icon-impo-circle.png" />
             <view class="title">接诊失败</view>
             <view class="reason">
                 <view>可能有如下原因：</view>

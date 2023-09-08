@@ -12,6 +12,19 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+  }
+
+  .form-item-label {
+    position: relative;
+
+    &.isRequire:before {
+      position: absolute;
+      top: 0rpx;
+      left: -18rpx;
+      content: '*';
+      color: red;
+    }
   }
 
 

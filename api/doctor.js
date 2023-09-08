@@ -71,5 +71,14 @@ export default {
       data,
       method: "post",
     });
+  },
+
+  // 医生信息编辑
+  editDoctorInfo(data) {
+    return request({
+      url: `${baseUrl}api/v1/doctor/editDoctor`,
+      data,
+      method: "post"
+    });
   }
 }

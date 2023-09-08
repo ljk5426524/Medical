@@ -6,12 +6,12 @@
             <view class="info">
                 <view wx:if="{{userInfo}}" class="phone">{{userInfo.name}}</view>
                 <view wx:else class="phone">
-                    <navigator url="/pages/login/index">点击登录</navigator>
+                    <navigator url="/pages/login/index" hover-class="none">点击登录</navigator>
                 </view>
                 <view class="account">{{userInfo?'账号：'+userInfo.nickname:''}}</view>
             </view>
             <view wx:if="{{userInfo}}" class="btn-self">
-                <navigator url="/pages/my-info/index">个人资料</navigator>
+                <navigator url="/pages/my-info/index" hover-class="none">个人资料</navigator>
             </view>
         </view>
     </view>

@@ -1,5 +1,5 @@
 <view class="page">
-  <van-search value="{{ keyword }}" focus="{{true}}" background="#f5f5f5" placeholder="专家姓名、疾病、症状查找" shape="round" bind:search="onSearch" />
+  <van-search value="{{ keyword }}" focus="{{true}}" placeholder="专家姓名、疾病、症状查找" shape="round" bind:search="onSearch" />
   <view class="search-content">
     <view class="title">医生</view>
     <view class="user-list">

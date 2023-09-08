@@ -7,13 +7,9 @@ Page({
      * 页面的初始数据
      */
     data: {
+        buttonClientRect: wx.getMenuButtonBoundingClientRect(),
         userInfo: null,
-        specialist: [{
-            name: '刘高级',
-            titleName: '主任',
-            departmentName: '外科',
-            merchantName: '南京市儿童医院'
-        }]
+        specialist: []
     },
 
     /**
@@ -117,6 +113,12 @@ Page({
         const { id } = e.currentTarget.dataset
         wx.navigateTo({
             url: `/pages/doctor-detail/index?id=${id}`,
+        })
+    },
+
+    toSearch() {
+        wx.navigateTo({
+            url: `/pages/home-search/index`
         })
     }
 })

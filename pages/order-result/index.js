@@ -13,7 +13,6 @@ Page({
 		reason: '',
 		orderNum: '',
 		userInfo: {
-			name: "185****1182",
 		},
 		pageIsReady: false
 	},
@@ -93,7 +92,7 @@ Page({
 	orderNow(id) {
 		const { userInfo: { id: userId, name } } = this.data
 		api.orderService({
-			memberId: userId || 99,
+			memberId: userId,
 			memberName: name,
 			serviceId: id
 		}).then(res => {
@@ -102,16 +101,18 @@ Page({
 				this.setData({
 					orderSuccess: +code === 0,
 					reason: msg,
-					orderNum: data
+					orderNum: data,
+					pageIsReady: true
 				})
 			} else {
+
+				this.setData({
+					pageIsReady: true
+				})
 				wxToast.show({
 					title: msg
 				})
 			}
-			this.setData({
-				pageIsReady: true
-			})
 		})
 	}
 })

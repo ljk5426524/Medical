@@ -2,12 +2,12 @@
   <view class="card">
     <view wx:if="{{userInfo}}" class="name">{{userInfo.name}}</view>
     <view wx:else class="login">
-      <navigator url="/pages/login/index">点击登录</navigator>
+      <navigator url="/pages/login/index" hover-class="none">点击登录</navigator>
     </view>
     <view wx:if="{{userInfo}}" class="hospital">
       {{userInfo.departmentName}} {{userInfo.titleName}} {{userInfo.merchantName}}
     </view>
-    <view wx:if="{{userInfo}}" class="info">个人资料</view>
+    <view wx:if="{{userInfo}}" class="info"><navigator url="/pages/my-info-doctor/index" hover-class="none">个人资料</navigator></view>
     <view class="statics">
       <view class="statics-item">
         <view class="val">{{userInfo?staticsInfo.patientsNum:'**'}}</view>
