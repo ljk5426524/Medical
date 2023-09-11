@@ -77,7 +77,7 @@ Page({
     getMyFamily() {
         const { id } = this.data.userInfo
         api.getMyFamily({
-            memberId: id || 99
+            memberId: id
         }).then(res => {
             this.setData({
                 userList: res.data

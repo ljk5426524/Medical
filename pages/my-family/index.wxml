@@ -11,7 +11,9 @@
     </view>
     <view class="phone">{{item.mobile}}</view>
   </view>
-  <view wx:if="{{!userList.length}}" class="empty">暂无家庭成员</view>
+  <view wx:if="{{!userList.length}}">
+    <no-data-filling noDataTxt="暂未添加家庭成员"></no-data-filling>
+  </view>
   <view class="btn-content">
     <van-button round type="primary" block custom-class="btn" bind:click="toAdd">
       <van-icon name="plus" />

@@ -23,5 +23,8 @@
         </view>
       </view>
     </view>
+    <view wx:if="{{!serviceList.length}}">
+      <no-data-filling noDataTxt="暂无服务"></no-data-filling>
+    </view>
   </view>
 </view>

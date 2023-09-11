@@ -49,11 +49,16 @@
     <view class="family-content">
       <van-radio-group value="{{ familyChoose }}" bind:change="onChange">
         <view class="title">选择家庭成员</view>
-        <van-cell-group>
-          <van-cell wx:for="{{userList}}" wx:key="id" title="{{item.name}}" clickable data-id="{{item.id}}" bind:click="onClick">
-            <van-radio slot="right-icon" name="{{item.id}}" />
-          </van-cell>
-        </van-cell-group>
+        <view wx:if="{{userList.length}}">
+          <van-cell-group>
+            <van-cell wx:for="{{userList}}" wx:key="id" title="{{item.name}}" clickable data-id="{{item.id}}" bind:click="onClick">
+              <van-radio slot="right-icon" name="{{item.id}}" />
+            </van-cell>
+          </van-cell-group>
+        </view>
+        <view wx:else>
+          <no-data-filling noDataTxt="暂未添加家庭成员"></no-data-filling>
+        </view>
       </van-radio-group>
       <view class="btn-group">
         <view class="btn" bindtap="onClose">取消</view>

@@ -15,6 +15,9 @@
         <view class="scan" bindtap="scanCode">扫码添加</view>
       </view>
     </view>
+    <view wx:if="{{!Object.keys(indexBarList).length}}">
+      <no-data-filling noDataTxt="暂无患者信息"></no-data-filling>
+    </view>
   </van-index-bar>
   <van-action-sheet show="{{ actionShow }}" actions="{{ actions }}" bind:close="onClose" bind:select="onSelect" />
 </view>

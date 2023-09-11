@@ -63,5 +63,8 @@
 						</view>
 						<view class="btn">咨询</view>
 				</view>
+				<view wx:if="{{!specialist.length}}">
+						<no-data-filling noDataTxt="暂未添加专家"></no-data-filling>
+				</view>
 		</view>
 </view>

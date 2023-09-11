@@ -23,5 +23,8 @@
         <view class="time">{{item.productName}}</view>
       </view>
     </view>
+    <view wx:if="{{!recordList.length}}">
+      <no-data-filling noDataTxt="暂无问诊历史"></no-data-filling>
+    </view>
   </view>
 </view>

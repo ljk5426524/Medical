@@ -2,6 +2,7 @@
     "pages": [
         "pages/home-doctor/index",
         "pages/home/index",
+        "pages/my-scan-record/index",
         "pages/patient/index",
         "pages/my-service/index",
         "pages/service-detail/index",
@@ -29,7 +30,6 @@
         "pages/chat/chat",
         "pages/hospital-detail/index",
         "pages/search/index",
-        "pages/my-scan-record/index",
         "pages/old-health-detail/index",
         "pages/order-result/index",
         "pages/login/index",
@@ -69,6 +69,7 @@
         ]
     },
     "usingComponents": {
+        "no-data-filling": "components/no-data-filling/no-data-filling",
         "van-search": "@vant/weapp/search/index",
         "van-icon": "@vant/weapp/icon/index",
         "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",

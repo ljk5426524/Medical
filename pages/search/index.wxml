@@ -31,6 +31,8 @@
                 </view>
             </view>
         </view>
-        <view wx:if="{{!userList.length}}" class="empty">暂无匹配角色</view>
+        <view wx:if="{{!userList.length}}">
+            <no-data-filling noDataTxt="暂无匹配角色"></no-data-filling>
+        </view>
     </view>
 </view>

@@ -14,5 +14,7 @@
       <view class="btn-chat" bindtap="toChat">咨询</view>
     </view>
   </view>
-  <view wx:if="{{!doctorList.length}}">暂未添加专家</view>
+  <view wx:if="{{!doctorList.length}}">
+    <no-data-filling noDataTxt="暂未添加专家"></no-data-filling>
+  </view>
 </view>

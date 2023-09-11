@@ -16,5 +16,8 @@
                 </view>
             </view>
         </view>
+        <view wx:if="{{!hospitalList.length}}">
+            <no-data-filling noDataTxt="暂未搜索到匹配医院"></no-data-filling>
+        </view>
     </scroll-view>
 </view>

@@ -1,6 +1,6 @@
 <view class="page">
   <van-search value="{{ keywords }}" focus="{{true}}" placeholder="专家姓名、疾病、症状查找" shape="round" bind:search="onSearch" />
-  <view class="search-content">
+  <view class="search-content" wx:if="{{doctorList.length}}">
     <view class="title">医生</view>
     <view class="user-list">
       <view class="user-item" wx:for="{{doctorList}}" wx:key="id" bindtap="toDoctorDetail" data-id="{{item.id}}">
@@ -30,7 +30,7 @@
       </view>
     </view>
   </view> -->
-  <view class="search-content">
+  <view class="search-content" wx:if="{{hospitalList.length}}">
     <view class="title">医院</view>
     <view class="user-list">
       <view class="user-item" wx:for="{{hospitalList}}" wx:key="id" bindtap="toHospital" data-id="{{item.id}}">
@@ -45,5 +45,8 @@
         </view>
       </view>
     </view>
+  </view>
+  <view wx:if="{{!doctorList.length && !hospitalList.length}}">
+    <no-data-filling noDataTxt="暂无搜索结果"></no-data-filling>
   </view>
 </view>

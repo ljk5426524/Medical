@@ -49,6 +49,9 @@
           </view>
         </view>
       </view>
+      <view wx:if="{{!msgList.length}}">
+        <no-data-filling noDataTxt="暂无消息"></no-data-filling>
+      </view>
     </view>
   </view>
 </view>

@@ -117,7 +117,8 @@ Page({
             userId: 99
         }).then(res => {
             this.setData({
-                specialist: res.data.records
+                // specialist: res.data.records
+                specialist: []
             })
         })
     },

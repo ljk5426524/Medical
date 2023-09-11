@@ -1,4 +1,6 @@
 // pages/my-scan-record/index.js
+import api from '../../api/index'
+import { getLocalUserInfo } from "../../utils/storage";
 Page({
 
     /**
@@ -26,7 +28,11 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        this.setData({
+            userInfo: getLocalUserInfo()
+        }, () => {
+            this.getScanRecord()
+        })
     },
 
     /**
@@ -88,6 +94,19 @@ Page({
         const { id } = e.currentTarget.dataset
         wx.switchTab({
             url: `/pages/chat/index`
+        })
+    },
+    getScanRecord() {
+        const { userInfo: { id } } = this.data
+        api.getScanRecord({
+            current: 1,
+            size: 100,
+            appId: 1,
+            userId: id
+        }).then(res => {
+            this.setData({
+                doctorList: res.data.records
+            })
         })
     }
 })

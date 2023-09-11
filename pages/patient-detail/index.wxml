@@ -49,6 +49,9 @@
 										</view>
 								</view>
 						</view>
+						<view wx:if="{{!recordList.length}}">
+								<no-data-filling noDataTxt="暂无记录"></no-data-filling>
+						</view>
 				</view>
 		</view>
 </view>

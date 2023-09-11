@@ -109,7 +109,8 @@ Page({
         api.handlePatientApply({
             userId: id,
             doctorId: loginId || 22,
-            state: +type
+            state: +type,
+            appId: 2,
         }).then(res => {
             wxToast.show({
                 title: +type === 2 ? '已添加' : '已忽略'

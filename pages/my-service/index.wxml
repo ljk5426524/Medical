@@ -31,5 +31,8 @@
         <view wx:else class="state over">已过期</view>
       </view>
     </view>
+    <view wx:if="{{!serviceList.length}}">
+      <no-data-filling noDataTxt="暂无{{tabActive === 0?'义诊服务':'体检服务'}}记录"></no-data-filling>
+    </view>
   </scroll-view>
 </view>

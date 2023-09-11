@@ -65,12 +65,22 @@ export default {
 		})
 	},
 
+	// 获取用户二维码
 	getUserCode(data) {
 		return request({
 			url: `${baseUrl}qrCode/getImagePath`,
 			data,
 			method: 'get',
 			contentType: 'application/json'
+		})
+	},
+
+	// 获取扫码记录
+	getScanRecord(data) {
+		return request({
+			url: `${baseUrl}api/v1/memberDoctorApply/applyDoctorList`,
+			data,
+			method: 'post',
 		})
 	}
 }
