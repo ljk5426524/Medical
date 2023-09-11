@@ -143,5 +143,14 @@ Page({
         wx.navigateTo({
             url: `/pages/doctor-detail/index?id=${id}`,
         })
+    },
+    selChange(e) {
+        const { detail, currentTarget: { dataset: { type } } } = e
+
+        this.setData({
+            [type]: detail
+        }, () => {
+            this.selectDoctorByPage()
+        })
     }
 })

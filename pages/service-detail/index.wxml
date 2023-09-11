@@ -1,0 +1,64 @@
+<view class="page">
+  <view class="state">
+    <image class="icon" src="/res/images/patient/icon-success-green.png" />
+    预约成功
+  </view>
+  <view class="info">
+    <image class="cover" src="/res/images/home-hospital.png" />
+    <view class="right-content">
+      <view class="name">{{serviceDetail.serviceName}}</view>
+      <view class="desc">{{serviceDetail.instruction}}</view>
+      <view class="time">{{serviceDetail.period}}</view>
+      <view class="address">{{serviceDetail.address}}</view>
+    </view>
+  </view>
+  <view class="order-info">
+    <view class="info-item">
+      <view class="label">预约号</view>
+      <view class="val">{{serviceDetail.num}}</view>
+    </view>
+    <view class="info-item">
+      <view class="label">预约时间</view>
+      <view class="val impo">{{serviceDetail.instruction}}</view>
+    </view>
+    <view class="info-item">
+      <view class="label">预约人</view>
+      <view class="val impo">{{serviceDetail.creatorName}}</view>
+    </view>
+    <view class="info-item">
+      <view class="label">联系电话</view>
+      <view class="val">{{serviceDetail.mobile}}</view>
+    </view>
+    <view class="info-item">
+      <view class="label">联系地址</view>
+      <view class="val">{{serviceDetail.instruction}}</view>
+    </view>
+  </view>
+  <view class="btn-item">
+    <van-button wx:if="{{serviceDetail.status === 0}}" size="large" block type="default" custom-class="btn" bindtap="changePatient">
+      自约
+    </van-button>
+    <van-button wx:elif="{{serviceDetail.status === 1}}" size="large" block type="default" custom-class="btn-transfer" bindtap="changePatient">
+      受让
+    </van-button>
+    <van-button wx:else type="default" size="large" block custom-class="btn-transfered">
+      已转让
+    </van-button>
+  </view>
+  <van-popup show="{{ familySelShow }}" bind:close="onClose">
+    <view class="family-content">
+      <van-radio-group value="{{ familyChoose }}" bind:change="onChange">
+        <view class="title">选择家庭成员</view>
+        <van-cell-group>
+          <van-cell wx:for="{{userList}}" wx:key="id" title="{{item.name}}" clickable data-id="{{item.id}}" bind:click="onClick">
+            <van-radio slot="right-icon" name="{{item.id}}" />
+          </van-cell>
+        </van-cell-group>
+      </van-radio-group>
+      <view class="btn-group">
+        <view class="btn" bindtap="onClose">取消</view>
+        <view class="btn confirm" bindtap="confirm">确定</view>
+      </view>
+    </view>
+  </van-popup>
+</view>

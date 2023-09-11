@@ -16,11 +16,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        this.setData({
-            userInfo: getLocalUserInfo()
-        }, () => {
-            this.getServiceList()
-        })
+
     },
 
     /**
@@ -34,7 +30,11 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+        this.setData({
+            userInfo: getLocalUserInfo()
+        }, () => {
+            this.getServiceRecordList()
+        })
     },
 
     /**
@@ -76,14 +76,16 @@ Page({
         this.setData({
             tabActive: tab
         }, () => {
-            this.getServiceList()
+            this.getServiceRecordList()
         })
     },
 
-    getServiceList() {
+    getServiceRecordList() {
         const { tabActive, userInfo: { id } } = this.data
-        api.getServiceList({
-            memberId: id || 99,
+        api.getServiceRecordList({
+            current: 0,
+            size: 100,
+            memberId: id,
             type: tabActive,// 0：义诊，1：体检
         }).then(res => {
             this.setData({
@@ -91,4 +93,11 @@ Page({
             })
         })
     },
+
+    toDetail(e) {
+        const { id } = e.currentTarget.dataset
+        wx.navigateTo({
+            url: `/pages/service-detail/index?id=${id}`,
+        })
+    }
 })

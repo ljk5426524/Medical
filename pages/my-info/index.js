@@ -27,44 +27,46 @@ Page({
   onLoad: function (options) {
     this.setData({
       loginInfo: getLocalUserInfo(),
-      userInfo: {...getLocalUserInfo(),sex:getLocalUserInfo().sex === '1'?'男':'女'},
+      userInfo: { ...getLocalUserInfo(), sex: getLocalUserInfo().sex === '1' ? '男' : '女' },
+    }, () => {
+      this.getQRCode()
     });
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {},
+  onReady: function () { },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {},
+  onShow: function () { },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {},
+  onHide: function () { },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {},
+  onUnload: function () { },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {},
+  onPullDownRefresh: function () { },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {},
+  onReachBottom: function () { },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {},
+  onShareAppMessage: function () { },
 
   // 更换头像
   changeAvator() {
@@ -193,7 +195,7 @@ Page({
     const {
       userInfo: { mobile, age, name, headImage, sex, marry, idcard },
       loginInfo: { id },
-	  loginInfo,
+      loginInfo,
     } = this.data;
     api
       .editUserInfo({
@@ -225,4 +227,22 @@ Page({
         });
       });
   },
+  getQRCode() {
+    const { userInfo, userInfo: { id } } = this.data
+    api.getUserCode({ id }).then(res => {
+      this.setData({
+        userInfo: {
+          ...userInfo,
+          qrCode: res.data
+        }
+      })
+    })
+  },
+  previewCode() {
+    const { userInfo: { qrCode } } = this.data
+    wx.previewImage({
+      current: qrCode, // 当前显示图片的http链接
+      urls: [qrCode] // 需要预览的图片http链接列表
+    })
+  }
 });

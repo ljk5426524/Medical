@@ -1,10 +1,9 @@
 <view class="page">
 		<van-cell-group>
-				<van-cell title="建议与意见" is-link />
-				<van-cell title="帮助中心" is-link />
-				<van-cell title="关于我们" is-link />
-				<van-cell title="账户安全" is-link />
-				<van-cell title="用户隐私协议" is-link />
-				<van-cell title="用户服务协议" is-link />
+				<!-- <van-cell title="建议与意见" is-link /> -->
+				<van-cell title="帮助中心" is-link url="/pages/agreement/index?type=3" />
+				<van-cell title="关于我们" is-link url="/pages/agreement/index?type=4" />
+				<van-cell title="用户隐私协议" is-link url="/pages/agreement/index?type=1" />
+				<van-cell title="用户服务协议" is-link url="/pages/agreement/index?type=2" />
 		</van-cell-group>
 </view>

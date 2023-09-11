@@ -51,7 +51,7 @@ export default {
     })
   },
   // 义诊体检列表
-  getServiceList(data) {
+  getServiceRecordList(data) {
     return request({
       url: `${baseUrl}api/v1/serviceRecord/listPage`,
       data,
@@ -108,6 +108,33 @@ export default {
       url: `${baseUrl}api/v1/service/order`,
       data,
       selfHandle: true,
+      method: "post",
+      contentType: 'application/json'
+    })
+  },
+  // 首页搜索
+  getSearchList(data) {
+    return request({
+      url: `${baseUrl}v1/api/patientIndex/searchInfoForAndroid`,
+      data,
+      method: "post",
+    })
+  },
+
+  // 我的服务详情
+  getMyServiceDetail(data) {
+    return request({
+      url: `${baseUrl}api/v1/serviceRecord/detail`,
+      data,
+      method: "get",
+      contentType: 'application/json'
+    })
+  },
+  // 我的服务转让
+  transferMyService(data) {
+    return request({
+      url: `${baseUrl}api/v1/serviceRecord/transfer`,
+      data,
       method: "post",
       contentType: 'application/json'
     })

@@ -35,7 +35,7 @@
 						<van-icon slot="right-icon" name="arrow" size="16px" />
 				</van-cell>
 				<van-cell title="我的二维码">
-						<image slot="right-icon" class="code" src="/res/images/home-doctor.png" />
+						<image slot="right-icon" class="code" src="{{userInfo.qrCode}}" bindtap="previewCode" />
 				</van-cell>
 		</van-cell-group>
 		<van-button round type="primary" block custom-class="btn" bind:click="submit">提交</van-button>

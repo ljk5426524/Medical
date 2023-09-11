@@ -7,7 +7,9 @@
     <view wx:if="{{userInfo}}" class="hospital">
       {{userInfo.departmentName}} {{userInfo.titleName}} {{userInfo.merchantName}}
     </view>
-    <view wx:if="{{userInfo}}" class="info"><navigator url="/pages/my-info-doctor/index" hover-class="none">个人资料</navigator></view>
+    <view wx:if="{{userInfo}}" class="info">
+      <navigator url="/pages/my-info-doctor/index" hover-class="none">个人资料</navigator>
+    </view>
     <view class="statics">
       <view class="statics-item">
         <view class="val">{{userInfo?staticsInfo.patientsNum:'**'}}</view>
@@ -25,6 +27,6 @@
     <view class="banner-sub-text">最懂您的诊疗决策助手</view>
     <image class="banner-pic" src="/res/images/banner.png" />
   </view>
-  <van-cell title="我的二维码" is-link icon="qr" url="{{userInfo?'/pages/my-scan-record/index':'/pages/login/index'}}" />
+  <van-cell title="我的二维码" is-link icon="qr" bindtap="showMyCode" />
   <van-cell title="设置" is-link icon="setting-o" url="{{userInfo?'/pages/setting/index':'/pages/login/index'}}" />
 </view>

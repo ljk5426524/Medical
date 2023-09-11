@@ -90,9 +90,21 @@ Page({
     },
     toAsk() {
         const { userInfo } = this.data
-        wx.navigateTo({
-            url: userInfo ? '/pages/doctor-detail/index' : '/pages/login/index'
-        })
+        if (!userInfo) {
+            wx.navigateTo({
+                url: '/pages/login/index'
+            })
+        } else {
+            wx.scanCode({
+                success(res) {
+                    const { result } = res
+                    console.log(res, result)
+                    wx.navigateTo({
+                        url: `/pages/doctor-detail/index?id=${result}`
+                    })
+                }
+            })
+        }
     },
     toOldHealth() {
         const { userInfo } = this.data

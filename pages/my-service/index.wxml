@@ -8,7 +8,7 @@
     </view>
   </view>
   <scroll-view class="list-items" scroll-y="{{true}}" show-scrollbar="{{false}}" enhanced="{{true}}">
-    <view class="list-item" wx:for="{{serviceList}}" wx:key="id">
+    <view class="list-item" wx:for="{{serviceList}}" wx:key="id" bindtap="toDetail" data-id="{{item.id}}">
       <view class="item-time">
         <van-icon name="clock-o" />
         {{item.startTime}} - {{item.endTime}}

@@ -65,16 +65,8 @@ Page({
 
     },
     getUserInfo() {
-        // api.getTokenByPhone({
-        //     token: '62efc330f72b42f5810201d38acea937'
-        // }).then(res => {
-        //     console.log(res)
-        // })
         this.setData({
             userInfo: getLocalUserInfo()
-        }, () => {
-            console.log(this.data.userInfo)
         })
-
     }
 })

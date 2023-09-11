@@ -1,11 +1,13 @@
 {
     "pages": [
-        "pages/home/index",
         "pages/home-doctor/index",
+        "pages/home/index",
+        "pages/patient/index",
+        "pages/my-service/index",
+        "pages/service-detail/index",
         "pages/my-doctor/index",
         "pages/my-info/index",
         "pages/my-info-doctor/index",
-        "pages/patient/index",
         "pages/seek-detail/index",
         "pages/my/index",
         "pages/patient-new/index",
@@ -13,7 +15,6 @@
         "pages/old-health-tab/index",
         "pages/order-diagnosis/index",
         "pages/order-diagnosis-detail/index",
-        "pages/my-service/index",
         "pages/old-health-menu/index",
         "pages/my-family-add/index",
         "pages/my-family/index",
@@ -32,7 +33,8 @@
         "pages/old-health-detail/index",
         "pages/order-result/index",
         "pages/login/index",
-        "pages/patient-info/index"
+        "pages/patient-info/index",
+        "pages/agreement/index"
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -49,19 +51,19 @@
             {
                 "iconPath": "./res/images/doctor/home.png",
                 "selectedIconPath": "./res/images/doctor/home-active.png",
-                "pagePath": "pages/home/index",
+                "pagePath": "pages/home-doctor/index",
                 "text": "首页"
             },
             {
-                "iconPath": "./res/images/patient/msg.png",
-                "selectedIconPath": "./res/images/patient/msg-active.png",
-                "pagePath": "pages/chat/index",
-                "text": "消息"
+                "iconPath": "./res/images/doctor/patient.png",
+                "selectedIconPath": "./res/images/doctor/patient-active.png",
+                "pagePath": "pages/patient/index",
+                "text": "患者"
             },
             {
-                "iconPath": "./res/images/patient/my.png",
-                "selectedIconPath": "./res/images/patient/my-active.png",
-                "pagePath": "pages/my/index",
+                "iconPath": "./res/images/doctor/my.png",
+                "selectedIconPath": "./res/images/doctor/my-active.png",
+                "pagePath": "pages/my-doctor/index",
                 "text": "我的"
             }
         ]

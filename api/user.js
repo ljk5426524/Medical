@@ -63,5 +63,14 @@ export default {
 			method: "post",
 			contentType: 'application/json'
 		})
+	},
+
+	getUserCode(data) {
+		return request({
+			url: `${baseUrl}qrCode/getImagePath`,
+			data,
+			method: 'get',
+			contentType: 'application/json'
+		})
 	}
 }
