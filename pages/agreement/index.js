@@ -14,10 +14,15 @@ Page({
      */
     onLoad: function (options) {
         const { type } = options
-        if (+type < 4) {
+        if (type && +type < 4) {
             this.getSettingData(type)
         } else {
-            this.aboutUs()
+            this.setData({
+                agreement: ''
+            })
+            wx.setNavigationBarTitle({
+                title: '关于我们'
+            })
         }
     },
 
@@ -85,7 +90,4 @@ Page({
             })
         })
     },
-    aboutUs() {
-        api.aboutUs().then(res => { })
-    }
 })

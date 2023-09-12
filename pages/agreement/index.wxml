@@ -1,3 +1,11 @@
 <view class="page">
-  <rich-text nodes="{{agreement}}"></rich-text>
+  <view wx:if="{{agreement}}" class="agreement">
+    <rich-text nodes="{{agreement}}"></rich-text>
+  </view>
+  <view wx:else class="about">
+    <view>南京宸晖网络科技有限公司</view>
+    <view>公司地址：南京市江宁区东吉大道1号(江宁开发区)</view>
+    <view>联系人：至为成</view>
+    <view>联系电话：18602553117</view>
+  </view>
 </view>

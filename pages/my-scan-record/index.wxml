@@ -4,17 +4,18 @@
     <view class="info">
       <view class="name">
         {{item.name}}
-        <text class="position">{{item.position}}</text>
+        <text class="position">{{item.title}}</text>
       </view>
       <view class="hospital">
-        {{item.hospital}}
-        <text class="department">{{item.department}}</text>
+        {{item.merchantName}}
+        <text class="department">{{item.departmentName}}</text>
       </view>
     </view>
-    <view wx:if="{{item.state === 1}}" class="btn-chat" bindtap="toChat" data-id="{{item.id}}">
+    <view wx:if="{{item.applyStatue === '1'}}" class="btn-chat" bindtap="toChat" data-id="{{item.id}}">
       申请加入
     </view>
-    <view wx:else class="btn-chat saved">已加入</view>
+    <view wx:elif="{{item.applyStatue === '2'}}" class="btn-chat saved">已加入</view>
+    <view wx:else class="btn-chat saved">已忽略</view>
   </view>
   <view wx:if="{{!doctorList.length}}">
     <no-data-filling noDataTxt="暂无扫码记录"></no-data-filling>

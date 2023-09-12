@@ -1,6 +1,8 @@
 {
     "pages": [
         "pages/home-doctor/index",
+        "pages/setting/index",
+        "pages/agreement/index",
         "pages/home/index",
         "pages/my-scan-record/index",
         "pages/patient/index",
@@ -21,7 +23,6 @@
         "pages/my-family/index",
         "pages/doctor-detail/index",
         "pages/my-doctors/index",
-        "pages/setting/index",
         "pages/home-search/index",
         "pages/hospital-list/index",
         "pages/department/index",
@@ -33,8 +34,7 @@
         "pages/old-health-detail/index",
         "pages/order-result/index",
         "pages/login/index",
-        "pages/patient-info/index",
-        "pages/agreement/index"
+        "pages/patient-info/index"
     ],
     "window": {
         "backgroundTextStyle": "light",
