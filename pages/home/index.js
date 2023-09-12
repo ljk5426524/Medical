@@ -113,14 +113,16 @@ Page({
         })
     },
     getMyDoctors() {
-        api.getMyDoctors({
-            userId: 99
-        }).then(res => {
-            this.setData({
-                // specialist: res.data.records
-                specialist: []
+        const { userInfo: { id } } = this.data
+        if (id) {
+            api.getMyDoctors({
+                userId: id
+            }).then(res => {
+                this.setData({
+                    specialist: res.data.records
+                })
             })
-        })
+        }
     },
     toDoctorDetail(e) {
         const { id } = e.currentTarget.dataset

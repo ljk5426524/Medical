@@ -1,5 +1,7 @@
 // pages/doctor-detail/index.js
 import api from '../../api/index'
+import { wxToast } from '../../utils/wx-api'
+import { getLocalUserInfo } from '../../utils/storage'
 Page({
 
     /**
@@ -7,7 +9,8 @@ Page({
      */
     data: {
         buttonClientRect: wx.getMenuButtonBoundingClientRect(),
-        doctorDetail: {}
+        doctorDetail: {},
+        userInfo: {}
     },
 
     /**
@@ -15,8 +18,12 @@ Page({
      */
     onLoad: function (options) {
         const { id } = options
-        this.getDoctorDetail(id)
-        this.findDoctorProduct(id)
+        this.setData({
+            userInfo: getLocalUserInfo()
+        }, () => {
+            this.getDoctorDetail(id)
+            this.findDoctorProduct(id)
+        })
     },
 
     /**
@@ -73,8 +80,11 @@ Page({
         wx.navigateBack()
     },
     getDoctorDetail(id) {
+        const { userInfo: { id: userId } } = this.data
         api.getDoctorDetail({
-            doctorId: id || 4
+            appId: 1,
+            userId,
+            doctorId: id
         }).then(res => {
             this.setData({
                 doctorDetail: res.data
@@ -83,11 +93,40 @@ Page({
     },
     findDoctorProduct(id) {
         api.findDoctorProduct({
-            doctorId: id || 4
+            doctorId: id
         }).then(res => {
             // this.setData({
             //     doctorDetail: res.data
             // })
+        })
+    },
+    applyDoctorFriend() {
+        const { doctorDetail: { id }, userInfo: { id: userId } } = this.data
+        api.applyDoctorFriend({
+            userId,
+            appId: 1,
+            doctorId: id
+        }).then(res => {
+            wxToast.show({
+                title: '申请成功'
+            })
+        })
+    },
+    deleteFriend() {
+        const {
+            doctorDetail: { id },
+            userInfo: { id: userId }
+        } = this.data
+        api.handlePatientApply({
+            userId,
+            doctorId: id,
+            state: 4,
+            appId: 2,
+        }).then(res => {
+            wxToast.show({
+                title: '已移除'
+            })
+            this.getDoctorDetail(id)
         })
     }
 })

@@ -40,7 +40,9 @@
         </view>
     </view>
     <view class="add-content">
-        <view wx:if="{{true}}" class="btn-add">申请加入专家联系名单</view>
-        <view wx:else class="btn-add-del">从专家联系名单中解除</view>
+        <view wx:if="{{doctorDetail.applyStatue !== '2'}}" class="btn-add" bindtap="applyDoctorFriend">
+            申请加入专家联系名单
+        </view>
+        <view wx:else class="btn-add-del" bindtap="deleteFriend">从专家联系名单中解除</view>
     </view>
 </view>
