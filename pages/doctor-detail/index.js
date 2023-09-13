@@ -121,7 +121,7 @@ Page({
             userId,
             doctorId: id,
             state: 4,
-            appId: 2,
+            appId:1,
         }).then(res => {
             wxToast.show({
                 title: '已移除'

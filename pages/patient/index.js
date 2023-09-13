@@ -47,6 +47,7 @@ Page({
       "9",
     ],
     indexBarList: {},
+    indexBarListStr: '',
     indexList: [],
     actions: [
       {
@@ -148,6 +149,7 @@ Page({
             indexBarList,
             indexList,
             patientList: list,
+            indexBarListStr: JSON.stringify(indexBarList),
           });
         });
     }
@@ -207,4 +209,5 @@ Page({
       },
     });
   },
+  toChat() { }
 });

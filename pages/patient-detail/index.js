@@ -7,7 +7,8 @@ Page({
   data: {
     buttonClientRect: wx.getMenuButtonBoundingClientRect(),
     patientDetail: {},
-    recordList: [],
+    recordList: {},
+    recordListStr: '',
     originRecordList: [],
     patientId: null
   },
@@ -97,6 +98,7 @@ Page({
         }
         this.setData({
           recordList: obj,
+          recordListStr: JSON.stringify(obj),
           originRecordList: list,
         });
       });

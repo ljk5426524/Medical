@@ -80,5 +80,12 @@ export default {
       data,
       method: "post"
     });
+  },
+  editReceivePatient(data){
+    return request({
+      url: `${baseUrl}api/v1/doctor/editReceivePatient`,
+      data,
+      method: "post"
+    });
   }
 }

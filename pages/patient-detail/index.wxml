@@ -49,7 +49,7 @@
 										</view>
 								</view>
 						</view>
-						<view wx:if="{{!recordList.length}}">
+						<view wx:if="{{recordListStr.length === 2}}">
 								<no-data-filling noDataTxt="暂无记录"></no-data-filling>
 						</view>
 				</view>

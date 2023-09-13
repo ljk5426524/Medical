@@ -20,7 +20,7 @@
       </view>
     </view>
   </view>
-  <view wx:if="{{!Object.keys(patientList).length}}">
+  <view wx:if="{{patientListStr.length === 2}}">
     <no-data-filling noDataTxt="暂无新患者信息"></no-data-filling>
   </view>
 </view>

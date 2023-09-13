@@ -9,7 +9,8 @@ Page({
      * 页面的初始数据
      */
     data: {
-        patientList: {}
+        patientList: {},
+        patientListStr: ''
     },
 
     /**
@@ -98,7 +99,8 @@ Page({
                 })
             })
             this.setData({
-                patientList: obj
+                patientList: obj,
+                patientListStr: JSON.stringify(obj)
             })
         })
     },
@@ -110,7 +112,7 @@ Page({
             userId: id,
             doctorId: loginId || 22,
             state: +type,
-            appId: 2,
+            appId: 1,
         }).then(res => {
             wxToast.show({
                 title: +type === 2 ? '已添加' : '已忽略'

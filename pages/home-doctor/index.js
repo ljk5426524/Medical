@@ -67,7 +67,15 @@ Page({
   onShareAppMessage: function () { },
 
   onStateChange({ detail }) {
-    this.setData({ doctorState: !detail });
+    console.log(detail)
+    const {userInfo:{id}} = this.data
+    this.setData({ doctorState: detail ?0:1});
+    api.editReceivePatient({
+      doctorId:id,
+      statue:detail?0:1
+    }).then(res=>{
+
+    })
   },
 
   getHomeStatics() {
@@ -101,7 +109,7 @@ Page({
             msgList: res.data.records.map((i) => {
               return {
                 ...i,
-                time: getTimeShow(i.updateTime),
+                time: getTimeShow(i.updateTime.split('-').join('/')),
               };
             }),
           });

@@ -12,28 +12,28 @@
     <van-cell bind:click="selShow" data-type="2" is-link>
       <view class="form-item-title" slot="title">
         <view class="form-item-label isRequire">在职状态</view>
-        <view class="form-item-value">{{userInfo.workState}}</view>
+        <view class="form-item-value">{{userInfo.workState||''}}</view>
       </view>
       <van-icon slot="right-icon" name="arrow" size="16px" />
     </van-cell>
     <van-cell bind:click="selShow" data-type="5" is-link>
       <view class="form-item-title" slot="title">
         <view class="form-item-label isRequire">医院</view>
-        <view class="form-item-value">{{userInfo.merchantName}}</view>
+        <view class="form-item-value">{{userInfo.merchantName||''}}</view>
       </view>
       <van-icon slot="right-icon" name="arrow" size="16px" />
     </van-cell>
     <van-cell bind:click="selShow" data-type="4" is-link>
       <view class="form-item-title" slot="title">
         <view class="form-item-label isRequire">科室</view>
-        <view class="form-item-value">{{userInfo.departmentName}}</view>
+        <view class="form-item-value">{{userInfo.departmentName||''}}</view>
       </view>
       <van-icon slot="right-icon" name="arrow" size="16px" />
     </van-cell>
     <van-cell bind:click="selShow" data-type="3" is-link>
       <view class="form-item-title" slot="title">
         <view class="form-item-label isRequire">职称</view>
-        <view class="form-item-value">{{userInfo.titleName}}</view>
+        <view class="form-item-value">{{userInfo.titleName||''}}</view>
       </view>
       <van-icon slot="right-icon" name="arrow" size="16px" />
     </van-cell>

@@ -28,7 +28,7 @@ const TABBAR_DATA = [
     "text": "我的"
   }
 ]
-
+const APPID = 'wxf5ac3d1f7ce0f588' 
 
 // 医生tabbar
 const TABBAR_DATA_DOCTOR = [
@@ -51,3 +51,4 @@ const TABBAR_DATA_DOCTOR = [
     "text": "我的"
   }
 ]
+const APPID_DOCTOR = 'wxf66d5c65f55ee904' 

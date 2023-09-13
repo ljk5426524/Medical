@@ -162,9 +162,13 @@ Page({
         [type]: text || value,
       },
     });
+    console.log(type === "titleName", id);
     if (type === "titleName") {
       this.setData({
-        title: id,
+        userInfo: {
+          ...this.data.userInfo,
+          title: id,
+        },
       });
     }
   },
@@ -252,32 +256,32 @@ Page({
       !departmentName ||
       !departmentId ||
       !title ||
-      // !goodat ||
+      !goodat ||
       !summary ||
       !doctorCertPath ||
       !engageCertPath
-    ){
+    ) {
       return wxToast.show({
-        title:'请完善必填项！'
-      })
+        title: "请完善必填项！",
+      });
     }
-      api
-        .editDoctorInfo({
-          ...this.data.userInfo,
-          sex: sex === "男" ? "1" : "2",
-          workState: workState === "在职" ? "1" : "2",
-          idcard:idcard === 'null'?'':idcard
-        })
-        .then((res) => {
-          saveLocalUserInfo(res.data);
-          wxToast.show({
-            title: "修改成功！",
-            done: () => {
-              wx.switchTab({
-                url: "/pages/my-doctor/index",
-              });
-            },
-          });
+    api
+      .editDoctorInfo({
+        ...this.data.userInfo,
+        sex: sex === "男" ? "1" : "2",
+        workState: workState === "在职" ? "1" : "2",
+        idcard: idcard === "null" ? "" : idcard,
+      })
+      .then((res) => {
+        saveLocalUserInfo(res.data);
+        wxToast.show({
+          title: "修改成功！",
+          done: () => {
+            wx.switchTab({
+              url: "/pages/my-doctor/index",
+            });
+          },
         });
+      });
   },
 });

@@ -54,19 +54,19 @@
                 "selectedIconPath": "./res/images/doctor/home-active.png",
                 "pagePath": "pages/home/index",
                 "text": "首页"
-            },
-            {
+              },
+              {
                 "iconPath": "./res/images/patient/msg.png",
                 "selectedIconPath": "./res/images/patient/msg-active.png",
                 "pagePath": "pages/chat/index",
                 "text": "消息"
-            },
-            {
+              },
+              {
                 "iconPath": "./res/images/patient/my.png",
                 "selectedIconPath": "./res/images/patient/my-active.png",
                 "pagePath": "pages/my/index",
                 "text": "我的"
-            }
+              }
         ]
     },
     "usingComponents": {
