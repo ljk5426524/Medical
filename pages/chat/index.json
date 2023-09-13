@@ -1,5 +1,5 @@
 {
   "usingComponents": {
-    "TUIKit": "../../TUIKit/index"
+    "TUIKit": "../../chat-im/TUIKit/index"
   }
 }

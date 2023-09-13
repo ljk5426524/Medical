@@ -1,6 +1,7 @@
 {
     "pages": [
         "pages/home/index",
+        "pages/chat/index",
         "pages/home-doctor/index",
         "pages/setting/index",
         "pages/agreement/index",
@@ -26,7 +27,6 @@
         "pages/home-search/index",
         "pages/hospital-list/index",
         "pages/department/index",
-        "pages/chat/index",
         "pages/index/index",
         "pages/chat/chat",
         "pages/hospital-detail/index",
@@ -36,6 +36,17 @@
         "pages/login/index",
         "pages/patient-info/index",
         "pages/image-consult/index"
+    ],
+    "subPackages": [
+        {
+            "root": "chat-im",
+            "name": "chat-im",
+            "pages": [
+                "pages/index",
+                "pages/chat"
+            ],
+            "independent": false
+        }
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -54,19 +65,19 @@
                 "selectedIconPath": "./res/images/doctor/home-active.png",
                 "pagePath": "pages/home/index",
                 "text": "首页"
-              },
-              {
+            },
+            {
                 "iconPath": "./res/images/patient/msg.png",
                 "selectedIconPath": "./res/images/patient/msg-active.png",
-                "pagePath": "pages/chat/index",
+                "pagePath": "chat-im/pages/chat",
                 "text": "消息"
-              },
-              {
+            },
+            {
                 "iconPath": "./res/images/patient/my.png",
                 "selectedIconPath": "./res/images/patient/my-active.png",
                 "pagePath": "pages/my/index",
                 "text": "我的"
-              }
+            }
         ]
     },
     "usingComponents": {

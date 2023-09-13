@@ -1,0 +1,21 @@
+<!-- TUIKitWChat/Conversation/index.wxml -->
+<view class="container-out" wx:if="{{showConversationList}}">
+  <view class="tabs">
+    <view class="{{tabActive === 1 ?'tab-item active':'tab-item'}}" bindtap="tabChange" data-tab="{{1}}">
+      问诊消息
+    </view>
+    <view class="{{tabActive === 2 ?'tab-item active':'tab-item'}}" bindtap="tabChange" data-tab="{{2}}">
+      服务消息
+    </view>
+  </view>
+  <view class="container">
+    <view class="conversation-list-area">
+      <scroll-view class="scoll-view" scroll-y="true">
+        <ConversationItem wx:for="{{conversationList}}" wx:key="index" id="{{item.conversationID}}" data-type="{{item.type}}" conversation="{{item}}" bindtap="handleRoute" statusList="{{statusList}}" bind:transCheckID="transCheckID" charge="{{transChenckID===item.conversationID}}"></ConversationItem>
+      </scroll-view>
+    </view>
+  </view>
+</view>
+<CreateConversation wx:if="{{showCreateConversation}}" bind:showConversation="showConversation" bind:searchUserID="searchUserID"></CreateConversation>
+<CreateGroup wx:if="{{showCreateGroup}}" bind:showConversation="showConversation" bind:createGroupID="createGroupID"></CreateGroup>
+<JoinGroup wx:if="{{showJoinGroup}}" bind:searchGroupID="searchGroupID" bind:showConversation="showConversation"></JoinGroup>

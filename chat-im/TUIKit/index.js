@@ -10,12 +10,13 @@ Component({
       type: String,
       value: '',
       observer(conversationID) {
+        console.log('jin', conversationID)
         this.setData({
           outsideConversation: true,
           currentConversationID: conversationID,
         });
       },
-    },  
+    },
   },
 
   /**
@@ -63,13 +64,17 @@ Component({
           });
         }
       });
+      console.log('?!?!??!??!!!?!?', this.data.outsideConversation, this.data.currentConversationID)
       if (this.data.outsideConversation) {
-        this.currentConversationID({
-          detail: {
-            currentConversationID: this.data.currentConversationID,
-            unreadCount: 0
-          }
-        })
+        this.setData({
+          isShowConversation: true,
+          isShowConversationList: false,
+          currentConversationID: this.data.currentConversationID,
+          unreadCount: 0,
+        }, () => {
+          const TUIChat = this.selectComponent('#TUIChat');
+          TUIChat.init();
+        });
       } else {
         this.setData({
           isShowConversationList: true,
@@ -80,15 +85,9 @@ Component({
       }
     },
     currentConversationID(event) {
-      this.setData({
-        isShowConversation: true,
-        isShowConversationList: false,
-        currentConversationID: event.detail.currentConversationID,
-        unreadCount: event.detail.unreadCount,
-      }, () => {
-        const TUIChat = this.selectComponent('#TUIChat');
-        TUIChat.init();
-      });
+      wx.navigateTo({
+        url: `/chat-im/pages/chat?id=${event.detail.currentConversationID}`
+      })
     },
     showConversationList() {
       if (this.data.outsideConversation) {

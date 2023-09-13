@@ -135,7 +135,7 @@ Component({
           if (isRecord === false) {
             const title = '麦克风权限授权';
             const content = '发送语音消息，需要在设置中对麦克风进行授权允许';
-            wx.authorize({ 
+            wx.authorize({
               scope: 'scope.record',
               success: () => {
                 this.recorderStart();
@@ -394,7 +394,7 @@ Component({
         },
       });
     },
-    
+
     handleShowModal(title, content) {
       wx.showModal({
         title,
@@ -447,11 +447,12 @@ Component({
         payload: {
           text,
         },
-        cloudCustomData: JSON.stringify({ messageFeature:
-        {
-          needTyping: FEAT_NATIVE_CODE.FEAT_TYPING,
-          version: FEAT_NATIVE_CODE.NATIVE_VERSION,
-        },
+        cloudCustomData: JSON.stringify({
+          messageFeature:
+          {
+            needTyping: FEAT_NATIVE_CODE.FEAT_TYPING,
+            version: FEAT_NATIVE_CODE.NATIVE_VERSION,
+          },
         }),
       });
       this.setData({
@@ -501,8 +502,8 @@ Component({
           },
         }),
       });
-        // 在消息列表中过滤出对方的消息，并且获取最新消息的时间。
-      const inList =  this.data.messageList.filter(item => item.flow === 'in');
+      // 在消息列表中过滤出对方的消息，并且获取最新消息的时间。
+      const inList = this.data.messageList.filter(item => item.flow === 'in');
       if (inList.length === 0) return;
       const sortList = inList.sort((firstItem, secondItem) => secondItem.time - firstItem.time);
       const newMessageTime = sortList[0].time * 1000;
@@ -515,9 +516,9 @@ Component({
           return false;
         }
       });
-        // 获取当前编辑时间，与收到对方最新的一条消息时间相比，时间小于30s则发送正在输入状态消息/
+      // 获取当前编辑时间，与收到对方最新的一条消息时间相比，时间小于30s则发送正在输入状态消息/
       const now = new Date().getTime();
-      const timeDifference =  (now  - newMessageTime);
+      const timeDifference = (now - newMessageTime);
 
       if (isSendTypingMessage && timeDifference > (1000 * 30)) return;
       if (this.data.isFirstSendTyping) {
@@ -558,11 +559,12 @@ Component({
             userAction: FEAT_NATIVE_CODE.NOTTYPING_ACTION,
             actionParam: constant.TYPE_INPUT_STATUS_END,
           }),
-          cloudCustomData: JSON.stringify({ messageFeature:
-              {
-                needTyping: FEAT_NATIVE_CODE.FEAT_TYPING,
-                version: FEAT_NATIVE_CODE.NATIVE_VERSION,
-              },
+          cloudCustomData: JSON.stringify({
+            messageFeature:
+            {
+              needTyping: FEAT_NATIVE_CODE.FEAT_TYPING,
+              version: FEAT_NATIVE_CODE.NATIVE_VERSION,
+            },
           }),
           description: '',
           extension: '',
@@ -635,12 +637,12 @@ Component({
           disablePush: true,
         },
       }).catch((error) => {
-          logger.log(`| TUI-chat | message-input | sendMessageError: ${error.code} `);
-          this.triggerEvent('showMessageErrorImage', {
-            showErrorImageFlag: error.code,
-            message,
-          });
+        logger.log(`| TUI-chat | message-input | sendMessageError: ${error.code} `);
+        this.triggerEvent('showMessageErrorImage', {
+          showErrorImageFlag: error.code,
+          message,
         });
+      });
       this.setData({
         displayFlag: '',
       });

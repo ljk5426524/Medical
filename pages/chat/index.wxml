@@ -7,7 +7,7 @@
             服务消息
         </view>
     </view>
-    <TUIKit config="{{config}}" id="TUIKit"></TUIKit>
+    <view bindtap="tochat">123</view>
     <!-- <view wx:for="{{conversationList}}" wx:key="id" class="dialog-item" bindtap="toChat" data-id="{{item.id}}">
         <image class="avator" src="../../res/images/home-doctor.png" />
         <view class="content">

@@ -4,7 +4,7 @@
   "description": "",
   "main": ".eslintrc.js",
   "dependencies": {
-    "@tencentcloud/chat-uikit-wechat": "^1.1.3",
+    "@tencentcloud/chat-uikit-wechat": "^1.1.4",
     "@vant/weapp": "^1.10.24",
     "cos-wx-sdk-v5": "^1.4.12",
     "js-pinyin": "^0.2.5",

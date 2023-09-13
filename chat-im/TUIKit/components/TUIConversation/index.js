@@ -20,6 +20,7 @@ Component({
    * 组件的初始数据
    */
   data: {
+    tabActive: 1,
     conversationList: [],
     currentConversationID: '',
     showSelectTag: false,
@@ -121,6 +122,7 @@ Component({
     },
     // 跳转到子组件需要的参数
     handleRoute(event) {
+      console.log('event', event)
       const flagIndex = this.data.conversationList.findIndex(item => item.conversationID === event.currentTarget.id);
       this.setData({
         index: flagIndex,
@@ -130,8 +132,10 @@ Component({
         currentConversationID: event.currentTarget.id,
         unreadCount: this.data.conversationList[this.data.index].unreadCount,
       });
-      this.triggerEvent('currentConversationID', { currentConversationID: event.currentTarget.id,
-        unreadCount: this.data.conversationList[this.data.index].unreadCount });
+      this.triggerEvent('currentConversationID', {
+        currentConversationID: event.currentTarget.id,
+        unreadCount: this.data.conversationList[this.data.index].unreadCount
+      });
     },
     // 展示发起会话/发起群聊/加入群聊
     showSelectedTag() {
@@ -217,8 +221,8 @@ Component({
       })
         .catch((imError) => {
           console.warn('开启在线状态功能,' + '\n'
-          + '1. 需要您开通旗舰版套餐：https://buy.cloud.tencent.com/avc ;' + '\n'
-          + '2. 进入 IM 控制台开启“用户状态查询及状态变更通知”开关: https://console.cloud.tencent.com/im/login-message');
+            + '1. 需要您开通旗舰版套餐：https://buy.cloud.tencent.com/avc ;' + '\n'
+            + '2. 进入 IM 控制台开启“用户状态查询及状态变更通知”开关: https://console.cloud.tencent.com/im/login-message');
         });
       wx.$TUIKit.subscribeUserStatus({ userIDList });
     },
@@ -248,6 +252,12 @@ Component({
       wx.navigateTo({
         url: '/pages/TUI-User-Center/webview/webview?url=https://cloud.tencent.com/product/im',
       });
+    },
+    tabChange(e) {
+      const { tab } = e.currentTarget.dataset
+      this.setData({
+        tabActive: tab
+      })
     },
   },
 });
