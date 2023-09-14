@@ -8,7 +8,6 @@ Page({
    */
   data: {
     userInfo: {},
-    popType: 1, // 1:性别 2:婚育
     sexColumns: ["男", "女"],
     ageColumns: new Array(121).fill(0).map((v, i) => i),
     marryColumns: [
@@ -19,16 +18,27 @@ Page({
       "离婚未育",
       "离婚已育",
     ],
+    popShow1: false,
+    popShow2: false,
+    popShow3: false,
+    defaultSexIdx: 1,
+    defaultMarryIdx: 1,
+    defaultAgeIdx: 50
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    const userInfo = getLocalUserInfo()
     this.setData({
-      loginInfo: getLocalUserInfo(),
-      userInfo: { ...getLocalUserInfo(), sex: getLocalUserInfo().sex === '1' ? '男' : '女' },
+      loginInfo: userInfo,
+      userInfo: {
+        ...userInfo,
+        sex: userInfo.sex === '1' ? '男' : userInfo.sex === '2' ? '女' : '男'
+      },
     }, () => {
+      this.backViewPicker()
       this.getQRCode()
     });
   },
@@ -123,25 +133,24 @@ Page({
   },
   sexSel() {
     this.setData({
-      popType: 1,
-      popShow: true,
+      popShow1: true,
     });
   },
   marrySel() {
     this.setData({
-      popType: 2,
-      popShow: true,
+      popShow2: true,
     });
   },
   ageSel() {
     this.setData({
-      popType: 0,
-      popShow: true,
+      popShow3: true,
     });
   },
   onClose() {
     this.setData({
-      popShow: false,
+      popShow1: false,
+      popShow2: false,
+      popShow3: false,
     });
   },
   onSexChange(e) {
@@ -197,6 +206,22 @@ Page({
       loginInfo: { id },
       loginInfo,
     } = this.data;
+    if (!name || !sex || !idcard || !mobile || !age || !marry) {
+      wxToast.show({
+        title: '请完善必填项'
+      })
+      return false
+    } else if (idcard && idcard.length !== 18) {
+      wxToast.show({
+        title: '请填写正确的身份证号'
+      })
+      return false
+    } else if (mobile && mobile.length !== 11) {
+      wxToast.show({
+        title: '请填写正确的手机号'
+      })
+      return false
+    }
     api
       .editUserInfo({
         mobile,
@@ -243,6 +268,23 @@ Page({
     wx.previewImage({
       current: qrCode, // 当前显示图片的http链接
       urls: [qrCode] // 需要预览的图片http链接列表
+    })
+  },
+  // 回显示picker 默认值
+  backViewPicker() {
+    const { userInfo, userInfo: { sex, marry, age }, marryColumns } = this.data
+    const defaultSexIdx = !sex ? 0 : sex === '男' ? 0 : 1
+    const defaultMarryIdx = marry ? marryColumns.indexOf(marry) : 3
+    const defaultAgeIdx = +age
+    this.setData({
+      defaultSexIdx,
+      defaultMarryIdx,
+      defaultAgeIdx,
+      userInfo: {
+        ...userInfo,
+        age: age || 50,
+        marry: marry || '已婚已育'
+      }
     })
   }
 });

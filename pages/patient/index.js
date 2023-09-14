@@ -58,6 +58,7 @@ Page({
       },
     ],
     newPatientList: [],
+    unDoPatientCount: 0
   },
 
   /**
@@ -80,6 +81,7 @@ Page({
       },
       () => {
         this.getMyPatients();
+        this.getNewPatientList()
       }
     );
   },
@@ -153,6 +155,18 @@ Page({
           });
         });
     }
+  },
+  getNewPatientList() {
+    const { userInfo: { id } } = this.data
+    api.getNewPatientList({
+      current: 1,
+      size: 500,
+      doctorId: id
+    }).then(res => {
+      this.setData({
+        unDoPatientCount: res.data.records.length
+      })
+    })
   },
 
   onSearch(e) {

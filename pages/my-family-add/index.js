@@ -25,17 +25,29 @@ Page({
 			'本人', '丈夫', '妻子', '父亲', '母亲', '儿子', '女儿', '爷爷', '奶奶', '外公', '外婆', '近亲', '远亲'],
 		sickList: [{ name: '高血压', sel: false }, { name: '糖尿病', sel: false }, { name: '冠心病', sel: false }, { name: '高血脂', sel: false }],
 		selSick: [],
-		loginInfo: {}
+		loginInfo: {},
+		currentSexIdx: 0,
+		currentMarryIdx: 3,
+		currentRelationIdx: 0,
+		currentAgeIdx: 50,
+		infoReadOnly: false
 	},
 
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
+		const { id, type } = options
+
 		this.setData({
-			loginInfo: getLocalUserInfo()
+			loginInfo: getLocalUserInfo(),
+			infoReadOnly: !!type
 		}, () => {
-			this.getSickList()
+			this.getSickList().then(() => {
+				if (id) {
+					this.getMemberDetail(id)
+				}
+			})
 		})
 	},
 
@@ -88,32 +100,43 @@ Page({
 
 	},
 	sexSel() {
-		this.setData({
-			popType: 1,
-			popShow: true
-		})
-	},
-	relationSel() {
-		this.setData({
-			popType: 3,
-			popShow: true
-		})
+		const { infoReadOnly } = this.data
+		if (!infoReadOnly) {
+			this.setData({
+				popShow1: true
+			})
+		}
 	},
 	marrySel() {
-		this.setData({
-			popType: 2,
-			popShow: true
-		})
+		const { infoReadOnly } = this.data
+		if (!infoReadOnly) {
+			this.setData({
+				popShow2: true
+			})
+		}
+	},
+	relationSel() {
+		const { infoReadOnly } = this.data
+		if (!infoReadOnly) {
+			this.setData({
+				popShow3: true
+			})
+		}
 	},
 	ageSel() {
-		this.setData({
-			popType: 0,
-			popShow: true
-		})
+		const { infoReadOnly } = this.data
+		if (!infoReadOnly) {
+			this.setData({
+				popShow4: true
+			})
+		}
 	},
 	onClose() {
 		this.setData({
-			popShow: false
+			popShow1: false,
+			popShow2: false,
+			popShow3: false,
+			popShow4: false,
 		})
 	},
 	onSexChange(e) {
@@ -161,8 +184,6 @@ Page({
 			}
 		} = event;
 
-		console.log(detail, type);
-
 		this.setData({
 			userInfo: {
 				...this.data.userInfo,
@@ -180,7 +201,8 @@ Page({
 	},
 	historySel(e) {
 		const { id } = e.currentTarget.dataset
-		const { selSick, sickList } = this.data
+		const { selSick, sickList, infoReadOnly } = this.data
+		if (infoReadOnly) return false
 		if (selSick.includes(id)) {
 			this.setData({
 				sickList: sickList.map(item => {
@@ -217,7 +239,8 @@ Page({
 				marriage,
 				relationship
 			},
-			loginInfo: { id }
+			loginInfo: { id },
+			currentMemberId
 		} = this.data
 
 		if (!sex || !cardNum || !phone || !age || !marriage || !relationship) {
@@ -225,8 +248,19 @@ Page({
 				title: `请完善必填项`
 			})
 			return false
+		} else if (cardNum && cardNum.length !== 18) {
+			wxToast.show({
+				title: '请填写正确的身份证号'
+			})
+			return false
+		} else if (phone && phone.length !== 11) {
+			wxToast.show({
+				title: '请填写正确的手机号'
+			})
+			return false
 		}
-		api.addFamilyMember({
+		api[currentMemberId ? 'updateFamilyMember' : 'addFamilyMember']({
+			id: currentMemberId || undefined,
 			age,
 			idCard: cardNum,
 			marry: marriage,
@@ -238,7 +272,7 @@ Page({
 			familyMedicalHistory: selSick.join(',')
 		}).then(res => {
 			wxToast.show({
-				title: '添加成功',
+				title: `${currentMemberId ? '编辑' : '添加'}成功`,
 				done: () => {
 					wx.navigateBack()
 				}
@@ -246,18 +280,65 @@ Page({
 		})
 	},
 	getSickList() {
-		api.getSickList({
-			code: 'familyMedicalHistorys'
-		}).then(res => {
-			console.log(res)
-			this.setData({
-				sickList: res.data.records.map(i => {
-					return {
-						id: +i.itemValue,
-						name: i.itemText,
-						sel: false
-					}
+		return new Promise((resolve, reject) => {
+			api.getSickList({
+				code: 'familyMedicalHistorys'
+			}).then(res => {
+				this.setData({
+					sickList: res.data.records.map(i => {
+						return {
+							id: +i.itemValue,
+							name: i.itemText,
+							sel: false
+						}
+					})
+				}, () => {
+					resolve()
 				})
+			}).catch(() => {
+				reject()
+			})
+		})
+	},
+	// 详情
+	getMemberDetail(id) {
+		api.getFamilyMemberDetail({ memberId: id }).then(res => {
+			const {
+				name,
+				age,
+				idCard,
+				marry,
+				mobile,
+				relationship,
+				sex,
+				familyMedicalHistory
+			} = res.data
+			const { sickList, marryColumns, relationColumns } = this.data
+
+			this.setData({
+				currentMemberId: id,
+				selSick: familyMedicalHistory && familyMedicalHistory.split(',').map(Number) || [],
+				sickList: sickList.map(i => {
+					if (familyMedicalHistory && familyMedicalHistory.split(',').map(Number).includes(i.id)) {
+						i.sel = true
+					} else {
+						i.sel = false
+					}
+					return i
+				}),
+				userInfo: {
+					userName: name || '',
+					sex: sex ? sex === '1' ? '男' : '女' : '男',
+					cardNum: idCard || '',
+					phone: mobile || '',
+					age: age,
+					marriage: marry || '已婚已育',
+					relationship: relationship || '本人'
+				},
+				currentSexIdx: sex && sex === '2' ? 1 : 0,
+				currentMarryIdx: marry ? marryColumns.indexOf(marry) : 3,
+				currentRelationIdx: relationship ? relationColumns.indexOf(relationship) : 0,
+				currentAgeIdx: +age,
 			})
 		})
 	}

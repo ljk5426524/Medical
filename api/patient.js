@@ -42,6 +42,24 @@ export default {
       method: "post",
     })
   },
+  // 查看家庭成员详情
+  getFamilyMemberDetail(data) {
+    return request({
+      url: `${baseUrl}api/v1/memberFamily/findFamilyMemberById`,
+      data,
+      method: "post",
+    })
+  },
+  // 新增家庭成员
+  updateFamilyMember(data) {
+    return request({
+      url: `${baseUrl}api/v1/memberFamily/updateFamilyMember`,
+      data,
+      method: "post",
+    })
+  },
+
+
   // 疾病列表
   getSickList(data) {
     return request({

@@ -1,7 +1,7 @@
 <view class="page">
   <van-search value="{{ name }}" focus="{{true}}" placeholder="请输入患者姓名" shape="round" bind:search="onSearch" use-action-slot>
     <view class="icon-content" slot="action" bind:tap="onClickFriend">
-      <van-icon name="friends-o" size="2em" class="icon" />
+      <van-icon name="friends-o" size="2em" class="icon" info="{{unDoPatientCount >0?unDoPatientCount+'' : ''}}" />
     </view>
   </van-search>
   <van-index-bar index-list="{{ indexList }}">

@@ -22,60 +22,70 @@ Page({
       { text: "护士", id: 2 },
       { text: "专家", id: 5 },
     ],
-    popShow: false,
-    popType: 1,
+    popShow1: false,
+    popShow2: false,
+    popShow3: false,
     deptColumns: [],
+    hospitalColumns: [],
+    defaultSexIdx: 0,
+    defaultJobIdx: 0,
+    defaultProfessionIdx: 0,
+    defaultDeptIdx: 0,
+    defaultHospitalIdx: 0,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      userInfo: {
-        ...getLocalUserInfo(),
-        sex: getLocalUserInfo().sex === "1" ? "男" : "女",
-        workState: getLocalUserInfo().workState === "1" ? "在职" : "退休",
-      },
-    });
-    this.getDepartmentPage();
-    this.getMerchantByPage();
+    const userInfo = getLocalUserInfo()
+    Promise.all([this.getDepartmentPage(), this.getMerchantByPage()]).then(res => {
+      this.setData({
+        userInfo: {
+          ...userInfo,
+          sex: userInfo.sex ? userInfo.sex === "1" ? "男" : "女" : '男',
+          workState: userInfo.workState === "1" ? "在职" : "退休",
+        },
+      }, () => {
+        this.backViewPicker()
+      });
+    })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {},
+  onReady: function () { },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {},
+  onShow: function () { },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {},
+  onHide: function () { },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {},
+  onUnload: function () { },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {},
+  onPullDownRefresh: function () { },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {},
+  onReachBottom: function () { },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {},
+  onShareAppMessage: function () { },
 
   uploadPic(e) {
     const { type } = e.currentTarget.dataset;
@@ -133,7 +143,9 @@ Page({
   // 关闭picker
   onClose() {
     this.setData({
-      popShow: false,
+      popShow1: false,
+      popShow2: false,
+      popShow3: false,
       deptShow: false,
       hospitalShow: false,
     });
@@ -145,8 +157,9 @@ Page({
     this.setData({
       deptShow: +type === 4,
       hospitalShow: +type === 5,
-      popShow: type < 4,
-      popType: +type,
+      popShow1: +type === 1,
+      popShow2: +type === 2,
+      popShow3: +type === 3,
     });
   },
 
@@ -188,29 +201,41 @@ Page({
   },
 
   getDepartmentPage() {
-    api.getDepartmentPage({}).then((res) => {
-      this.setData({
-        deptColumns: res.data.map((i) => {
-          return {
-            text: i.name,
-            value: i.id,
-          };
-        }),
-        deptList: res.data,
-      });
-    });
+    return new Promise((resolve, reject) => {
+      api.getDepartmentPage({}).then((res) => {
+        this.setData({
+          deptColumns: res.data.map((i) => {
+            return {
+              text: i.name,
+              value: i.id,
+            };
+          }),
+          deptList: res.data,
+        }, () => {
+          resolve()
+        });
+      }).catch(() => {
+        reject()
+      })
+    })
   },
   getMerchantByPage() {
-    api.getMerchantByPage().then((res) => {
-      this.setData({
-        hospitalColumns: res.data.records.map((i) => {
-          return {
-            text: i.name,
-            value: i.id,
-          };
-        }),
-      });
-    });
+    return new Promise((resolve, reject) => {
+      api.getMerchantByPage().then((res) => {
+        this.setData({
+          hospitalColumns: res.data.records.map((i) => {
+            return {
+              text: i.name,
+              value: i.id,
+            };
+          }),
+        }, () => {
+          resolve()
+        });
+      }).catch(() => {
+        reject()
+      })
+    })
   },
   onChange(e) {
     const { userInfo } = this.data;
@@ -275,7 +300,7 @@ Page({
       .then((res) => {
         saveLocalUserInfo(res.data);
         wxToast.show({
-          title: "修改成功！",
+          title: "修改成功",
           done: () => {
             wx.switchTab({
               url: "/pages/my-doctor/index",
@@ -284,4 +309,30 @@ Page({
         });
       });
   },
+  // 回显picker
+  backViewPicker() {
+    const {
+      userInfo: {
+        sex,
+        titleName,
+        title,
+        departmentName,
+        departmentId,
+        merchantName,
+        merchantId,
+        workState
+      },
+      professionColumns,
+      deptColumns,
+      hospitalColumns
+    } = this.data
+    console.log(hospitalColumns.findIndex(i => i.value === merchantId))
+    this.setData({
+      defaultSexIdx: !sex ? 0 : sex === '男' ? 0 : 1,
+      defaultJobIdx: workState === "在职" ? 0 : 1,
+      defaultProfessionIdx: professionColumns.findIndex(i => i.id === +title),
+      defaultDeptIdx: deptColumns.findIndex(i => i.value === departmentId),
+      defaultHospitalIdx: hospitalColumns.findIndex(i => i.value === +merchantId),
+    })
+  }
 });

@@ -1,8 +1,9 @@
 {
     "pages": [
-        "pages/home/index",
-        "pages/chat/index",
         "pages/home-doctor/index",
+        "pages/home/index",
+        "pages/my-info/index",
+        "pages/chat/index",
         "pages/setting/index",
         "pages/agreement/index",
         "pages/my-scan-record/index",
@@ -10,7 +11,6 @@
         "pages/my-service/index",
         "pages/service-detail/index",
         "pages/my-doctor/index",
-        "pages/my-info/index",
         "pages/my-info-doctor/index",
         "pages/seek-detail/index",
         "pages/my/index",
@@ -63,19 +63,19 @@
             {
                 "iconPath": "./res/images/doctor/home.png",
                 "selectedIconPath": "./res/images/doctor/home-active.png",
-                "pagePath": "pages/home/index",
+                "pagePath": "pages/home-doctor/index",
                 "text": "首页"
             },
             {
-                "iconPath": "./res/images/patient/msg.png",
-                "selectedIconPath": "./res/images/patient/msg-active.png",
-                "pagePath": "chat-im/pages/chat",
-                "text": "消息"
+                "iconPath": "./res/images/doctor/patient.png",
+                "selectedIconPath": "./res/images/doctor/patient-active.png",
+                "pagePath": "pages/patient/index",
+                "text": "患者"
             },
             {
-                "iconPath": "./res/images/patient/my.png",
-                "selectedIconPath": "./res/images/patient/my-active.png",
-                "pagePath": "pages/my/index",
+                "iconPath": "./res/images/doctor/my.png",
+                "selectedIconPath": "./res/images/doctor/my-active.png",
+                "pagePath": "pages/my-doctor/index",
                 "text": "我的"
             }
         ]
@@ -98,7 +98,8 @@
         "van-action-sheet": "@vant/weapp/action-sheet/index",
         "van-switch": "@vant/weapp/switch/index",
         "van-radio": "@vant/weapp/radio/index",
-        "van-radio-group": "@vant/weapp/radio-group/index"
+        "van-radio-group": "@vant/weapp/radio-group/index",
+        "van-swipe-cell": "@vant/weapp/swipe-cell/index"
     },
     "sitemapLocation": "sitemap.json"
 }

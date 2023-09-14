@@ -14,11 +14,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        this.setData({
-            userInfo: getLocalUserInfo()
-        }, () => {
-            this.getMyFamily()
-        })
+
     },
 
     /**
@@ -32,7 +28,11 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+        this.setData({
+            userInfo: getLocalUserInfo()
+        }, () => {
+            this.getMyFamily()
+        })
     },
 
     /**
@@ -82,6 +82,19 @@ Page({
             this.setData({
                 userList: res.data
             })
+        })
+    },
+    // 详情
+    toDetail(e) {
+        const { id } = e.currentTarget.dataset
+        wx.navigateTo({
+            url: `/pages/my-family-add/index?id=${id}&type=1`,
+        })
+    },
+    toEdit(e) {
+        const { id } = e.currentTarget.dataset
+        wx.navigateTo({
+            url: `/pages/my-family-add/index?id=${id}`,
         })
     }
 })

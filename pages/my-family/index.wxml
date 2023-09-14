@@ -1,15 +1,22 @@
 <view class="page">
-  <view class="user-item" wx:for="{{userList}}" wx:key="id">
-    <view class="avator">{{item.relationship}}</view>
-    <view class="info">
-      <view class="info-top">
-        {{item.name}}
-        <text class="sub-text">{{item.sex === '1'?"男":"女"}}</text>
-        <text class="sub-text">{{item.age}}岁</text>
+  <view wx:for="{{userList}}" wx:key="id">
+    <van-swipe-cell right-width="{{ 65 }}" bind:click="toDetail" data-id="{{item.id}}">
+      <view class="user-item">
+        <view class="avator">{{item.relationship}}</view>
+        <view class="info">
+          <view class="info-top">
+            {{item.name}}
+            <text class="sub-text">{{item.sex === '1'?"男":"女"}}</text>
+            <text class="sub-text">{{item.age}}岁</text>
+          </view>
+          <view class="id-num">身份证号：{{item.idCard}}</view>
+        </view>
+        <view class="phone">{{item.mobile}}</view>
       </view>
-      <view class="id-num">身份证号：{{item.idCard}}</view>
-    </view>
-    <view class="phone">{{item.mobile}}</view>
+      <view slot="right" class="van-swipe-cell__right btn-edit" data-id="{{item.id}}" bindtap="toEdit">
+        编辑
+      </view>
+    </van-swipe-cell>
   </view>
   <view wx:if="{{!userList.length}}">
     <no-data-filling noDataTxt="暂未添加家庭成员"></no-data-filling>
