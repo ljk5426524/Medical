@@ -36,6 +36,10 @@
     </view>
   </view>
   <view class="btn-content">
-    <view class="btn" bindtap="order">立即预约</view>
+    <view class="btn used" wx:if="{{serviceDetail.userStatus === 1}}" bindtap="toRecordDetail" data-id="{{serviceDetail.recordId}}">
+      已预约
+      <text class="sub-text">（点击查看预约详情）</text>
+    </view>
+    <view class="btn" wx:else bindtap="order">立即预约</view>
   </view>
 </view>

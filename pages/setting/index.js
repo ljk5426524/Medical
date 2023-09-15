@@ -5,7 +5,13 @@ Page({
      * 页面的初始数据
      */
     data: {
+        phoneShow: false,
+        actions: [
+            {
+                name: '18602553117',
+            },
 
+        ],
     },
 
     /**
@@ -62,4 +68,21 @@ Page({
     onShareAppMessage: function () {
 
     },
+
+    showPhone() {
+        this.setData({
+            phoneShow: true
+        })
+    },
+    onClose() {
+        this.setData({
+            phoneShow: false
+        })
+    },
+    onSelect(e) {
+        const phone = e.detail.name
+        wx.makePhoneCall({
+            phoneNumber: phone
+        })
+    }
 })

@@ -1,6 +1,7 @@
 // pages/old-health-detail/index.js
 import api from '../../api/index'
 import { wxToast } from '../../utils/wx-api'
+import { getLocalUserInfo } from "../../utils/storage";
 Page({
 
     /**
@@ -15,7 +16,12 @@ Page({
      */
     onLoad: function (options) {
         const { id } = options
-        this.getServiceDetail(id)
+        this.setData({
+            userInfo: getLocalUserInfo(),
+        }, () => {
+            this.getServiceDetail(id)
+        }
+        );
     },
 
     /**
@@ -68,8 +74,10 @@ Page({
     },
 
     getServiceDetail(id) {
+        const { userInfo: { id: userId } } = this.data
         api.getServiceDetail({
-            serviceId: id
+            serviceId: id,
+            userId
         }).then(res => {
             this.setData({
                 serviceDetail: res.data
@@ -81,6 +89,12 @@ Page({
         const { serviceDetail: { id } } = this.data
         wx.navigateTo({
             url: `/pages/order-result/index?id=${id}`
+        })
+    },
+    toRecordDetail(e) {
+        const { id } = e.currentTarget.dataset
+        wx.navigateTo({
+            url: `/pages/service-detail/index?id=${id}`
         })
     }
 })
