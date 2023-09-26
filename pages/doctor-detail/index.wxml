@@ -31,11 +31,11 @@
     </view>
     <view class="service">
         <view class="title">医生服务</view>
-        <view class="btn-content">
-            <image class="icon" src="/res/images/home-hospital.png" />
+        <view class="btn-content" wx:for="{{doctorProduct}}" wx:key="id" bindtap="toAsk" data-imid="{{doctorDetail.mobile}}" data-id="{{item.doctorId}}" data-code="{{item.product.goodsCode}}">
+            <image class="icon" src="{{item.product.img ||'/res/images/home-hospital.png' }}" />
             <view class="btn-text">
-                <view class="text-title">图文问诊</view>
-                <view class="text-sub">通过文字、图片与医生沟通，时长为20分钟</view>
+                <view class="text-title">{{item.product.name}}</view>
+                <view class="text-sub">{{item.product.subTitle}}</view>
             </view>
         </view>
     </view>

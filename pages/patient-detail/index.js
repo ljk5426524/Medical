@@ -1,5 +1,7 @@
 // pages/patient-detail/index.js
 import api from "../../api/index";
+import { getLocalUserInfo } from '../../utils/storage'
+import { getTimeShow } from "../../utils/util";
 Page({
   /**
    * 页面的初始数据
@@ -10,7 +12,9 @@ Page({
     recordList: {},
     recordListStr: '',
     originRecordList: [],
-    patientId: null
+    patientId: null,
+    tabActive: 1,
+    msgList: []
   },
 
   /**
@@ -21,7 +25,10 @@ Page({
     this.getPatientDetail(id);
     this.getPatientRecordList(id);
     this.setData({
-      patientId: id
+      patientId: id,
+      userInfo: getLocalUserInfo(),
+    }, () => {
+      this.getChatList()
     })
   },
 
@@ -103,6 +110,26 @@ Page({
         });
       });
   },
+  // 消息列表
+  getChatList() {
+    const { userInfo: { id: userId } } = this.data
+    api.getChatList({
+      current: 0,
+      size: 100,
+      appid: 2,
+      userId
+    }).then(res => {
+      this.setData({
+        msgList: res.data.records.map(i => {
+          return {
+            ...i,
+            time: getTimeShow(i.receiveStartTime * 1),
+            stateStr: this.stateFomart(+i.statue)
+          }
+        })
+      })
+    })
+  },
   imgPreview(e) {
     const { idx, month, index } = e.currentTarget.dataset;
     const { recordList } = this.data;
@@ -142,4 +169,49 @@ Page({
       url: `/pages/patient-info/index?id=${patientId}`
     })
   },
+  // 会话记录
+  toChatHistory() {
+    this.setData({
+      tabActive: 1
+    })
+  },
+  toMedicalRecord() {
+    this.setData({
+      tabActive: 2
+    })
+  },
+  stateFomart(val) {
+    const map = {
+      0: '待支付',
+      1: '待服务',
+      2: '问诊中',
+      3: '问诊结束',
+      4: '问诊已取消',
+      5: '无效订单',
+      6: '已关闭',
+      9: '待派单'
+    }
+    return map[+val]
+  },
+  toDialog(e) {
+    const { tuid, oid, dname, cvid, state } = e.currentTarget.dataset
+    if ([0, 4, 5, 9].includes(+state)) return false
+    if (+state === 2) {
+      // 问诊中 带入聊天所需数据
+      wx.navigateTo({
+        url: `/pages/chat/chat?tuId=${tuid}&oId=${oid}&tuName=${dname}&state=${state}`
+      })
+    } else if (+state === 3 || +state === 6) {
+      // 订单结束 不可聊天直接获取聊天记录
+      wx.navigateTo({
+        url: `/pages/chat/chat?tuId=${tuid}&tuName=${dname}&msgId=${oid}&state=${state}&oId=${oid}`
+      })
+    } else if (+state === 1) {
+      // 待服务
+      wx.showToast({
+        title: '未接单',
+        icon: 'none'
+      })
+    }
+  }
 });

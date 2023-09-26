@@ -1,2 +1,80 @@
-<!--pages/chat/chat.wxml-->
-<text>pages/chat/chat.wxml</text>
+<view class="page">
+  <view class="limit-time" wx:if="{{limitShow}}">
+    <view class="limit-text">问诊倒计时 {{lastMinute}}:{{lastSecond}}</view>
+  </view>
+  <view class="msg-list-box">
+    <scroll-view scroll-y scroll-into-view='{{toView}}' scroll-with-animation bindscrolltoupper="bindscrolltoupperHandler" style='height: 92vh;' enable-passive bindtap="clickScrollView">
+      <block wx:key="id" wx:for='{{messageList}}'>
+        <view wx:if="{{ item.showMessageTime }}" class="message-time">
+          <text>{{ item.messageTime }}</text>
+        </view>
+        <!-- （右） -->
+        <view wx:if="{{ item.flow == 'out' }}" id='msg-{{index}}' class="right-msg-list-box">
+          <view class='rightMsg' wx:if="{{ item.type == 'TIMTextElem' }}">{{item.payload.text}}</view>
+          <image style="width: 300rpx;border-radius: 10rpx;" bindtap="getLookBigImage" data-imgurl="{{item.payload.imageInfoArray[0].imageUrl}}" mode="widthFix" wx:if="{{ item.type == 'TIMImageElem' }}" src="{{ item.payload.imageInfoArray[0].imageUrl }}"></image>
+          <view class="right-msg-list-avatar-box">
+            <image class="right-msg-list-avatar" src='{{userInfo.headImage}}'></image>
+          </view>
+        </view>
+        <!-- （左） -->
+        <view wx:else id='msg-{{index}}' class="left-msg-list">
+          <view style='width: 70rpx; height: 70rpx;margin-right: 30rpx;'>
+            <image style='width: 70rpx; height: 70rpx; border-radius: 50%;' src=''></image>
+          </view>
+          <view class='leftMsg' wx:if="{{ item.type == 'TIMTextElem' }}">{{item.payload.text}}</view>
+          <image bindtap="getLookBigImage" data-imgurl="{{ item.payload.imageInfoArray[0].imageUrl  }}" style="width: 300rpx;border-radius: 10rpx;" mode="widthFix" wx:if="{{ item.type == 'TIMImageElem' }}" src="{{ item.payload.imageInfoArray[0].imageUrl }}"></image>
+        </view>
+      </block>
+      <!-- 占位 -->
+      <view style='width: 100%; height: 16vw;'></view>
+    </scroll-view>
+    <!-- {{inputBottom}} -->
+    <view class="inputRoom" wx:if="{{!historyMsgId}}" style='bottom: {{ inputBottom }};height: {{ inputRoomHeight }};'>
+      <view class="close-btn" wx:if="{{isDoctor}}" bindtap="closeDialog">
+        结束对话
+        <van-icon name="close" />
+      </view>
+      <view style="display: flex;align-items: center;box-sizing: border-box;padding: 20rpx;width: 100%;background-color: #fff;">
+        <input bindconfirm='sendClick' wx:if="{{ !audioFlag }}" adjust-position='{{false}}' model:value='{{inputVal}}' confirm-type='send' bindfocus='focus' bindblur='blur'></input>
+        <image style='width: 7vw; margin-left: 3.2vw;' bindtap="changeEmoji" src='https://tongxuecool.oss-cn-beijing.aliyuncs.com/applet-tongxuecool/im-20230224%E8%A1%A8%E6%83%85%402x.png' mode='widthFix'></image>
+        <image style='width: 7vw; margin-left: 3.2vw;' bindtap="multimediaHandler" src='https://tongxuecool.oss-cn-beijing.aliyuncs.com/applet-tongxuecool/im-20230224icon_%E6%B7%BB%E5%8A%A0%402x.png' mode='widthFix'></image>
+      </view>
+      <!-- 表情 -->
+      <view wx:if="{{displayFlag === 'emoji'}}" class="TUI-Emoji-area">
+        <Emoji bind:enterEmoji="appendMessage" />
+      </view>
+      <!-- 图片 -->
+      <view wx:if="{{displayFlag === 'extension'}}" class="TUI-Extensions">
+        <view class="TUI-Extension-slot" style="margin-left: 40rpx;" bindtap="publicImageUpload" data-type="album">
+          <view class="extension-box">
+            <image class="TUI-Extension-icon" mode="widthFix" src="https://tongxuecool.oss-cn-beijing.aliyuncs.com/applet-tongxuecool/im-20230227%E6%8B%8D%E6%91%84-%E9%80%89%E4%B8%AD%402x%20%282%29.png" />
+          </view>
+          <view class="TUI-Extension-slot-name">照片</view>
+        </view>
+        <view class="TUI-Extension-slot" style="margin-left: 90rpx;" bindtap="publicImageUpload" data-type="camera">
+          <view class="extension-box">
+            <image class="TUI-Extension-icon" mode="widthFix" src="https://tongxuecool.oss-cn-beijing.aliyuncs.com/applet-tongxuecool/im-20230227%E6%8B%8D%E6%91%84-%E9%80%89%E4%B8%AD%402x%20%281%29.png" />
+          </view>
+          <view class="TUI-Extension-slot-name">拍摄</view>
+        </view>
+      </view>
+    </view>
+    <view class="inputRoom over" wx:if="{{!isDoctor && historyMsgId}}" style='bottom: {{ inputBottom }};height: {{ inputRoomHeight }};'>
+      <view class="btn" bindtap="toEvaluate">{{isComment?'我的评价':'评价'}}</view>
+      <view class="btn" bindtap="toDoctorDetail">再次问诊</view>
+    </view>
+  </view>
+  <van-dialog use-slot title="请评价本次问诊质量" show="{{ evaluateShow }}" bind:close="onClose" close-on-click-overlay show-confirm-button="{{false}}">
+    <view class="rate-content">
+      <van-rate value="{{ rate }}" size="{{ 25 }}" color="#ffd21e" void-icon="star" void-color="#eee" readonly="{{isComment}}" bind:change="onRateChange" />
+      <view class="word-items">
+        <view wx:for="{{comment}}" wx:key="id" class="word-item {{item.sel?' active':''}}" bindtap="chooseEv" data-sel="{{item.sel}}" data-text="{{item.text}}">
+          {{item.text}}
+        </view>
+      </view>
+      <van-field class="field-content" model:value="{{ suggest }}" readonly="{{isComment}}" maxlength="100" show-word-limit size="large" type="textarea" placeholder="一些您的意见或建议吧" autosize="{{options}}" border="{{ false }}" />
+      <view wx:if="{{!isComment}}" class="btn-confirm" bindtap="confirmEvaluate">确认</view>
+    </view>
+  </van-dialog>
+  <van-dialog title="提示" message="是否结束当前会话? 结束后患者不可回复" show="{{ dialogShow }}" show-cancel-button confirm-button-color="#5A82FF" bind:confirm="closeConfirm" />
+</view>

@@ -101,7 +101,7 @@ Page({
         api.getScanRecord({
             current: 1,
             size: 100,
-            appId: 1,
+            appId: 2,
             userId: id
         }).then(res => {
             this.setData({

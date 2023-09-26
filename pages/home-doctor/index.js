@@ -2,6 +2,7 @@
 import api from "../../api/index";
 import { getLocalUserInfo } from "../../utils/storage";
 import { getTimeShow } from "../../utils/util";
+let time = null
 Page({
   /**
    * 页面的初始数据
@@ -35,8 +36,11 @@ Page({
         isChecking: +flag === 5, // 用户状态，0.启用；1.已删除；2.禁用,3.未认证,4:认证未通过 5:认证中 6:已认证
       },
       () => {
-        this.getMsgList();
-        this.getHomeStatics();
+        this.getMsgList()
+        time = setInterval(() => {
+          this.getMsgList()
+        }, 5000)
+        this.getHomeStatics()
       }
     );
   },
@@ -44,12 +48,16 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () { },
+  onHide: function () {
+    time && clearInterval(time)
+  },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () { },
+  onUnload: function () {
+    time && clearInterval(time)
+  },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
@@ -68,12 +76,12 @@ Page({
 
   onStateChange({ detail }) {
     console.log(detail)
-    const {userInfo:{id}} = this.data
-    this.setData({ doctorState: detail ?0:1});
+    const { userInfo: { id } } = this.data
+    this.setData({ doctorState: detail ? 0 : 1 });
     api.editReceivePatient({
-      doctorId:id,
-      statue:detail?0:1
-    }).then(res=>{
+      doctorId: id,
+      statue: detail ? 0 : 1
+    }).then(res => {
 
     })
   },
@@ -103,6 +111,8 @@ Page({
         .getMsgList({
           userId: id,
           appId: 2,
+          current: 0,
+          size: 100
         })
         .then((res) => {
           this.setData({
@@ -118,9 +128,26 @@ Page({
   },
   // 接诊详情
   toSeekDetail(e) {
-    const { id } = e.currentTarget.dataset;
+    const { oid, oiid } = e.currentTarget.dataset;
+    time && clearInterval(time)
     wx.navigateTo({
-      url: `/pages/seek-detail/index?id=${id}`,
+      url: `/pages/seek-detail/index?oId=${oid}&oiId=${oiid}`,
     });
+  },
+  toChat(e) {
+    const { tuid, oid, pname, cvid, state, msgid } = e.currentTarget.dataset
+    if ([0, 4, 5, 9].includes(+state)) return false
+    time && clearInterval(time)
+    if (+state === 2) {
+      // 问诊中 带入聊天所需数据
+      wx.navigateTo({
+        url: `/pages/chat/chat?tuId=${tuid}&oId=${oid}&tuName=${pname}&state=${state}`
+      })
+    } else if (+state === 3 || +state === 6) {
+      // 订单结束 不可聊天直接获取聊天记录
+      wx.navigateTo({
+        url: `/pages/chat/chat?tuId=${tuid}&tuName=${pname}&msgId=${msgid}&state=${state}`
+      })
+    }
   },
 });

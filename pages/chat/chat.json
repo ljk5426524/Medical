@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "Emoji": "./components/emoji/index"
+  },
+  "navigationBarTitleText": ""
 }

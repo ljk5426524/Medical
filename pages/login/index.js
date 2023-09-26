@@ -3,6 +3,12 @@ import api from "../../api/index";
 import { ROLE_TYPE } from "../../utils/constant";
 import { saveLocalUserInfo, saveOpenId, saveToken } from "../../utils/storage";
 import { wxToast } from "../../utils/wx-api";
+
+import { genTestUserSig } from '../../debug/GenerateTestUserSig';
+import TencentCloudChat from '@tencentcloud/chat';
+import TIMUploadPlugin from 'tim-upload-plugin';
+
+const app = getApp()
 Page({
   /**
    * 页面的初始数据
@@ -15,12 +21,12 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {},
+  onLoad: function (options) { },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {},
+  onReady: function () { },
 
   /**
    * 生命周期函数--监听页面显示
@@ -32,27 +38,27 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {},
+  onHide: function () { },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {},
+  onUnload: function () { },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {},
+  onPullDownRefresh: function () { },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {},
+  onReachBottom: function () { },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {},
+  onShareAppMessage: function () { },
 
   checkUser() {
     wx.login({
@@ -82,7 +88,7 @@ Page({
                       : "/pages/my-info-doctor/index",
                 });
               } else {
-                wx.navigateBack();
+                this.initIM(res.data.userInfo)
               }
             }
           });
@@ -121,16 +127,16 @@ Page({
                     wxToast.show({
                       title: "授权成功",
                       done: () => {
-						if (this.checkNeedFillInfo(res2.data.userInfo)) {
-							wx.redirectTo({
-							  url:
-								ROLE_TYPE === 1
-								  ? "/pages/my-info/index"
-								  : "/pages/my-info-doctor/index",
-							});
-						  } else {
-							wx.navigateBack();
-						  }
+                        if (this.checkNeedFillInfo(res2.data.userInfo)) {
+                          wx.redirectTo({
+                            url:
+                              ROLE_TYPE === 1
+                                ? "/pages/my-info/index"
+                                : "/pages/my-info-doctor/index",
+                          });
+                        } else {
+                          this.initIM(res2.data.userInfo)
+                        }
                       },
                     });
                   }
@@ -176,4 +182,28 @@ Page({
       );
     }
   },
+
+  initIM(userInfo) {
+    const { mobile } = userInfo
+    console.log('????????????', userInfo)
+    if (mobile) {
+      console.log(mobile, '手机号')
+      app.globalData.config.userID = mobile
+      const userSig = genTestUserSig(app.globalData.config).userSig
+      wx.$chat_SDKAppID = app.globalData.config.SDKAPPID;
+      wx.$TUIKitTIM = TencentCloudChat;
+      wx.$chat_userID = app.globalData.config.userID;
+      wx.$chat_userSig = userSig;
+      wx.$TUIKit.registerPlugin({ 'tim-upload-plugin': TIMUploadPlugin });
+      wx.$TUIKit.login({
+        userID: userInfo.mobile,
+        userSig
+      });
+      wx.$TUIKit.on(wx.$TUIKitTIM.EVENT.SDK_READY, this.onSDKReady, this);
+      wx.navigateBack();
+    }
+  },
+  onSDKReady() {
+    console.log('SDK_READY',)
+  }
 });

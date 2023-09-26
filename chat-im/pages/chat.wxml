@@ -1,3 +1,0 @@
-<view class="page">
-  <TUIKit config="{{config}}" conversationID="{{urlCurrentConversationID}}" id="TUIKit"></TUIKit>
-</view>

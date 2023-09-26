@@ -4,7 +4,7 @@
 		</view>
 		<view class="search-input" bindtap="toSearch">
 				<van-icon name="search" size="18px" />
-				专家姓名、疾病、症状查找
+				医生姓名、医院、科室查找
 		</view>
 		<view class="menu-items">
 				<view class="menu-item" bindtap="toAsk">

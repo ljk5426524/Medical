@@ -1,5 +1,5 @@
 <view class="page">
-  <van-search value="{{ keywords }}" focus="{{true}}" placeholder="专家姓名、疾病、症状查找" shape="round" bind:search="onSearch" />
+  <van-search value="{{ keywords }}" focus="{{true}}" placeholder="医生姓名、医院、科室查找" shape="round" bind:search="onSearch" />
   <view class="search-content" wx:if="{{doctorList.length}}">
     <view class="title">医生</view>
     <view class="user-list">

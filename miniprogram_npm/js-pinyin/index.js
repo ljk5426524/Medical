@@ -4,7 +4,7 @@ var __DEFINE__ = function(modId, func, req) { var m = { exports: {}, _tempexport
 var __REQUIRE__ = function(modId, source) { if(!__MODS__[modId]) return require(source); if(!__MODS__[modId].status) { var m = __MODS__[modId].m; m._exports = m._tempexports; var desp = Object.getOwnPropertyDescriptor(m, "exports"); if (desp && desp.configurable) Object.defineProperty(m, "exports", { set: function (val) { if(typeof val === "object" && val !== m._exports) { m._exports.__proto__ = val.__proto__; Object.keys(val).forEach(function (k) { m._exports[k] = val[k]; }); } m._tempexports = val }, get: function () { return m._tempexports; } }); __MODS__[modId].status = 1; __MODS__[modId].func(__MODS__[modId].req, m, m.exports); } return __MODS__[modId].m.exports; };
 var __REQUIRE_WILDCARD__ = function(obj) { if(obj && obj.__esModule) { return obj; } else { var newObj = {}; if(obj != null) { for(var k in obj) { if (Object.prototype.hasOwnProperty.call(obj, k)) newObj[k] = obj[k]; } } newObj.default = obj; return newObj; } };
 var __REQUIRE_DEFAULT__ = function(obj) { return obj && obj.__esModule ? obj.default : obj; };
-__DEFINE__(1693207508464, function(require, module, exports) {
+__DEFINE__(1695026767206, function(require, module, exports) {
 /**
  * @fileOverview 导出默认的实例
  * @author waterchestnut 2017/3/13
@@ -22,8 +22,8 @@ console.log(pinyin.getCamelChars('昕'))
 console.log(pinyin.getCamelChars('佛'))
 console.log(pinyin.getFullChars('佛'))*/
 module.exports = pinyin;
-}, function(modId) {var map = {"./dist/pinyin":1693207508465}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1693207508465, function(require, module, exports) {
+}, function(modId) {var map = {"./dist/pinyin":1695026767207}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1695026767207, function(require, module, exports) {
 /**
  * @fileOverview 汉字拼音转换主题功能
  * @author waterchestnut 2017/3/13
@@ -975,7 +975,7 @@ var Pinyin = function () {
 
 module.exports = Pinyin;
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-return __REQUIRE__(1693207508464);
+return __REQUIRE__(1695026767206);
 })()
 //miniprogram-npm-outsideDeps=[]
 //# sourceMappingURL=index.js.map

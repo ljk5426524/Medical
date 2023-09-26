@@ -14,20 +14,17 @@
 						</view>
 						<view class="info" bindtap="toUserInfo">详细资料></view>
 						<view class="btn-group">
-								<view class="btn btn-left">会话记录</view>
-								<view class="btn btn-right">
-										<van-icon name="plus" />
-										诊疗记录
-								</view>
+								<view class="btn {{tabActive === 1?'btn-left':'btn-right'}}" bindtap="toChatHistory">会话记录</view>
+								<view class="btn {{tabActive === 2?'btn-left':'btn-right'}}" bindtap="toMedicalRecord">诊疗记录</view>
 						</view>
 				</view>
 		</view>
 		<view class="body-content">
 				<view class="title">
-						<view>诊疗记录</view>
+						<view>{{tabActive === 1?'会话记录':'诊疗记录'}}</view>
 						<view class="total">共{{originRecordList.length}}条记录</view>
 				</view>
-				<view class="scroll-content">
+				<view class="scroll-content" wx:if="{{tabActive === 2}}">
 						<view wx:for="{{recordList}}" wx:key="key" wx:for-index="key" wx:for-item="value" class="month-content">
 								<view class="month">{{value[0].month}}</view>
 								<view class="day-content" wx:for="{{value}}" wx:key="id">
@@ -43,14 +40,25 @@
 												<view class="img-list" wx:if="{{item.caseAlbums}}">
 														<image class="img" wx:for="{{item.caseAlbums}}" wx:key="*this" wx:for-index="idx" wx:for-item="i" src="{{i}}" bindtap="imgPreview" data-idx="{{index}}" data-month="{{key}}" data-index="{{idx}}" />
 												</view>
-												<view class="doctor">
-														医师：{{item.hospitalName}} {{item.departmentName}} {{item.doctorName}}
-												</view>
+												<view class="doctor">医师：{{item.hospitalName}} {{item.departmentName}} {{item.doctorName}}</view>
 										</view>
 								</view>
 						</view>
 						<view wx:if="{{recordListStr.length === 2}}">
 								<no-data-filling noDataTxt="暂无记录"></no-data-filling>
+						</view>
+				</view>
+				<view class="scroll-content" wx:else>
+						<view wx:for="{{msgList}}" wx:key="id" class="dialog-item" bindtap="toDialog" data-msgid="{{item.msgId}}" data-state="{{item.statue}}" data-tuid="{{item.mobile}}" data-oid="{{item.orderId}}" data-dname="{{item.patientName}}">
+								<image class="avator" src="{{item.avatar}}" />
+								<view class="content">
+										<view class="info">
+												{{item.patientName}}
+												<view class="time">{{item.time}}</view>
+										</view>
+										<view class="msg">{{item.content || ''}}</view>
+								</view>
+								<view class="state">{{item.stateStr}}</view>
 						</view>
 				</view>
 		</view>

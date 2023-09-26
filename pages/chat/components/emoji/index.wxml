@@ -1,0 +1,8 @@
+<!-- pages/chat/components/emoji/index.wxml -->
+<scroll-view scroll-y="true" enable-flex="true" class="TUI-Emoji">
+  <view class="TUI-emoji-image" wx:for="{{emojiList}}" wx:key="index">
+    <view data-value="{{ item.value }}" bindtap="handleEnterEmoji" style="width: 100%;height: 100%;font-size: 48rpx;">
+      {{ item.value }}
+    </view>
+  </view>
+</scroll-view>

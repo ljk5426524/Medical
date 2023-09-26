@@ -1,23 +1,23 @@
 <view class="page">
     <view class="tabs">
-        <view class="{{tabActive === 1 ?'tab-item active':'tab-item'}}" bindtap="tabChange" data-tab="{{1}}">
-            问诊消息
-        </view>
-        <view class="{{tabActive === 2 ?'tab-item active':'tab-item'}}" bindtap="tabChange" data-tab="{{2}}">
-            服务消息
+        <view class="{{tabActive === 1 ?'tab-item active':'tab-item'}}" bindtap="tabChange" data-tab="{{1}}">问诊消息</view>
+        <view class="{{tabActive === 2 ?'tab-item active':'tab-item'}}" bindtap="tabChange" data-tab="{{2}}">服务消息</view>
+    </view>
+    <view hidden="{{tabActive === 2}}">
+        <view wx:for="{{msgList}}" wx:key="id" class="dialog-item" bindtap="toDialog" data-msgid="{{item.msgId}}" data-did="{{item.doctorId}}" data-state="{{item.statue}}" data-tuid="{{item.doctorMobile}}" data-cvid="{{item.thirdMsgId}}" data-oid="{{item.orderId}}" data-dname="{{item.doctorName}}">
+            <image class="avator" src="{{item.doctorAvatar}}" />
+            <view class="content">
+                <view class="info">
+                    {{item.doctorName}}
+                    <view class="sub-text">{{item.title || ''}}</view>
+                    <view class="time">{{item.time}}</view>
+                </view>
+                <view class="msg">{{item.content || ''}}</view>
+            </view>
+            <view class="state">{{item.stateStr}}</view>
         </view>
     </view>
-    <view bindtap="tochat">123</view>
-    <!-- <view wx:for="{{conversationList}}" wx:key="id" class="dialog-item" bindtap="toChat" data-id="{{item.id}}">
-        <image class="avator" src="../../res/images/home-doctor.png" />
-        <view class="content">
-            <view class="info">
-                {{item.name}}
-                <view class="sub-text">外科</view>
-                <view class="time">{{item.time}}</view>
-            </view>
-            <view class="msg">{{item.msg}}</view>
-        </view>
-        <view></view>
-    </view> -->
+    <view hidden="{{tabActive === 1}}">
+        <view wx:for="{{serviceList}}" wx:key="id"></view>
+    </view>
 </view>

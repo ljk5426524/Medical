@@ -69,6 +69,7 @@ export default {
     return request({
       url: `${baseUrl}v1/api/push/message/getList`,
       data,
+      isLoading: false,
       method: "post",
     });
   },
@@ -81,11 +82,41 @@ export default {
       method: "post"
     });
   },
-  editReceivePatient(data){
+
+  // 医生编辑自己的状态 - 是否停诊
+  editReceivePatient(data) {
     return request({
       url: `${baseUrl}api/v1/doctor/editReceivePatient`,
       data,
       method: "post"
+    });
+  },
+
+  // 查询患者订单详情
+  getSeekDetail(data) {
+    return request({
+      url: `${baseUrl}api/v1/dispatch/dispatchOrderDetail`,
+      data,
+      method: "post"
+    });
+  },
+
+  // 处理患者订单 忽略
+  handleRefusePatientSeek(data) {
+    return request({
+      url: `${baseUrl}api/v1/dispatch/refuseOrder`,
+      data,
+      method: "post"
+    });
+  },
+
+  // 处理患者订单 同意
+  handleAgreePatientSeek(data) {
+    return request({
+      url: `${baseUrl}api/v1/dispatch/receiptOrderNotify/${data.orderId}`,
+      data,
+      selfHandle: true,
+      method: "post",
     });
   }
 }

@@ -93,4 +93,11 @@ Page({
 		}
 		return map[+val]
 	},
+	// 会话
+	toChat(e) {
+		const { did, dname } = e.currentTarget.dataset
+		wx.navigateTo({
+			url: `/pages/chat/chat?tuId=${did}&tuName=${dname}`
+		})
+	}
 })

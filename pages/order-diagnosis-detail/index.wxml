@@ -4,12 +4,12 @@
     <view class="nav-title" style="top:{{buttonClientRect.top + 8}}px">记录详情</view>
     <view class="detail-top" style="padding-top:{{buttonClientRect.top + 50}}px">
       <view class="state">{{recordDetail.stateStr}}</view>
-      <view wx:if="{{recordDetail.state === 2}}" class="sub-state">正在咨询医生，请及时关注医生回复</view>
-      <view wx:if="{{recordDetail.state === 3}}" class="sub-state">咨询已结束，点击“查看回话”可回看咨询详情</view>
+      <view wx:if="{{recordDetail.state === '2'}}" class="sub-state">正在咨询医生，请及时关注医生回复</view>
+      <view wx:if="{{recordDetail.state === '3'}}" class="sub-state">咨询已结束，点击“查看回话”可回看咨询详情</view>
     </view>
   </view>
   <view class="detail-content">
-    <view class="text">{{recordDetail.productName}}</view>
+    <view class="text">{{recordDetail.productName}}：</view>
     <view class="text">创建时间：{{recordDetail.createTime}}</view>
     <view class="text">咨询医生：</view>
     <view class="doctor-card">
@@ -37,8 +37,10 @@
       <text class="val">{{recordDetail.description}}</text>
     </view>
   </view>
-  <view wx:if="{{recordDetail.state === 2 || recordDetail.state === 3}}" class="btn-content">
-    <view class="btn">{{recordDetail.state === 2?'进入':'查看'}}会话</view>
+  <view wx:if="{{recordDetail.state === '2' || recordDetail.state === '3'}}" class="btn-content">
+    <view class="btn" bindtap="toChat" data-did="{{recordDetail.doctorRelVo.doctorMobile}}" data-dname="{{recordDetail.doctorRelVo.nickname}}">
+      {{recordDetail.state === '2'?'进入':'查看'}}会话
+    </view>
   </view>
   <view wx:if="{{recordDetail.commentTime}}" class="order-code">
     服务评价：

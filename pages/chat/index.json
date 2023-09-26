@@ -1,5 +1,4 @@
 {
-  "usingComponents": {
-    "TUIKit": "../../chat-im/TUIKit/index"
-  }
+  "usingComponents": {},
+  "navigationBarTitleText": "消息"
 }

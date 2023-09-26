@@ -35,11 +35,13 @@
     }
 
     .dialog-item {
+        position: relative;
         background-color: #fff;
         border-radius: 16rpx;
+        overflow: hidden;
         box-shadow: 0rpx 0rpx 20rpx 0rpx #F1F3F8;
-        padding: 25rpx;
-        margin: 30rpx 0;
+        padding: 30rpx 25rpx;
+        margin: 30rpx;
         display: flex;
         justify-content: flex-start;
         align-items: center;
@@ -82,7 +84,24 @@
             .msg {
                 font-size: 26rpx;
                 color: #606973;
+                word-break: break-all;
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
             }
+        }
+
+        .state {
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-size: 20rpx;
+            padding: 2rpx 20rpx;
+            border-radius: 0 16rpx 0 16rpx;
+            background-color: #6D91FF;
+            color: #fff;
+            border: 2rpx solid #6D91FF;
         }
     }
 }

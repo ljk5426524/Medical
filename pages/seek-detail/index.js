@@ -1,5 +1,6 @@
 import { wxToast } from "../../utils/wx-api";
 import api from '../../api/index'
+import { getLocalUserInfo } from '../../utils/storage'
 
 // pages/seek-detail/index.js
 Page({
@@ -11,14 +12,23 @@ Page({
     refuseShow: false,
     allowErrorShow: false,
     options: { maxHeight: 100, minHeight: 50 },
+    orderDetail: null,
+    oiId: null,
+    oId: null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    const { id } = options
-    this.getSeekDetail(id)
+    const { oiId, oId } = options
+    const userInfo = getLocalUserInfo()
+    this.setData({
+      oiId,
+      oId,
+      userInfo
+    })
+    this.getSeekDetail(oiId, oId)
   },
 
   /**
@@ -59,19 +69,42 @@ Page({
   // pop关闭
   onClose() {
     this.setData({
-      refuseShow: false,
-      allowErrorShow: false
+      refuseShow: false
     });
   },
-
+  onErrorClose() {
+    this.setData({
+      allowErrorShow: false
+    }, () => {
+      wx.navigateBack()
+    })
+  },
   // 接诊
   toChat() {
-    wxToast.show({
-      title: "跳转对话",
-    });
-    this.setData({
-      allowErrorShow: true,
-    });
+    const { oiId: orderItmeId, oId: orderId, userInfo: { id: doctorId }, orderDetail: { mobile, patientName } } = this.data
+    api.handleAgreePatientSeek({
+      orderId,
+      doctorId,
+      orderItmeId
+    }).then(res => {
+      const { msg, code } = res
+      if (+code === 0) {
+        wx.redirectTo({
+          url: `/pages/chat/chat?tuId=${mobile}&oId=${orderId}&tuName=${patientName}&state=2`
+        })
+      } else if (+code === 4000) {
+        this.setData({
+          allowErrorShow: true,
+        });
+      } else {
+        wxToast.show({
+          title: msg || `接诊失败`,
+          done: () => {
+            wx.navigateBack()
+          }
+        })
+      }
+    })
   },
 
   // 忽略
@@ -91,7 +124,12 @@ Page({
 
   // 忽略确认
   confirm() {
-    const { refuseType, reason } = this.data;
+    const { refuseType, reason, oiId, oId: orderId, userInfo: { id: doctorId } } = this.data
+    const refuseTypeMap = {
+      '1': '患者咨询的病情与我的专业无关',
+      '2': '工作很忙，暂时没有时间处理',
+      '3': reason
+    }
     if (!refuseType) {
       wxToast.show({
         title: "请选择拒绝原因",
@@ -101,15 +139,41 @@ Page({
         title: "请填写拒绝原因",
       });
     } else {
-      wxToast.show({
-        title: "已忽略",
+      api.handleRefusePatientSeek({
+        doctorId,
+        orderId,
+        reasons: refuseTypeMap[refuseType]
+      }).then(res => {
+        this.setData({
+          refuseShow: false
+        })
+        wxToast.show({
+          title: "已忽略",
+          done: () => {
+            wx.navigateBack()
+          }
+        })
       })
     }
   },
 
-  getSeekDetail(id) {
-    api.getSeekDetail({}).then(res => {
-
+  getSeekDetail(oiId, oId) {
+    api.getSeekDetail({
+      orderType: 2,
+      orderId: oId,
+      orderItemId: oiId,
+      appId: 2
+    }).then(res => {
+      this.setData({
+        orderDetail: res.data
+      })
     })
+  },
+  previewImg(e) {
+    const { src, urls } = e.currentTarget.dataset
+    wx.previewImage({
+      current: src, // 当前显示图片的http链接
+      urls: urls.split(','), // 需要预览的图片http链接列表
+    });
   }
 });

@@ -1,2 +1,42 @@
-<!--pages/image-consult/index.wxml-->
-<text>pages/image-consult/index.wxml</text>
+<view class="page">
+  <view class="tip">请填写您的基础信息，仅专家可见</view>
+  <view class="name">
+    <view class="label">姓名</view>
+    <view class="text" bindtap="openFamilyChoose">
+      {{familyChooseName||'选择问诊人'}}
+      <van-icon name="arrow" />
+    </view>
+  </view>
+  <view class="desc">
+    <view class="label">病症描述</view>
+    <view class="text">
+      <van-field model:value="{{ desc }}" type="textarea" placeholder="请详细描述您的症状、疾病和身体状况，便于专家更准确的分析，我们承诺您的隐私安全(请输入10~500字" autosize="{{options}}" border="{{ false }}" />
+    </view>
+  </view>
+  <view class="pic">
+    <view class="label">请上传检测报告/病历/患处照片/处方等</view>
+    <view class="pic-content">
+      <van-uploader file-list="{{ imgList }}" bind:after-read="uploadFile" bind:delete="del" />
+    </view>
+  </view>
+  <view class="btn-content">
+    <view class="btn" bindtap="confirm">提交</view>
+  </view>
+  <van-popup show="{{ familySelShow }}" bind:close="onClose">
+    <view class="family-content">
+      <van-radio-group value="{{ familyChoose }}">
+        <view class="title">选择问诊人</view>
+        <view wx:if="{{userList.length}}">
+          <van-cell-group>
+            <van-cell wx:for="{{userList}}" wx:key="id" title="{{item.name}}" clickable data-id="{{item.id}}" data-name="{{item.name}}" data-card="{{item.idCard}}" data-sex="{{item.sex}}" data-age="{{item.age}}" data-sickhis="{{item.familyMedicalHistory}}" bind:click="onClick">
+              <van-radio slot="right-icon" name="{{item.id}}" />
+            </van-cell>
+          </van-cell-group>
+        </view>
+        <view wx:else>
+          <no-data-filling noDataTxt="暂未添加家庭成员"></no-data-filling>
+        </view>
+      </van-radio-group>
+    </view>
+  </van-popup>
+</view>

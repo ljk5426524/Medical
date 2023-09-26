@@ -2,35 +2,28 @@
     <view class="panel">
         <view class="title">订单详情</view>
         <view class="content">
-            <view class="label">订单类别：快速问诊</view>
-            <view class="label">下单时间：2018-10-21 12:12</view>
+            <view class="label">订单类别：{{orderDetail.orderType === '2'?'快速问诊':'在线问诊'}}</view>
+            <view class="label">下单时间：{{orderDetail.createTime}}</view>
         </view>
     </view>
     <view class="panel">
         <view class="title">患者基本信息</view>
         <view class="content">
-            <view class="label">患者信息：刘涛 女 32岁</view>
-            <view class="label">下单时间：2018-10-21 12:12</view>
+            <view class="label">
+                患者信息：{{orderDetail.patientName}} {{orderDetail.patientSex === '1'?'男':'女'}} {{orderDetail.patientAge}}
+            </view>
+            <view class="label">健康档案：共有 {{orderDetail.caseTimes}} 条诊疗记录</view>
         </view>
     </view>
     <view class="panel">
         <view class="title">病情描述</view>
-        <view class="content">
-            咽喉不适，痰多，干咳已有两个月。吃了快咳，一点不见好。咳起来肺都快炸了。咽喉不适，痰多，干咳已有两个月。吃了快咳，一点不见好。咳起来肺都快炸了。咽喉不适，痰多，干咳已有两个月。吃了快咳，一点不见好。咳起来肺都快炸了。咽喉不适，痰多，干咳已有两个月。吃了快咳，一点不见好。咳起来肺都快炸了。咽喉不适，痰多，干咳已有两个月。吃了快咳，一点不见好。咳起来肺都快炸了。咽喉不适，痰多，干咳已有两个月。吃了快咳，一点不见好。咳起来肺都快炸了。
-        </view>
-        <view class="sub-title">
+        <view class="content">{{orderDetail.description}}</view>
+        <view class="sub-title" wx:if="{{orderDetail.caseUrl}}">
             附件
             <text class="text">（点击查看大图）</text>
         </view>
         <view class="pic-content">
-            <image class="pic" src="/res/images/home-doctor.png" />
-            <image class="pic" src="/res/images/home-doctor.png" />
-            <image class="pic" src="/res/images/home-doctor.png" />
-            <image class="pic" src="/res/images/home-doctor.png" />
-            <image class="pic" src="/res/images/home-doctor.png" />
-            <image class="pic" src="/res/images/home-doctor.png" />
-            <image class="pic" src="/res/images/home-doctor.png" />
-            <image class="pic" src="/res/images/home-doctor.png" />
+            <image wx:for="{{orderDetail.caseUrls}}" wx:key="*this" bindtap="previewImg" data-src="{{item}}" data-urls="{{orderDetail.caseUrl}}" class="pic" src="{{item}}" />
         </view>
     </view>
     <view class="btn-content">
@@ -43,10 +36,10 @@
             <view class="title">接诊失败</view>
             <view class="reason">
                 <view>可能有如下原因：</view>
-                <view>1.患者主动取消任务</view>
+                <view>1.订单超时系统已自动取消</view>
                 <view>2.网络连接失败</view>
             </view>
-            <view class="btn" bindtap="onClose">确定</view>
+            <view class="btn" bindtap="onErrorClose">确定</view>
         </view>
     </van-popup>
     <van-popup show="{{ refuseShow }}" closeable position="bottom" bind:close="onClose">

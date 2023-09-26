@@ -157,4 +157,30 @@ export default {
       contentType: 'application/json'
     })
   },
+
+  // 发起图文问诊
+  sendOrder(data) {
+    return request({
+      url: `${baseUrl}api/v1/order/handler/4`,
+      data,
+      method: "post",
+      contentType: 'application/json'
+    })
+  },
+  // 问诊评价
+  saveEvaluate(data) {
+    return request({
+      url: `${baseUrl}api/v1/order/saveOrderComment`,
+      data,
+      method: "post",
+    })
+  },
+  // 评价详情
+  getEvaluateDetail(data) {
+    return request({
+      url: `${baseUrl}api/v1/order/getOrderComment`,
+      data,
+      method: 'post'
+    })
+  },
 }

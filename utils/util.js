@@ -101,7 +101,6 @@ export function request({ url, data = {}, type, loadingText = '', isLoading = tr
         mask: true
       });
     }
-    console.log(header, toUrlEncoded(data))
     wx[requestName]({
       url,
       data:
@@ -122,7 +121,6 @@ export function request({ url, data = {}, type, loadingText = '', isLoading = tr
         }
         const { code } = resData
 
-        console.log(resData)
         if (+code === 0 || selfHandle) {
           reslove(resData)
         } else {

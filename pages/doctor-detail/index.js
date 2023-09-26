@@ -10,7 +10,8 @@ Page({
     data: {
         buttonClientRect: wx.getMenuButtonBoundingClientRect(),
         doctorDetail: {},
-        userInfo: {}
+        userInfo: {},
+        doctorProduct: []
     },
 
     /**
@@ -95,9 +96,9 @@ Page({
         api.findDoctorProduct({
             doctorId: id
         }).then(res => {
-            // this.setData({
-            //     doctorDetail: res.data
-            // })
+            this.setData({
+                doctorProduct: res.data
+            })
         })
     },
     applyDoctorFriend() {
@@ -121,12 +122,18 @@ Page({
             userId,
             doctorId: id,
             state: 4,
-            appId:1,
+            appId: 1,
         }).then(res => {
             wxToast.show({
                 title: '已移除'
             })
             this.getDoctorDetail(id)
         })
-    }
+    },
+    toAsk(e) {
+        const { code, id, imid } = e.currentTarget.dataset
+        wx.navigateTo({
+            url: `/pages/image-consult/index?code=${code}&id=${id}&imId=${imid}`
+        })
+    },
 })
