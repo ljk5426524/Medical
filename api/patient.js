@@ -183,4 +183,13 @@ export default {
       method: 'post'
     })
   },
+  // 服务消息
+  getServiceMsgList(data) {
+    return request({
+      url: `${baseUrl}api/v1/serviceRecord/msg/listPage`,
+      data,
+      method: 'post',
+      contentType: 'application/json'
+    })
+  }
 }

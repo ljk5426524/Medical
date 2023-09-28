@@ -18,6 +18,12 @@
         </view>
     </view>
     <view hidden="{{tabActive === 1}}">
-        <view wx:for="{{serviceList}}" wx:key="id"></view>
+        <view wx:for="{{serviceList}}" wx:key="id" class="msg-item" bindtap="toSeverceDetail" data-id="{{item.recordId}}">
+            <view class="msg-header">
+                <view class="title">{{item.title}}</view>
+                <view class="time">{{item.createTime}}</view>
+            </view>
+            <view class="content">{{item.msg}}</view>
+        </view>
     </view>
 </view>

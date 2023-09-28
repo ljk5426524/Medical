@@ -39,6 +39,7 @@ Page({
 				userInfo: getLocalUserInfo()
 			}, () => {
 				this.getChatList(userInfo.id)
+				this.getServiceMsgList(userInfo.id)
 				time = setInterval(() => {
 					this.getChatList(userInfo.id)
 				}, 5000)
@@ -126,8 +127,21 @@ Page({
 		})
 	},
 	// 获取服务消息
-	getServiceList() {
-
+	getServiceMsgList(userId) {
+		api.getServiceMsgList({
+			memberId: userId,
+			size: 500,
+			current: 0
+		}).then(res => {
+			this.setData({
+				serviceList: res.data.records.map(i => {
+					return {
+						...i,
+						time: getTimeShow(i.createTime * 1)
+					}
+				})
+			})
+		})
 	},
 	toDialog(e) {
 		const { tuid, oid, dname, cvid, state, msgid, did } = e.currentTarget.dataset
@@ -151,5 +165,11 @@ Page({
 				icon: 'none'
 			})
 		}
-	}
+	},
+	toSeverceDetail(e) {
+		const { id } = e.currentTarget.dataset
+		wx.navigateTo({
+			url: `/pages/service-detail/index?id=${id}`
+		})
+	},
 })
