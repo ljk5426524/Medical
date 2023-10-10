@@ -98,10 +98,26 @@ input {
 
 /* 表情 */
 .TUI-Emoji-area {
+  position: relative;
   width: 100vw;
   height: 200px;
   background-color: #fff;
   padding-bottom: 100rpx;
+}
+
+.TUI-Emoji-area .btn-send {
+  position: absolute;
+  bottom: 100rpx;
+  right: 50rpx;
+  padding: 16rpx 20rpx;
+  background-color: #4C78FF;
+  color: #fff;
+  border-radius: 10rpx;
+}
+
+.TUI-Emoji-area .noword {
+  background-color: #f6f7f9;
+  color: #999;
 }
 
 /* 多媒体 */

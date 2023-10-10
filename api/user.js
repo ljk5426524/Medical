@@ -7,6 +7,7 @@ export default {
 		return request({
 			url: `${baseUrl}v1/api/file/upload`,
 			data,
+			isLoading: false,
 			method: "post",
 			type: "uploadFile",
 			filePath: data.filePath,

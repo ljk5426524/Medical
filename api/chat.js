@@ -16,6 +16,7 @@ export default {
     return request({
       url: `${baseUrl}v1/api/im/message/sendMsg`,
       data,
+      isLoading: false,
       method: 'post'
     })
   },
@@ -24,6 +25,7 @@ export default {
     return request({
       url: `${baseUrl}api/v1/dispatch/closeOrder`,
       data,
+      isLoading: false,
       method: 'post'
     })
   },
@@ -32,6 +34,7 @@ export default {
     return request({
       url: `${baseUrl}v1/api/im/message/getImMsg`,
       data,
+      isLoading: false,
       method: 'post'
     })
   },
@@ -40,6 +43,7 @@ export default {
     return request({
       url: `${baseUrl}api/v1/dispatch/getOrderServerTime`,
       data,
+      isLoading: false,
       method: 'post'
     })
   },

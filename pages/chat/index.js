@@ -120,7 +120,8 @@ Page({
 					return {
 						...i,
 						time: getTimeShow(i.receiveStartTime * 1),
-						stateStr: this.stateFomart(+i.statue)
+						stateStr: this.stateFomart(+i.statue),
+						content: i.content && i.content.indexOf('http://app.kbing123.com') > -1 ? '[图片]' : i.content
 					}
 				})
 			})
@@ -137,7 +138,7 @@ Page({
 				serviceList: res.data.records.map(i => {
 					return {
 						...i,
-						time: getTimeShow(i.createTime * 1)
+						time: getTimeShow(i.createTime * 1),
 					}
 				})
 			})

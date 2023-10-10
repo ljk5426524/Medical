@@ -183,36 +183,32 @@ Page({
 	blur(e) {
 		this.setData({
 			scrollHeight: '',
-			inputBottom: 0
-		})
-		this.setData({
+			inputBottom: 0,
 			toView: 'msg-' + (this.data.messageList.length - 1),
 			displayFlag: "",
 		})
 
 	},
 	changeEmoji() {
-		this.setData({
-			scrollHeight: '',
-			inputBottom: 0,
-			audioFlag: false
-		})
-		this.setData({
-			displayFlag: 'emoji',
-			inputBottom: '0px',
-			inputRoomHeight: '310px'
-		})
+		setTimeout(() => {
+			this.setData({
+				scrollHeight: '',
+				inputBottom: 0,
+				audioFlag: false,
+				displayFlag: 'emoji',
+				inputRoomHeight: '310px'
+			})
+		}, 200)
 	},
 	multimediaHandler() {
-		this.setData({
-			scrollHeight: '',
-			inputBottom: 0,
-		})
-		this.setData({
-			displayFlag: 'extension',
-			inputBottom: '0px',
-			inputRoomHeight: '200px'
-		})
+		setTimeout(() => {
+			this.setData({
+				scrollHeight: '',
+				inputBottom: 0,
+				displayFlag: 'extension',
+				inputRoomHeight: '200px'
+			})
+		}, 200)
 	},
 	// 表情接收事件
 	appendMessage(emoji) {
@@ -370,7 +366,7 @@ Page({
 					text: _this.data.inputVal
 				},
 			});
-			// 2. 发送消息
+			// 发送消息
 			let promise = wx.$TUIKit.sendMessage(message);
 			promise.then(function (imResponse) {
 				// 发送成功
@@ -381,10 +377,8 @@ Page({
 				setTimeout(() => {
 					_this.setData({
 						inputVal: "",
-						messageList: [..._this.data.messageList, imResponse.data.message]
-					})
-					_this.setData({
-						toView: 'msg-' + (_this.data.messageList.length - 1),
+						messageList: [..._this.data.messageList, imResponse.data.message],
+						toView: 'msg-' + ([..._this.data.messageList, imResponse.data.message].length - 1),
 					})
 				}, 300)
 			}).catch(function (imError) {

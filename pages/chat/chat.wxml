@@ -42,6 +42,8 @@
       <!-- 表情 -->
       <view wx:if="{{displayFlag === 'emoji'}}" class="TUI-Emoji-area">
         <Emoji bind:enterEmoji="appendMessage" />
+        <view class="btn-send" hidden="{{!inputVal}}" bindtap="sendClick">发送</view>
+        <view class="btn-send noword" hidden="{{inputVal}}">发送</view>
       </view>
       <!-- 图片 -->
       <view wx:if="{{displayFlag === 'extension'}}" class="TUI-Extensions">
