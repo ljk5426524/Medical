@@ -1,6 +1,6 @@
 // pages/home-doctor/index.js
 import api from "../../api/index";
-import { getLocalUserInfo } from "../../utils/storage";
+import { getLocalUserInfo, saveLocalUserInfo } from "../../utils/storage";
 import { getTimeShow } from "../../utils/util";
 let time = null
 Page({
@@ -76,13 +76,13 @@ Page({
 
   onStateChange({ detail }) {
     console.log(detail)
-    const { userInfo: { id } } = this.data
+    const { userInfo: { id }, userInfo } = this.data
     this.setData({ doctorState: detail ? 0 : 1 });
     api.editReceivePatient({
       doctorId: id,
       statue: detail ? 0 : 1
     }).then(res => {
-
+      saveLocalUserInfo({ ...userInfo, state: detail ? 0 : 1 })
     })
   },
 
