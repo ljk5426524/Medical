@@ -164,7 +164,9 @@ Page({
       doctorId: id
     }).then(res => {
       this.setData({
-        unDoPatientCount: res.data.records.length
+        unDoPatientCount: res.data.records.filter(i => {
+          return i.applyStatue !== '2' && i.applyStatue !== '3'
+        }).length
       })
     })
   },

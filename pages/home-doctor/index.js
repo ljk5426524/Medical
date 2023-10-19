@@ -2,6 +2,7 @@
 import api from "../../api/index";
 import { getLocalUserInfo, saveLocalUserInfo } from "../../utils/storage";
 import { getTimeShow } from "../../utils/util";
+import { wxToast } from "../../utils/wx-api";
 let time = null
 Page({
   /**
@@ -83,6 +84,7 @@ Page({
       statue: detail ? 0 : 1
     }).then(res => {
       saveLocalUserInfo({ ...userInfo, state: detail ? 0 : 1 })
+      wxToast.show({ title: `${detail ? '已停止接诊' : '已开始接诊'}` })
     })
   },
 
